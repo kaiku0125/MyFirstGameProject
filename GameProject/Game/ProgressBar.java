@@ -34,7 +34,7 @@ public class ProgressBar {
                 }
                 try {
                     controller.getEnhanceResult();
-                    Thread.sleep(2000);
+                    Thread.sleep(1000);
                     jProgressBar.setString("");
                     jProgressBar.setValue(0);
                     enhanceRunning = false;

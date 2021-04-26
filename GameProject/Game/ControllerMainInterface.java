@@ -7,14 +7,17 @@ public interface ControllerMainInterface {
 
     void stop();
 
+    // Coin
     void minusCoin(int coin);
 
     boolean coinchecker(int coin);
 
+    // Stone
     void minusStone(int stone);
 
     boolean stoneChecker(int stone);
 
+    // Element
     boolean bananChecker(int banana);
 
     boolean appleChecker(int apple);
@@ -23,15 +26,17 @@ public interface ControllerMainInterface {
 
     boolean melonChecker(int melon);
 
-    void enhanceStart();
-
-    void enhanceEnd();
-
+    // Daily
     void setDailybtnEnable(boolean b);
 
     void dailystart();
 
     void getdailyBouns();
+
+    // Enhance
+    void enhanceStart();
+
+    void enhanceEnd();
 
     void getEnhanceResult();
 
@@ -40,6 +45,11 @@ public interface ControllerMainInterface {
     boolean isEnhanceRunning();
 
     void enhanceProgressEnd();
+
+    // Alchemy
+    void alchemyStart();
+
+    void alchemyEnd();
 
     void alchemyThread(JProgressBar jProgressBar);
 

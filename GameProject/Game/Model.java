@@ -12,7 +12,7 @@ public class Model implements ModelInterface {
     ClockTask stoneTask, dailyTask;
     String password = null;
     public static int coin;
-    public int stone = 0;
+    public int stone, protectStone, failureTimes;
     boolean ismain = false;
     int banana, apple, orange, melon;
     int swordLevel, bowLevel, currentLevel;
@@ -45,6 +45,17 @@ public class Model implements ModelInterface {
         dataset.readStone();
         dataset.readClock();
         dataset.readElement();
+        dataset.readFailure();
+    }
+
+    @Override
+    public void saveData() {
+        dataset.savecoin();
+        dataset.saveStone();
+        dataset.saveClock();
+        dataset.saveElement();
+        dataset.saveWeaponLevel();
+        dataset.saveFalure();
     }
 
     @Override
@@ -81,12 +92,35 @@ public class Model implements ModelInterface {
     }
 
     @Override
-    public void saveData() {
-        dataset.savecoin();
-        dataset.saveStone();
-        dataset.saveClock();
-        dataset.saveElement();
-        dataset.saveWeaponLevel();
+    public void setStone(int stone) {
+        this.stone = stone;
+        stoneListener();
+    }
+
+    @Override
+    public int getStone() {
+        return stone;
+    }
+
+    @Override
+    public void setProtectStone(int protectStone) {
+        this.protectStone = protectStone;
+    }
+
+    @Override
+    public int getProtectStone() {
+        return protectStone;
+    }
+
+    @Override
+    public void setFailureTimes(int fail) {
+        this.failureTimes = fail;
+        failureListener();
+    }
+
+    @Override
+    public int getFailureTimes() {
+        return failureTimes;
     }
 
     @Override
@@ -207,19 +241,13 @@ public class Model implements ModelInterface {
     }
 
     @Override
-    public void setStone(int stone) {
-        this.stone = stone;
-        stoneListener();
-    }
-
-    @Override
-    public int getStone() {
-        return stone;
-    }
-
-    @Override
     public void stoneListener() {
         callback.updateStone();
+    }
+
+    @Override
+    public void failureListener() {
+        callback.updateFailure();
     }
 
     @Override

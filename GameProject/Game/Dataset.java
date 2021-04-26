@@ -12,7 +12,7 @@ public class Dataset {
     ModelInterface model;
     BufferedReader reader = null;
     FileWriter fw = null;
-    int tempcoin, count, tempStone;
+    int tempcoin, count, tempStone, tempFailure;
     String UserID, temp;
 
     public Dataset(ModelInterface model) {
@@ -189,4 +189,27 @@ public class Dataset {
         }
     }
 
+    public void readFailure() {
+        try {
+            reader = new BufferedReader(new FileReader("GameProject//res//Failure.txt"));
+            temp = reader.readLine();
+            model.setFailureTimes(Integer.parseInt(temp));
+            logger.info("Read failure : " + temp);
+            reader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveFalure() {
+        try {
+            fw = new FileWriter("GameProject//res//Failure.txt");
+            tempFailure = model.getFailureTimes();
+            fw.write(String.valueOf(tempFailure));
+            logger.info("Save failure : " + String.valueOf(tempFailure));
+            fw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,12 +34,16 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     JFrame mainFrame;
     JPanel mainPanel, leftPanel, rightPanel, downPanel, middlePanel;
     JPanel elementPanel, elementNumPanel;
-    JLabel coinLabel, stoneNumLabel, stoneClockLabel, descriptionLabel;
+
+    JLabel coinLabel, stoneClockLabel, descriptionLabel;
+    JLabel stoneLabel, stoneNumLabel, extremeLabel, extremeNumLabel;
+    JLabel protectNumLabel, failureTimesLabel;
     JLabel alchemyImgLabel, enhanceImgLabel, weaponLevelLabel;
     JLabel bananaLabel, appleLabel, orangeLabel, melonLabel;
     JLabel bananaNum, appleNum, orangeNum, melonNum;
+    JCheckBox failcheck;
     JComboBox<Integer> element1, element2, element3, element4;
-    JButton enhanceBtn, dailyBtn, testBtn;
+    JButton enhanceBtn, dailyBtn, alchemyBtn;
     WeaponComboBox weaponCombo;
     JMenuBar menuBar;
     JMenu menu;
@@ -99,8 +104,17 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         // component.............//
         weaponCombo = new WeaponComboBox(model);
         weaponCombo.setBounds(0, 0, 200, 50);
+        weaponCombo.setSelectedItem(null);
 
-        weaponLevelLabel = new JLabel("..");
+        failcheck = new JCheckBox();
+        failcheck.setBounds(145, 0, 20, 20);
+
+        failureTimesLabel = new JLabel("0", SwingConstants.CENTER);
+        failureTimesLabel.setBounds(165, 0, 35, 20);
+        failureTimesLabel.setOpaque(true);
+        failureTimesLabel.setBackground(Color.white);
+
+        weaponLevelLabel = new JLabel("..", SwingConstants.CENTER);
         weaponLevelLabel.setBounds(75, 140, 50, 20);
         weaponLevelLabel.setOpaque(true);
         weaponLevelLabel.setBackground(Color.WHITE);
@@ -110,8 +124,10 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
         JLayeredPane pane = new JLayeredPane();
         pane.setBounds(0, 50, 200, 200);
+        pane.add(failcheck);
         pane.add(enhanceImgLabel);
         pane.add(weaponLevelLabel);
+        pane.add(failureTimesLabel);
 
         enhancementBar = new JProgressBar(0, 100);
         enhancementBar.setBounds(0, 250, 200, 20);
@@ -119,19 +135,34 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         enhancementBar.setString("");
         enhancementBar.setVisible(false);
 
+        stoneLabel = new JLabel("強化石", SwingConstants.CENTER);
+        stoneLabel.setBackground(Color.lightGray);
+        stoneLabel.setOpaque(true);
+        stoneLabel.setBounds(0, 270, 50, 20);
+
+        extremeLabel = new JLabel("凝縮的強化石", SwingConstants.CENTER);
+        extremeLabel.setBackground(Color.lightGray);
+        extremeLabel.setOpaque(true);
+        extremeLabel.setBounds(50, 270, 80, 20);
+
         stoneNumLabel = new JLabel("0", SwingConstants.CENTER);
-        stoneNumLabel.setBackground(Color.WHITE);
+        stoneNumLabel.setBackground(Color.white);
         stoneNumLabel.setOpaque(true);
-        stoneNumLabel.setBounds(0, 270, 50, 40);
+        stoneNumLabel.setBounds(0, 290, 50, 20);
+
+        extremeNumLabel = new JLabel("0", SwingConstants.CENTER);
+        extremeNumLabel.setBackground(Color.white);
+        extremeNumLabel.setOpaque(true);
+        extremeNumLabel.setBounds(50, 290, 80, 20);
 
         stoneClockLabel = new JLabel("00:00", SwingConstants.CENTER);
         stoneClockLabel.setBackground(Color.WHITE);
         stoneClockLabel.setOpaque(true);
         stoneClockLabel.setBounds(0, 310, 50, 40);
 
-        enhanceBtn = new JButton("enhance");
-        enhanceBtn.setBorder(BorderFactory.createLineBorder(Color.black, 5));
-        enhanceBtn.setBounds(50, 270, 150, 80);
+        enhanceBtn = new JButton("強化");
+        enhanceBtn.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+        enhanceBtn.setBounds(130, 270, 70, 40);
 
         descriptionLabel = new JLabel("...");
         descriptionLabel.setVerticalAlignment(JLabel.NORTH);
@@ -148,8 +179,8 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         alchemyBar = new JProgressBar(0, 100);
         alchemyBar.setBounds(0, 300, 300, 20);
         alchemyBar.setStringPainted(true);
-        alchemyBar.setString("s");
-        alchemyBar.setVisible(true);
+        alchemyBar.setString("");
+        alchemyBar.setVisible(false);
 
         Integer[] allelement = new Integer[5];
         for (int i = 0; i < 5; i++) {
@@ -216,12 +247,15 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         dailyBtn = new JButton("00:00");
         dailyBtn.setPreferredSize(new Dimension(100, 20));
 
-        testBtn = new JButton("test");
+        alchemyBtn = new JButton("alchemy");
         // panel add component...................//
         leftPanel.add(weaponCombo);
         leftPanel.add(pane);
         leftPanel.add(enhancementBar);
+        leftPanel.add(stoneLabel);
         leftPanel.add(stoneNumLabel);
+        leftPanel.add(extremeLabel);
+        leftPanel.add(extremeNumLabel);
         leftPanel.add(stoneClockLabel);
         leftPanel.add(enhanceBtn);
         leftPanel.add(descriptionLabel);
@@ -246,7 +280,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
         rightPanel.add(coinLabel);
         rightPanel.add(dailyBtn);
-        rightPanel.add(testBtn);
+        rightPanel.add(alchemyBtn);
         // mainFrame add panel................//
         mainFrame.add(leftPanel);
         mainFrame.add(rightPanel);
@@ -289,25 +323,29 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         element4.addActionListener(this);
         enhanceBtn.addActionListener(this);
         dailyBtn.addActionListener(this);
-        testBtn.addActionListener(this);
+        alchemyBtn.addActionListener(this);
         weaponCombo.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == enhanceBtn) {
-            if (controller.coinchecker(1000)) {
-                if (controller.stoneChecker(1)) {
-                    controller.minusCoin(1000);
-                    controller.minusStone(1);
-                    controller.enhanceStart();
-                    controller.enhanceThread(enhancementBar);
-                    enhancementBar.setString("強化中...");
+            if (getWeaponCombObject() != null) {
+                if (controller.coinchecker(1000)) {
+                    if (controller.stoneChecker(1)) {
+                        controller.minusCoin(1000);
+                        controller.minusStone(1);
+                        controller.enhanceStart();
+                        controller.enhanceThread(enhancementBar);
+                        enhancementBar.setString("強化中...");
+                    } else {
+                        showDialog("No stone!");
+                    }
                 } else {
-                    showDialong("No stone!");
+                    showDialog("No coin!");
                 }
             } else {
-                showDialong("No coin!");
+                showDialog("Please select weapon");
             }
         } else if (e.getSource() == dailyBtn) {
             if (model.isDailyfinish()) {
@@ -315,31 +353,32 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
                 enableDailybtn(false);
                 controller.dailystart();
             }
-        } else if (e.getSource() == testBtn) {
+        } else if (e.getSource() == alchemyBtn) {
             if (rightSet()) {
                 controller.alchemyMinus(getBananaCombo(), getAppleCombo(), getOrangeCombo(), getMelonCombo());
+                controller.alchemyStart();
                 controller.alchemyThread(alchemyBar);
                 alchemyBar.setString("煉金中...");
             }
         } else if (e.getSource() == element1) {
             if (!controller.bananChecker(getBananaCombo())) {
                 element1.setSelectedItem(null);
-                showDialong("Can't insert more than u have");
+                showDialog("Can't insert more than u have");
             }
         } else if (e.getSource() == element2) {
             if (!controller.appleChecker(getAppleCombo())) {
                 element2.setSelectedItem(null);
-                showDialong("Can't insert more than u have");
+                showDialog("Can't insert more than u have");
             }
         } else if (e.getSource() == element3) {
             if (!controller.orangeChecker(getOrangeCombo())) {
                 element3.setSelectedItem(null);
-                showDialong("Can't insert more than u have");
+                showDialog("Can't insert more than u have");
             }
         } else if (e.getSource() == element4) {
             if (!controller.melonChecker(getMelonCombo())) {
                 element4.setSelectedItem(null);
-                showDialong("Can't insert more than u have");
+                showDialog("Can't insert more than u have");
             }
         } else if (e.getSource() == weaponCombo) {
             model.setCurrentLevel(((Weapon) weaponCombo.getSelectedItem()).getLevel());
@@ -377,6 +416,11 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     }
 
     @Override
+    public void updateFailure() {
+        failureTimesLabel.setText(String.valueOf(model.getFailureTimes()));
+    }
+
+    @Override
     public void enhanceProgressEnd() {
         if (controller.isEnhanceRunning() == false) {
             controller.enhanceEnd();
@@ -400,7 +444,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     @Override
     public void alchemyProgressEnd() {
         if (controller.isAlchemyRunning() == false) {
-            System.out.println("煉金結束");
+            controller.alchemyEnd();
         }
     }
 
@@ -410,6 +454,14 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
     public void visibleProgressbar(boolean b) {
         enhancementBar.setVisible(b);
+    }
+
+    public void enableAlchemyBtn(boolean b) {
+        alchemyBtn.setEnabled(b);
+    }
+
+    public void visibleAlchemybar(boolean b) {
+        alchemyBar.setVisible(b);
     }
 
     public void enableDailybtn(boolean b) {
@@ -467,7 +519,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
     }
 
-    public void showDialong(String msg) {
+    public void showDialog(String msg) {
         JOptionPane.showMessageDialog(null, msg);
     }
 
@@ -490,8 +542,20 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
             element1.setOpaque(true);
             element1.setBackground(Color.RED);
         }
-        showDialong("Please insert element number for Alchemy");
+        showDialog("Please insert element number for Alchemy");
         return false;
+    }
+
+    public int getWeaponLabel() {
+        return ((Weapon) weaponCombo.getSelectedItem()).getLevel();
+    }
+
+    public Object getWeaponCombObject() {
+        return weaponCombo.getSelectedItem();
+    }
+
+    public void setFailreLabelText(int fail) {
+        failureTimesLabel.setText(String.valueOf(fail));
     }
 
 }

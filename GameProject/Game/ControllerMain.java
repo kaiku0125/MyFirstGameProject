@@ -131,18 +131,6 @@ public class ControllerMain implements ControllerMainInterface {
     }
 
     @Override
-    public void enhanceStart() {
-        viewMain.visibleProgressbar(true);
-        viewMain.enableEnhanceBtn(false);
-    }
-
-    @Override
-    public void enhanceEnd() {
-        viewMain.visibleProgressbar(false);
-        viewMain.enableEnhanceBtn(true);
-    }
-
-    @Override
     public void setDailybtnEnable(boolean b) {
         viewMain.enableDailybtn(b);
     }
@@ -154,9 +142,7 @@ public class ControllerMain implements ControllerMainInterface {
 
     @Override
     public void getdailyBouns() {
-        SimpleDateFormat form = new SimpleDateFormat("HH:mm:ss");
-        Date date = new Date(System.currentTimeMillis());
-        String msg = form.format(date);
+        String msg = getformateTime();
         bonus = Rate.getDailyBouns();
         switch (bonus) {
         case STONE:
@@ -175,11 +161,31 @@ public class ControllerMain implements ControllerMainInterface {
     }
 
     @Override
+    public void enhanceStart() {
+        viewMain.visibleProgressbar(true);
+        viewMain.enableEnhanceBtn(false);
+        viewMain.enableAlchemyBtn(false);
+    }
+
+    @Override
+    public void enhanceEnd() {
+        viewMain.visibleProgressbar(false);
+        viewMain.enableEnhanceBtn(true);
+        viewMain.enableAlchemyBtn(true);
+    }
+
+    @Override
     public void getEnhanceResult() {
-        SimpleDateFormat form = new SimpleDateFormat("HH:mm:ss");
-        Date date = new Date(System.currentTimeMillis());
-        String msg = form.format(date);
-        result = Rate.getEnhanceResult();
+        String msg = getformateTime();
+        int level = viewMain.getWeaponLabel();
+        if (level < 5) {
+            result = Rate.getResult(Rate.NORMAL);
+        } else if (level >= 5 && level < 10) {
+            result = Rate.getResult(Rate.MEDIUM);
+        } else if (level >= 10 && level < 16) {
+            result = Rate.getResult(Rate.HARD);
+        }
+
         switch (result) {
         case SUCCESS:
             jProgressBar.setString("強化成功");
@@ -190,6 +196,8 @@ public class ControllerMain implements ControllerMainInterface {
         case FAIL:
             jProgressBar.setString("強化失敗");
             viewMain.setdescription(msg + ", enhance Fail");
+            model.setFailureTimes(model.getFailureTimes() + 1);
+            viewMain.setFailreLabelText(model.getFailureTimes());
             model.setCurrentLevel(model.getCurrentLevel() - 1);
             break;
 
@@ -213,6 +221,21 @@ public class ControllerMain implements ControllerMainInterface {
     @Override
     public void enhanceProgressEnd() {
         model.enhanceProgressListener();
+    }
+
+    @Override
+    public void alchemyStart() {
+        viewMain.enableAlchemyBtn(false);
+        viewMain.visibleAlchemybar(true);
+        viewMain.enableEnhanceBtn(false);
+    }
+
+    @Override
+    public void alchemyEnd() {
+        viewMain.enableAlchemyBtn(true);
+        viewMain.visibleAlchemybar(false);
+        viewMain.enableEnhanceBtn(true);
+
     }
 
     public void alchemyThread(JProgressBar jProgressBar) {
@@ -248,7 +271,7 @@ public class ControllerMain implements ControllerMainInterface {
         SimpleDateFormat form = new SimpleDateFormat("HH:mm:ss");
         Date date = new Date(System.currentTimeMillis());
         String msg = form.format(date);
-        result = Rate.getEnhanceResult();
+        result = Rate.getResult(Rate.ALCHEMY);
         sb = new StringBuilder();
         sb.append(String.valueOf(viewMain.getBananaCombo()));
         sb.append(String.valueOf(viewMain.getAppleCombo()));
@@ -260,7 +283,17 @@ public class ControllerMain implements ControllerMainInterface {
             plusStone(1);
             viewMain.setdescription(msg + ", Alchemy result : gstone +1");
             break;
+
+        default:
+            viewMain.setdescription(msg + ", Nothing happened");
+            break;
         }
+    }
+
+    public String getformateTime() {
+        SimpleDateFormat form = new SimpleDateFormat("HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
+        return form.format(date);
     }
 
 }
