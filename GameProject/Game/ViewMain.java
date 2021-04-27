@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -37,11 +38,11 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
     JLabel coinLabel, stoneClockLabel, descriptionLabel;
     JLabel stoneLabel, stoneNumLabel, extremeLabel, extremeNumLabel;
-    JLabel protectNumLabel, failureTimesLabel;
+    JLabel protectLabel, protectNumLabel, failureTimesLabel;
     JLabel alchemyImgLabel, enhanceImgLabel, weaponLevelLabel;
     JLabel bananaLabel, appleLabel, orangeLabel, melonLabel;
     JLabel bananaNum, appleNum, orangeNum, melonNum;
-    JCheckBox failcheck;
+    JCheckBox failcheck, protectcheck;
     JComboBox<Integer> element1, element2, element3, element4;
     JButton enhanceBtn, dailyBtn, alchemyBtn;
     WeaponComboBox weaponCombo;
@@ -49,6 +50,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     JMenu menu;
     JMenuItem saveItem;
     JProgressBar enhancementBar, alchemyBar;
+    Weapon tempItem;
 
     public ViewMain(ControllerMainInterface controller, ModelInterface model) {
         this.controller = controller;
@@ -108,6 +110,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
         failcheck = new JCheckBox();
         failcheck.setBounds(145, 0, 20, 20);
+        failcheck.setToolTipText("使用累積失敗疊層，增加下次強化成功機率");
 
         failureTimesLabel = new JLabel("0", SwingConstants.CENTER);
         failureTimesLabel.setBounds(165, 0, 35, 20);
@@ -120,14 +123,17 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         weaponLevelLabel.setBackground(Color.WHITE);
 
         enhanceImgLabel = new JLabel();
-        enhanceImgLabel.setBounds(0, 50, 200, 200);
+        enhanceImgLabel.setOpaque(true);
+        enhanceImgLabel.setBackground(Color.ORANGE);
+        enhanceImgLabel.setBounds(0, 0, 200, 200);
 
         JLayeredPane pane = new JLayeredPane();
         pane.setBounds(0, 50, 200, 200);
+
         pane.add(failcheck);
-        pane.add(enhanceImgLabel);
         pane.add(weaponLevelLabel);
         pane.add(failureTimesLabel);
+        pane.add(enhanceImgLabel);
 
         enhancementBar = new JProgressBar(0, 100);
         enhancementBar.setBounds(0, 250, 200, 20);
@@ -145,24 +151,51 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         extremeLabel.setOpaque(true);
         extremeLabel.setBounds(50, 270, 80, 20);
 
+        protectcheck = new JCheckBox();
+        protectcheck.setBounds(130, 270, 20, 20);
+        protectcheck.setOpaque(true);
+        protectcheck.setBackground(Color.orange);
+        protectcheck.setToolTipText("下次強化將注入保護石");
+
+        protectLabel = new JLabel("保護石");
+        protectLabel.setBackground(Color.ORANGE);
+        protectLabel.setOpaque(true);
+        protectLabel.setBounds(150, 270, 50, 20);
+
         stoneNumLabel = new JLabel("0", SwingConstants.CENTER);
         stoneNumLabel.setBackground(Color.white);
         stoneNumLabel.setOpaque(true);
         stoneNumLabel.setBounds(0, 290, 50, 20);
+        stoneNumLabel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
         extremeNumLabel = new JLabel("0", SwingConstants.CENTER);
         extremeNumLabel.setBackground(Color.white);
         extremeNumLabel.setOpaque(true);
         extremeNumLabel.setBounds(50, 290, 80, 20);
+        extremeNumLabel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+
+        protectNumLabel = new JLabel("0", SwingConstants.CENTER);
+        protectNumLabel.setBackground(Color.white);
+        protectNumLabel.setOpaque(true);
+        protectNumLabel.setBounds(130, 290, 70, 20);
+        protectNumLabel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
         stoneClockLabel = new JLabel("00:00", SwingConstants.CENTER);
         stoneClockLabel.setBackground(Color.WHITE);
         stoneClockLabel.setOpaque(true);
         stoneClockLabel.setBounds(0, 310, 50, 40);
+        stoneClockLabel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
         enhanceBtn = new JButton("強化");
-        enhanceBtn.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-        enhanceBtn.setBounds(130, 270, 70, 40);
+        enhanceBtn.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+        enhanceBtn.setBounds(50, 310, 150, 40);
+        // enhanceBtn.setBounds(0, 0, 150, 40);
+
+        // JLayeredPane pane1 = new JLayeredPane();
+        // pane1.setBounds(50, 310, 150, 40);
+
+        // pane1.add(protectcheck);
+        // pane1.add(enhanceBtn);
 
         descriptionLabel = new JLabel("...");
         descriptionLabel.setVerticalAlignment(JLabel.NORTH);
@@ -256,8 +289,12 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         leftPanel.add(stoneNumLabel);
         leftPanel.add(extremeLabel);
         leftPanel.add(extremeNumLabel);
+        leftPanel.add(protectLabel);
+        leftPanel.add(protectNumLabel);
         leftPanel.add(stoneClockLabel);
+        // leftPanel.add(pane1);
         leftPanel.add(enhanceBtn);
+        leftPanel.add(protectcheck);
         leftPanel.add(descriptionLabel);
 
         middlePanel.add(alchemyImgLabel);
@@ -317,6 +354,51 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
             }
         });
 
+        element2.addPopupMenuListener(new PopupMenuListener() {
+            @Override
+            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+                element2.setBackground(Color.white);
+            }
+
+            @Override
+            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+            }
+
+            @Override
+            public void popupMenuCanceled(PopupMenuEvent e) {
+            }
+        });
+
+        element3.addPopupMenuListener(new PopupMenuListener() {
+            @Override
+            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+                element3.setBackground(Color.white);
+            }
+
+            @Override
+            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+            }
+
+            @Override
+            public void popupMenuCanceled(PopupMenuEvent e) {
+            }
+        });
+
+        element4.addPopupMenuListener(new PopupMenuListener() {
+            @Override
+            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+                element4.setBackground(Color.white);
+            }
+
+            @Override
+            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+            }
+
+            @Override
+            public void popupMenuCanceled(PopupMenuEvent e) {
+            }
+        });
+
         element1.addActionListener(this);
         element2.addActionListener(this);
         element3.addActionListener(this);
@@ -331,18 +413,18 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == enhanceBtn) {
             if (getWeaponCombObject() != null) {
-                if (controller.coinchecker(1000)) {
-                    if (controller.stoneChecker(1)) {
-                        controller.minusCoin(1000);
-                        controller.minusStone(1);
-                        controller.enhanceStart();
-                        controller.enhanceThread(enhancementBar);
-                        enhancementBar.setString("強化中...");
+                if (isProtectEnable()) {
+                    controller.setprotect(true);
+                    logger.info("protect = true");
+                    if (controller.protectStoneChecker(1)) {
+                        checkFailure();
                     } else {
-                        showDialog("No stone!");
+                        showDialog("沒有保護石");
                     }
                 } else {
-                    showDialog("No coin!");
+                    logger.info("protect = false");
+                    controller.setprotect(false);
+                    checkFailure();
                 }
             } else {
                 showDialog("Please select weapon");
@@ -381,11 +463,42 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
                 showDialog("Can't insert more than u have");
             }
         } else if (e.getSource() == weaponCombo) {
-            model.setCurrentLevel(((Weapon) weaponCombo.getSelectedItem()).getLevel());
-            String level = ((Weapon) weaponCombo.getSelectedItem()).getLeveltext();
+            tempItem = (Weapon) weaponCombo.getSelectedItem();
+            model.setCurrentLevel(tempItem.getLevel());
+            String level = tempItem.getLeveltext();
             weaponLevelLabel.setText(level);
+            controller.initEnhanceImg(tempItem);
         }
 
+    }
+
+    public void enhance() {
+        if (controller.coinchecker(1000)) {
+            if (controller.stoneChecker(1)) {
+                if (protectcheck.isSelected()) {
+                    controller.minusProtectStone(1);
+                }
+                controller.minusCoin(1000);
+                controller.minusStone(1);
+                controller.enhanceStart();
+                controller.enhanceThread(enhancementBar);
+                enhancementBar.setString("強化中...");
+            } else {
+                showDialog("No stone!");
+            }
+        } else {
+            showDialog("No coin!");
+        }
+    }
+
+    public void checkFailure() {
+        if (isFailureEnabel()) {
+            controller.setNotFailure(true);
+            enhance();
+        } else {
+            controller.setNotFailure(false);
+            enhance();
+        }
     }
 
     @Override
@@ -416,15 +529,26 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     }
 
     @Override
+    public void updateExtremeStone() {
+        extremeNumLabel.setText(String.valueOf(model.getExtremeStone()));
+    }
+
+    @Override
+    public void updateProtectStone() {
+        protectNumLabel.setText(String.valueOf(model.getProtectStone()));
+    }
+
+    @Override
     public void updateFailure() {
         failureTimesLabel.setText(String.valueOf(model.getFailureTimes()));
     }
 
     @Override
     public void enhanceProgressEnd() {
+        tempItem = (Weapon) weaponCombo.getSelectedItem();
         if (controller.isEnhanceRunning() == false) {
             controller.enhanceEnd();
-            String name = ((Weapon) weaponCombo.getSelectedItem()).getName();
+            String name = tempItem.getName();
             switch (name) {
             case "Sword":
                 model.setSwordLevel(model.getCurrentLevel());
@@ -433,11 +557,9 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
                 model.setBowLevel(model.getCurrentLevel());
                 break;
             }
-            ((Weapon) weaponCombo.getSelectedItem()).setlevel(model.getCurrentLevel());
-
-            String level = ((Weapon) weaponCombo.getSelectedItem()).getLeveltext();
+            tempItem.setlevel(model.getCurrentLevel());
+            String level = tempItem.getLeveltext();
             weaponLevelLabel.setText(level);
-
         }
     }
 
@@ -466,6 +588,14 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
     public void enableDailybtn(boolean b) {
         dailyBtn.setEnabled(b);
+    }
+
+    public void enableProtectCheck(boolean b) {
+        protectcheck.setEnabled(b);
+    }
+
+    public void enableFailureCheck(boolean b) {
+        failcheck.setEnabled(b);
     }
 
     public void setdescription(String msg) {
@@ -530,13 +660,16 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
                     if (element4.getSelectedItem() != null) {
                         return true;
                     } else {
-
+                        element4.setOpaque(true);
+                        element4.setBackground(Color.RED);
                     }
                 } else {
-
+                    element3.setOpaque(true);
+                    element3.setBackground(Color.RED);
                 }
             } else {
-
+                element2.setOpaque(true);
+                element2.setBackground(Color.RED);
             }
         } else {
             element1.setOpaque(true);
@@ -554,8 +687,26 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         return weaponCombo.getSelectedItem();
     }
 
-    public void setFailreLabelText(int fail) {
+    public void setFailureLabelText(int fail) {
         failureTimesLabel.setText(String.valueOf(fail));
+    }
+
+    public void setEnhanceLabelImg(Icon icon) {
+        enhanceImgLabel.setIcon(icon);
+    }
+
+    public boolean isProtectEnable() {
+        if (protectcheck.isSelected()) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isFailureEnabel() {
+        if (failcheck.isSelected()) {
+            return true;
+        }
+        return false;
     }
 
 }

@@ -11,12 +11,16 @@ public class ComboBoxRenderer extends JLabel implements ListCellRenderer<Object>
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
             boolean cellHasFocus) {
+
         Weapon weapon = (Weapon) value;
 
         if (weapon != null) {
             setText(weapon.getName());
+            setIcon(weapon.getImg());
         } else {
             System.out.println("weapon null!!");
+            setText("");
+            setIcon(null);
         }
 
         if (isSelected) {

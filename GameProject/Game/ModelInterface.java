@@ -27,6 +27,10 @@ public interface ModelInterface {
 
     int getStone();
 
+    void setExtrmeneStone(int stone);
+
+    int getExtremeStone();
+
     void setProtectStone(int protectStone);
 
     int getProtectStone();
@@ -77,6 +81,10 @@ public interface ModelInterface {
     void regStoneCallback(Callback callback);
 
     void stoneListener();
+
+    void extremeStoneListener();
+
+    void protectStoneListener();
 
     void failureListener();
 

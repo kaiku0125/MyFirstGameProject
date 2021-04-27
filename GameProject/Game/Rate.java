@@ -46,19 +46,19 @@ public class Rate {
         return null;
     }
 
-    public static Result getResult(int state) {
+    public static Result getResult(int state, int x) {
         if (state == NORMAL) {
-            int[] rate = { 70, 30 };
+            int[] rate = { 70 + x, 30 - x };
             setRate(rate);
-            System.out.println("70,30");
+            System.out.println(String.valueOf(70 + x) + "," + String.valueOf(30 - x));
         } else if (state == MEDIUM) {
-            int[] rate = { 50, 50 };
+            int[] rate = { 50 + x, 50 - x };
             setRate(rate);
-            System.out.println("50,50");
+            System.out.println(String.valueOf(50 + x) + "," + String.valueOf(50 - x));
         } else if (state == HARD) {
-            int[] rate = { 30, 70 };
+            int[] rate = { 30 + x, 70 - x };
             setRate(rate);
-            System.out.println("30,70");
+            System.out.println(String.valueOf(30 + x) + "," + String.valueOf(70 - x));
         } else if (state == ALCHEMY) {
             int[] rate = { 100, 0 };
             setRate(rate);

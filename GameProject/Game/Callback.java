@@ -3,6 +3,10 @@ package GameProject.Game;
 public interface Callback {
     void updateStone();
 
+    void updateExtremeStone();
+
+    void updateProtectStone();
+
     void updateFailure();
 
     void enhanceProgressEnd();

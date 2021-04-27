@@ -12,7 +12,7 @@ public class Model implements ModelInterface {
     ClockTask stoneTask, dailyTask;
     String password = null;
     public static int coin;
-    public int stone, protectStone, failureTimes;
+    public int stone, extremeStone, protectStone, failureTimes;
     boolean ismain = false;
     int banana, apple, orange, melon;
     int swordLevel, bowLevel, currentLevel;
@@ -55,7 +55,7 @@ public class Model implements ModelInterface {
         dataset.saveClock();
         dataset.saveElement();
         dataset.saveWeaponLevel();
-        dataset.saveFalure();
+        dataset.saveFailure();
     }
 
     @Override
@@ -103,8 +103,20 @@ public class Model implements ModelInterface {
     }
 
     @Override
+    public void setExtrmeneStone(int stone) {
+        this.extremeStone = stone;
+        extremeStoneListener();
+    }
+
+    @Override
+    public int getExtremeStone() {
+        return extremeStone;
+    }
+
+    @Override
     public void setProtectStone(int protectStone) {
         this.protectStone = protectStone;
+        protectStoneListener();
     }
 
     @Override
@@ -243,6 +255,16 @@ public class Model implements ModelInterface {
     @Override
     public void stoneListener() {
         callback.updateStone();
+    }
+
+    @Override
+    public void extremeStoneListener() {
+        callback.updateExtremeStone();
+    }
+
+    @Override
+    public void protectStoneListener() {
+        callback.updateProtectStone();
     }
 
     @Override

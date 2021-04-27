@@ -8,6 +8,7 @@ public class Dataset {
     private static Logger logger = Logger.getLogger(Dataset.class.getName());
     ArrayList<String> allClock = new ArrayList<String>();
     ArrayList<String> weaponLevel = new ArrayList<String>();
+    ArrayList<String> stone = new ArrayList<String>();
     HashMap<String, Integer> allElement = new HashMap<String, Integer>();
     ModelInterface model;
     BufferedReader reader = null;
@@ -167,10 +168,16 @@ public class Dataset {
         try {
             reader = new BufferedReader(new FileReader("GameProject//res//Stone.txt"));
             temp = reader.readLine();
-            tempStone = model.getStone();
-            tempStone = Integer.parseInt(temp);
-            logger.info("Read stone : " + String.valueOf(tempStone));
-            model.setStone(tempStone);
+            String[] s = temp.split(",");
+            stone.add(s[0]);
+            stone.add(s[1]);
+            stone.add(s[2]);
+            model.setStone(Integer.parseInt(s[0]));
+            model.setExtrmeneStone(Integer.parseInt(s[1]));
+            model.setProtectStone(Integer.parseInt(s[2]));
+            logger.info("Read stone : " + s[0]);
+            logger.info("Read ExtremeStone : " + s[1]);
+            logger.info("Read Protectstone : " + s[2]);
             reader.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -180,9 +187,10 @@ public class Dataset {
     public void saveStone() {
         try {
             fw = new FileWriter("GameProject//res//Stone.txt");
-            tempStone = model.getStone();
-            fw.write(String.valueOf(tempStone));
-            logger.info("Save stone : " + String.valueOf(tempStone));
+            stone.set(0, String.valueOf(model.getStone()));
+            stone.set(1, String.valueOf(model.getExtremeStone()));
+            stone.set(2, String.valueOf(model.getProtectStone()));
+            fw.write(stone.get(0) + "," + stone.get(1));
             fw.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -201,7 +209,7 @@ public class Dataset {
         }
     }
 
-    public void saveFalure() {
+    public void saveFailure() {
         try {
             fw = new FileWriter("GameProject//res//Failure.txt");
             tempFailure = model.getFailureTimes();
