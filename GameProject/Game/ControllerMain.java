@@ -271,10 +271,8 @@ public class ControllerMain implements ControllerMainInterface {
             viewMain.setFailureLabelText(model.getFailureTimes());
             if (protect) {
                 model.setCurrentLevel(model.getCurrentLevel());
-                logger.info("1111111111111111");
             } else {
                 model.setCurrentLevel(model.getCurrentLevel() - 1);
-                logger.info("2222222222222222");
             }
             break;
 

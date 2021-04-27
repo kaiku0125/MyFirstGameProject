@@ -570,6 +570,30 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         }
     }
 
+    @Override
+    public void updateBanana(int num) {
+        bananaNum.setText(String.valueOf(num));
+
+    }
+
+    @Override
+    public void updateApple() {
+        appleNum.setText(String.valueOf(model.getBanana()));
+
+    }
+
+    @Override
+    public void updateOrange() {
+        orangeNum.setText(String.valueOf(model.getOrange()));
+
+    }
+
+    @Override
+    public void updateMelon() {
+        melonNum.setText(String.valueOf(model.getMelon()));
+
+    }
+
     public void enableEnhanceBtn(boolean b) {
         enhanceBtn.setEnabled(b);
     }
@@ -623,30 +647,6 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
     public int getMelonCombo() {
         return (int) element4.getSelectedItem();
-    }
-
-    @Override
-    public void updateBanana(int num) {
-        bananaNum.setText(String.valueOf(num));
-
-    }
-
-    @Override
-    public void updateApple() {
-        appleNum.setText(String.valueOf(model.getBanana()));
-
-    }
-
-    @Override
-    public void updateOrange() {
-        orangeNum.setText(String.valueOf(model.getOrange()));
-
-    }
-
-    @Override
-    public void updateMelon() {
-        melonNum.setText(String.valueOf(model.getMelon()));
-
     }
 
     public void showDialog(String msg) {
