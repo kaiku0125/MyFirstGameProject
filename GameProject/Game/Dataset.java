@@ -82,6 +82,8 @@ public class Dataset {
             allClock.set(0, model.getStoneClock().getMinute());
             allClock.set(3, model.getDailyClock().getSecond());
             allClock.set(2, model.getDailyClock().getMinute());
+            allClock.set(5, model.getClock_gd1().getSecond());
+            allClock.set(4, model.getClock_gd1().getMinute());
             for (int i = 0; i < allClock.size(); i = i + 2) {
                 fw.write(allClock.get(i) + "," + allClock.get(i + 1) + "\n");
             }
@@ -190,7 +192,7 @@ public class Dataset {
             stone.set(0, String.valueOf(model.getStone()));
             stone.set(1, String.valueOf(model.getExtremeStone()));
             stone.set(2, String.valueOf(model.getProtectStone()));
-            fw.write(stone.get(0) + "," + stone.get(1));
+            fw.write(stone.get(0) + "," + stone.get(1) + "," + stone.get(2));
             fw.close();
         } catch (Exception e) {
             e.printStackTrace();

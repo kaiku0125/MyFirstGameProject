@@ -9,7 +9,7 @@ public class Model implements ModelInterface {
     ArrayList<ClockObserver> clockObservers = new ArrayList<ClockObserver>();
     Dataset dataset;
     Callback callback;
-    ClockTask stoneTask, dailyTask;
+    ClockTask stoneTask, dailyTask, gd1_Task;
     String password = null;
     public static int coin;
     public int stone, extremeStone, protectStone, failureTimes;
@@ -37,6 +37,7 @@ public class Model implements ModelInterface {
     public void startallTimer() {
         initDailyTimer();
         initStoneTimer();
+        initTimer_Gd1();
     }
 
     @Override
@@ -176,6 +177,28 @@ public class Model implements ModelInterface {
     }
 
     @Override
+    public void initTimer_Gd1() {
+        gd1_Task = new Gd1_Clock(this);
+        gd1_Task.setMinute(dataset.getClockindex(4));
+        gd1_Task.setSecond(dataset.getClockindex(5));
+        gd1_Task.getTimer().scheduleAtFixedRate(gd1_Task, 0, 1000);
+    }
+
+    @Override
+    public void restartTimer_Gd1() {
+        gd1_Task.again();
+        gd1_Task = new Gd1_Clock(this);
+        gd1_Task.setMinute(1);
+        gd1_Task.setSecond(1);
+        gd1_Task.getTimer().scheduleAtFixedRate(gd1_Task, 0, 1000);
+    }
+
+    @Override
+    public boolean isfinish_Gd1() {
+        return gd1_Task.isfinish();
+    }
+
+    @Override
     public ClockTask getDailyClock() {
         return dailyTask;
     }
@@ -183,6 +206,11 @@ public class Model implements ModelInterface {
     @Override
     public ClockTask getStoneClock() {
         return stoneTask;
+    }
+
+    @Override
+    public ClockTask getClock_gd1() {
+        return gd1_Task;
     }
 
     @Override
@@ -253,6 +281,16 @@ public class Model implements ModelInterface {
     }
 
     @Override
+    public String getSecond_gd1() {
+        return gd1_Task.dsecond;
+    }
+
+    @Override
+    public String getMinute_gd1() {
+        return gd1_Task.dminute;
+    }
+
+    @Override
     public void stoneListener() {
         callback.updateStone();
     }
@@ -301,6 +339,11 @@ public class Model implements ModelInterface {
     @Override
     public void melonListener() {
         callback.updateMelon();
+    }
+
+    @Override
+    public void gdBtn_1Listener() {
+        callback.updateClockGdBtn_1();
     }
 
     @Override

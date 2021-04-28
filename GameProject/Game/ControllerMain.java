@@ -400,6 +400,11 @@ public class ControllerMain implements ControllerMainInterface {
         }
     }
 
+    @Override
+    public void gd1_start() {
+        model.restartTimer_Gd1();
+    }
+
     public String getformateTime() {
         SimpleDateFormat form = new SimpleDateFormat("HH:mm:ss");
         Date date = new Date(System.currentTimeMillis());

@@ -50,9 +50,17 @@ public interface ModelInterface {
 
     boolean isDailyfinish();
 
+    void initTimer_Gd1();
+
+    void restartTimer_Gd1();
+
+    boolean isfinish_Gd1();
+
     ClockTask getStoneClock();
 
     ClockTask getDailyClock();
+
+    ClockTask getClock_gd1();
 
     // Observer
     void registerCoinObserver(CoinObserver o);
@@ -77,6 +85,10 @@ public interface ModelInterface {
 
     String getDailyMinute();
 
+    String getSecond_gd1();
+
+    String getMinute_gd1();
+
     // Listener
     void regStoneCallback(Callback callback);
 
@@ -99,6 +111,8 @@ public interface ModelInterface {
     void orangeListener();
 
     void melonListener();
+
+    void gdBtn_1Listener();
 
     // Element
     int getBanana();

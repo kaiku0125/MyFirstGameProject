@@ -17,7 +17,6 @@ public class WeaponComboBox extends JComboBox<Object> {
         sword_init();
         bow_init();
         model = new DefaultComboBoxModel<Object>();
-        // model.addElement(new ImageIcon("GameProject//res//pics//Sword1.jpg"), sword);
         model.addElement(sword);
         model.addElement(bow);
         setModel(model);

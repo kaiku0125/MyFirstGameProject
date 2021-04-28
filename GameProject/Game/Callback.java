@@ -21,4 +21,6 @@ public interface Callback {
 
     void updateMelon();
 
+    void updateClockGdBtn_1();
+
 }

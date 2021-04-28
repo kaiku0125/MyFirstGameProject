@@ -78,4 +78,7 @@ public interface ControllerMainInterface {
     void alchemyMinus(int banana, int apple, int orange, int melon);
 
     void getAlchemyResult();
+
+    // Garden
+    void gd1_start();
 }
