@@ -81,4 +81,10 @@ public interface ControllerMainInterface {
 
     // Garden
     void gd1_start();
+
+    void gd2_start();
+
+    void gd3_start();
+
+    void gd4_start();
 }

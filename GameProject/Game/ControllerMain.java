@@ -19,7 +19,7 @@ public class ControllerMain implements ControllerMainInterface {
     ViewMain viewMain;
     BounsItem bonus;
     Result result;
-    int tempcoin, tempstone;
+    int tempcoin, tempstone, tempFail;
     int dailySecond, dailyMinute;
     int failurePlus;
     StringBuilder sb;
@@ -142,6 +142,12 @@ public class ControllerMain implements ControllerMainInterface {
             return false;
         }
         return true;
+    }
+
+    public void plusFailureTimes(int fail) {
+        tempFail = model.getFailureTimes();
+        tempFail += fail;
+        model.setFailureTimes(tempFail);
     }
 
     @Override
@@ -382,16 +388,31 @@ public class ControllerMain implements ControllerMainInterface {
             plusExtremeStone(1);
             viewMain.showDialog("獲得凝縮強化石");
             viewMain.setdescription(msg + ",Alchemy result : Extreme Stone +1");
+            break;
 
         case "4444":
             plusStone(5);
             viewMain.showDialog("獲得強化石*5");
             viewMain.setdescription(msg + ",Alchemy result : Stone +5");
+            break;
 
         case "3333":
             plusProtectStone(1);
             viewMain.showDialog("獲得保護石");
             viewMain.setdescription(msg + ",Alchemy result : Protect Stone +1");
+            break;
+
+        case "3132":
+            plusFailureTimes(15);
+            viewMain.showDialog("獲得失敗疊層*15");
+            viewMain.setdescription(msg + ",Alchemy result : FailureTimes +15");
+            break;
+
+        case "1211":
+            plusFailureTimes(5);
+            viewMain.showDialog("獲得失敗疊層*5");
+            viewMain.setdescription(msg + ",Alchemy result : FailureTimes +5");
+            break;
 
         default:
             viewMain.showDialog("沒發生什麼事");
@@ -403,6 +424,21 @@ public class ControllerMain implements ControllerMainInterface {
     @Override
     public void gd1_start() {
         model.restartTimer_Gd1();
+    }
+
+    @Override
+    public void gd2_start() {
+        model.restartTimer_Gd2();
+    }
+
+    @Override
+    public void gd3_start() {
+        model.restartTimer_Gd3();
+    }
+
+    @Override
+    public void gd4_start() {
+        model.restartTimer_Gd4();
     }
 
     public String getformateTime() {

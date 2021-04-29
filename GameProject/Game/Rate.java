@@ -62,7 +62,7 @@ public class Rate {
         } else if (state == ALCHEMY) {
             int[] rate = { 100, 0 };
             setRate(rate);
-            System.out.println("100,30");
+            System.out.println("100,0");
         }
 
         int total = 0;

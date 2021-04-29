@@ -1,5 +1,6 @@
 package GameProject.Game;
 
+import java.awt.Color;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -15,6 +16,8 @@ public class ProgressBar {
     public ProgressBar(JProgressBar jProgressBar, ControllerMainInterface controller) {
         this.jProgressBar = jProgressBar;
         this.controller = controller;
+        jProgressBar.setForeground(Color.RED);
+        jProgressBar.setBackground(Color.BLACK);
     }
 
     public void runEnhance() {

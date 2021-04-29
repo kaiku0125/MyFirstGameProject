@@ -84,6 +84,12 @@ public class Dataset {
             allClock.set(2, model.getDailyClock().getMinute());
             allClock.set(5, model.getClock_gd1().getSecond());
             allClock.set(4, model.getClock_gd1().getMinute());
+            allClock.set(7, model.getClock_gd2().getSecond());
+            allClock.set(6, model.getClock_gd2().getMinute());
+            allClock.set(9, model.getClock_gd3().getSecond());
+            allClock.set(8, model.getClock_gd3().getMinute());
+            allClock.set(11, model.getClock_gd4().getSecond());
+            allClock.set(10, model.getClock_gd4().getMinute());
             for (int i = 0; i < allClock.size(); i = i + 2) {
                 fw.write(allClock.get(i) + "," + allClock.get(i + 1) + "\n");
             }

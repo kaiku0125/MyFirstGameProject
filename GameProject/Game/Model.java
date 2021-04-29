@@ -9,7 +9,7 @@ public class Model implements ModelInterface {
     ArrayList<ClockObserver> clockObservers = new ArrayList<ClockObserver>();
     Dataset dataset;
     Callback callback;
-    ClockTask stoneTask, dailyTask, gd1_Task;
+    ClockTask stoneTask, dailyTask, gd1_Task, gd2_Task, gd3_Task, gd4_Task;
     String password = null;
     public static int coin;
     public int stone, extremeStone, protectStone, failureTimes;
@@ -38,6 +38,9 @@ public class Model implements ModelInterface {
         initDailyTimer();
         initStoneTimer();
         initTimer_Gd1();
+        initTimer_Gd2();
+        initTimer_Gd3();
+        initTimer_Gd4();
     }
 
     @Override
@@ -199,6 +202,78 @@ public class Model implements ModelInterface {
     }
 
     @Override
+    public void initTimer_Gd2() {
+        gd2_Task = new Gd2_Clock(this);
+        gd2_Task.setMinute(dataset.getClockindex(6));
+        gd2_Task.setSecond(dataset.getClockindex(7));
+        gd2_Task.getTimer().scheduleAtFixedRate(gd2_Task, 0, 1000);
+
+    }
+
+    @Override
+    public void restartTimer_Gd2() {
+        gd2_Task.again();
+        gd2_Task = new Gd2_Clock(this);
+        gd2_Task.setMinute(1);
+        gd2_Task.setSecond(1);
+        gd2_Task.getTimer().scheduleAtFixedRate(gd2_Task, 0, 1000);
+
+    }
+
+    @Override
+    public boolean isfinish_Gd2() {
+        return gd2_Task.isfinish();
+    }
+
+    @Override
+    public void initTimer_Gd3() {
+        gd3_Task = new Gd3_Clock(this);
+        gd3_Task.setMinute(dataset.getClockindex(8));
+        gd3_Task.setSecond(dataset.getClockindex(9));
+        gd3_Task.getTimer().scheduleAtFixedRate(gd3_Task, 0, 1000);
+
+    }
+
+    @Override
+    public void restartTimer_Gd3() {
+        gd3_Task.again();
+        gd3_Task = new Gd3_Clock(this);
+        gd3_Task.setMinute(1);
+        gd3_Task.setSecond(1);
+        gd3_Task.getTimer().scheduleAtFixedRate(gd3_Task, 0, 1000);
+
+    }
+
+    @Override
+    public boolean isfinish_Gd3() {
+        return gd3_Task.isfinish();
+    }
+
+    @Override
+    public void initTimer_Gd4() {
+        gd4_Task = new Gd4_Clock(this);
+        gd4_Task.setMinute(dataset.getClockindex(10));
+        gd4_Task.setSecond(dataset.getClockindex(11));
+        gd4_Task.getTimer().scheduleAtFixedRate(gd4_Task, 0, 1000);
+
+    }
+
+    @Override
+    public void restartTimer_Gd4() {
+        gd4_Task.again();
+        gd4_Task = new Gd4_Clock(this);
+        gd4_Task.setMinute(1);
+        gd4_Task.setSecond(1);
+        gd4_Task.getTimer().scheduleAtFixedRate(gd4_Task, 0, 1000);
+
+    }
+
+    @Override
+    public boolean isfinish_Gd4() {
+        return gd4_Task.isfinish();
+    }
+
+    @Override
     public ClockTask getDailyClock() {
         return dailyTask;
     }
@@ -211,6 +286,21 @@ public class Model implements ModelInterface {
     @Override
     public ClockTask getClock_gd1() {
         return gd1_Task;
+    }
+
+    @Override
+    public ClockTask getClock_gd2() {
+        return gd2_Task;
+    }
+
+    @Override
+    public ClockTask getClock_gd3() {
+        return gd3_Task;
+    }
+
+    @Override
+    public ClockTask getClock_gd4() {
+        return gd4_Task;
     }
 
     @Override
@@ -291,6 +381,36 @@ public class Model implements ModelInterface {
     }
 
     @Override
+    public String getSecond_gd2() {
+        return gd2_Task.dsecond;
+    }
+
+    @Override
+    public String getMinute_gd2() {
+        return gd2_Task.dminute;
+    }
+
+    @Override
+    public String getSecond_gd3() {
+        return gd3_Task.dsecond;
+    }
+
+    @Override
+    public String getMinute_gd3() {
+        return gd3_Task.dminute;
+    }
+
+    @Override
+    public String getSecond_gd4() {
+        return gd4_Task.dsecond;
+    }
+
+    @Override
+    public String getMinute_gd4() {
+        return gd4_Task.dminute;
+    }
+
+    @Override
     public void stoneListener() {
         callback.updateStone();
     }
@@ -344,6 +464,21 @@ public class Model implements ModelInterface {
     @Override
     public void gdBtn_1Listener() {
         callback.updateClockGdBtn_1();
+    }
+
+    @Override
+    public void gdBtn_2Listener() {
+        callback.updateClockGdBtn_2();
+    }
+
+    @Override
+    public void gdBtn_3Listener() {
+        callback.updateClockGdBtn_3();
+    }
+
+    @Override
+    public void gdBtn_4Listener() {
+        callback.updateClockGdBtn_4();
     }
 
     @Override

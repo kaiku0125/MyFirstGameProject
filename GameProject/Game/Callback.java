@@ -23,4 +23,10 @@ public interface Callback {
 
     void updateClockGdBtn_1();
 
+    void updateClockGdBtn_2();
+
+    void updateClockGdBtn_3();
+
+    void updateClockGdBtn_4();
+
 }

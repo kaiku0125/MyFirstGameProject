@@ -59,6 +59,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     // Garden Component
     GardenItemComboBox gdCb_1, gdCb_2, gdCb_3, gdCb_4;
     JButton gdBtn_1, gdBtn_2, gdBtn_3, gdBtn_4;
+    String gdBtnText;
 
     public ViewMain(ControllerMainInterface controller, ModelInterface model) {
         this.controller = controller;
@@ -84,7 +85,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         mainPanel = new JPanel();
         leftPanel = new JPanel();
         leftPanel.setLayout(null);
-        leftPanel.setBackground(Color.GREEN);
+        leftPanel.setBackground(Color.BLACK);
         leftPanel.setBounds(0, 0, 200, 500);
 
         middlePanel = new JPanel();
@@ -110,13 +111,13 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
         CoinDailyPanel = new JPanel();
         CoinDailyPanel.setLayout(null);
-        CoinDailyPanel.setBounds(500, 0, 200, 40);
+        CoinDailyPanel.setBounds(500, 0, 200, 50);
         CoinDailyPanel.setOpaque(true);
         CoinDailyPanel.setBackground(Color.RED);
 
         gardenPanel = new JPanel();
         gardenPanel.setLayout(null);
-        gardenPanel.setBounds(500, 40, 200, 410);
+        gardenPanel.setBounds(500, 50, 200, 400);
         gardenPanel.setOpaque(true);
         gardenPanel.setBackground(Color.GREEN);
 
@@ -137,16 +138,19 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         failureTimesLabel = new JLabel("0", SwingConstants.CENTER);
         failureTimesLabel.setBounds(165, 0, 35, 20);
         failureTimesLabel.setOpaque(true);
-        failureTimesLabel.setBackground(Color.white);
+        failureTimesLabel.setForeground(Color.white);
+        failureTimesLabel.setBackground(Color.BLACK);
 
-        weaponLevelLabel = new JLabel("..", SwingConstants.CENTER);
+        weaponLevelLabel = new JLabel("", SwingConstants.CENTER);
         weaponLevelLabel.setBounds(75, 140, 50, 20);
         weaponLevelLabel.setOpaque(true);
-        weaponLevelLabel.setBackground(Color.WHITE);
+        weaponLevelLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
+        weaponLevelLabel.setForeground(Color.RED);
+        weaponLevelLabel.setBackground(Color.BLACK);
 
         enhanceImgLabel = new JLabel();
         enhanceImgLabel.setOpaque(true);
-        enhanceImgLabel.setBackground(Color.ORANGE);
+        enhanceImgLabel.setBackground(Color.BLACK);
         enhanceImgLabel.setBounds(0, 0, 200, 200);
 
         JLayeredPane pane = new JLayeredPane();
@@ -255,42 +259,42 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         setElementComboNull();
 
         bananaLabel = new JLabel("Banana", SwingConstants.CENTER);
-        bananaLabel.setBackground(Color.WHITE);
+        bananaLabel.setBackground(Color.yellow);
         bananaLabel.setOpaque(true);
         bananaLabel.setPreferredSize(new Dimension(60, 20));
 
         appleLabel = new JLabel("Apple", SwingConstants.CENTER);
-        appleLabel.setBackground(Color.WHITE);
+        appleLabel.setBackground(Color.RED);
         appleLabel.setOpaque(true);
         appleLabel.setPreferredSize(new Dimension(60, 20));
 
         orangeLabel = new JLabel("Orange", SwingConstants.CENTER);
-        orangeLabel.setBackground(Color.WHITE);
+        orangeLabel.setBackground(Color.orange);
         orangeLabel.setOpaque(true);
         orangeLabel.setPreferredSize(new Dimension(60, 20));
 
         melonLabel = new JLabel("Melon", SwingConstants.CENTER);
-        melonLabel.setBackground(Color.WHITE);
+        melonLabel.setBackground(Color.green);
         melonLabel.setOpaque(true);
         melonLabel.setPreferredSize(new Dimension(60, 20));
 
         bananaNum = new JLabel("0", SwingConstants.CENTER);
-        bananaNum.setBackground(Color.WHITE);
+        bananaNum.setBackground(Color.yellow);
         bananaNum.setOpaque(true);
         bananaNum.setPreferredSize(new Dimension(60, 20));
 
         appleNum = new JLabel("0", SwingConstants.CENTER);
-        appleNum.setBackground(Color.WHITE);
+        appleNum.setBackground(Color.RED);
         appleNum.setOpaque(true);
         appleNum.setPreferredSize(new Dimension(60, 20));
 
         orangeNum = new JLabel("0", SwingConstants.CENTER);
-        orangeNum.setBackground(Color.WHITE);
+        orangeNum.setBackground(Color.orange);
         orangeNum.setOpaque(true);
         orangeNum.setPreferredSize(new Dimension(60, 20));
 
         melonNum = new JLabel("0", SwingConstants.CENTER);
-        melonNum.setBackground(Color.WHITE);
+        melonNum.setBackground(Color.green);
         melonNum.setOpaque(true);
         melonNum.setPreferredSize(new Dimension(60, 20));
 
@@ -309,24 +313,44 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         dailyImgLabel.setBounds(90, 0, 20, 20);
 
         dailyBtn = new JButton("00:00");
-        dailyBtn.setBounds(110, 0, 75, 20);
-        // dailyBtn.setHorizontalAlignment(SwingConstants.CENTER);
+        dailyBtn.setBounds(110, 0, 74, 20);
 
         gardenLabel = new JLabel("花園", SwingConstants.CENTER);
-        gardenLabel.setBounds(0, 20, 185, 20);
+        gardenLabel.setBounds(0, 20, 184, 30);
         gardenLabel.setOpaque(true);
         gardenLabel.setBackground(Color.WHITE);
-        gardenLabel.setBorder(BorderFactory.createLineBorder(Color.green, 2));
+        gardenLabel.setBorder(BorderFactory.createLineBorder(Color.green, 5));
 
-        // String[] element77 = { "0", "1", "2", "3", "4" };
         gdCb_1 = new GardenItemComboBox(model);
-        gdCb_1.setBounds(10, 10, 80, 80);
+        gdCb_1.setBounds(10, 10, 75, 60);
         gdCb_1.setEnabled(false);
 
+        gdCb_2 = new GardenItemComboBox(model);
+        gdCb_2.setBounds(95, 10, 75, 60);
+        gdCb_2.setEnabled(false);
+
+        gdCb_3 = new GardenItemComboBox(model);
+        gdCb_3.setBounds(10, 115, 75, 60);
+        gdCb_3.setEnabled(false);
+
+        gdCb_4 = new GardenItemComboBox(model);
+        gdCb_4.setBounds(95, 115, 75, 60);
+        gdCb_4.setEnabled(false);
+
         gdBtn_1 = new JButton("00:00");
-        gdBtn_1.setBounds(10, 95, 80, 20);
+        gdBtn_1.setBounds(10, 75, 75, 20);
+
+        gdBtn_2 = new JButton("00:00");
+        gdBtn_2.setBounds(95, 75, 75, 20);
+
+        gdBtn_3 = new JButton("00:00");
+        gdBtn_3.setBounds(10, 180, 75, 20);
+
+        gdBtn_4 = new JButton("00:00");
+        gdBtn_4.setBounds(95, 180, 75, 20);
 
         alchemyBtn = new JButton("alchemy");
+        alchemyBtn.setBounds(0, 0, 80, 20);
 
         // panel add component...................//
         leftPanel.add(weaponCombo);
@@ -372,13 +396,13 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         CoinDailyPanel.add(gardenLabel);
 
         gardenPanel.add(gdCb_1);
-        // gardenPanel.add(gdCb_2);
-        // gardenPanel.add(gdCb_3);
-        // gardenPanel.add(gdCb_4);
+        gardenPanel.add(gdCb_2);
+        gardenPanel.add(gdCb_3);
+        gardenPanel.add(gdCb_4);
         gardenPanel.add(gdBtn_1);
-        // gardenPanel.add(gdBtn_2);
-        // gardenPanel.add(gdBtn_3);
-        // gardenPanel.add(gdBtn_4);
+        gardenPanel.add(gdBtn_2);
+        gardenPanel.add(gdBtn_3);
+        gardenPanel.add(gdBtn_4);
 
         rightPanel.add(alchemyBtn);
 
@@ -474,6 +498,9 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         alchemyBtn.addActionListener(this);
         weaponCombo.addActionListener(this);
         gdBtn_1.addActionListener(this);
+        gdBtn_2.addActionListener(this);
+        gdBtn_3.addActionListener(this);
+        gdBtn_4.addActionListener(this);
     }
 
     @Override
@@ -536,18 +563,27 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
             weaponLevelLabel.setText(level);
             controller.initEnhanceImg(tempItem);
         } else if (e.getSource() == gdBtn_1) {
-            if (!isComboGd1Enable()) {
+            if (gdBtn_1.getText() == "start" && gdCb_1.getSelectedItem() == null) {
+                showDialog("選擇一種煉金素材種植");
+            }
+            if (gdBtn_1.getText() == "收割") {
                 gdCb_1.setSelectedItem(null);
                 gdCb_1.setEnabled(true);
+                enableGdBtn_1(true);
+                gdBtn_1.setText("start");
             }
-            enableGdBtn_1(true);
-            gdBtn_1.setText("start");
             if (gdCb_1.getSelectedItem() != null) {
                 enableGdBtn_1(false);
+                enableGdCb_1(false);
                 controller.gd1_start();
             }
-        }
+        } else if (e.getSource() == gdBtn_2) {
 
+        } else if (e.getSource() == gdBtn_3) {
+
+        } else if (e.getSource() == gdBtn_4) {
+
+        }
     }
 
     public void enhance() {
@@ -606,9 +642,41 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
             gdBtn_1.setText(model.getMinute_gd1() + ":" + model.getSecond_gd1());
             enableGdBtn_1(false);
         } else {
-            gdBtn_1.setText("可收割");
-            // enableGdCb_1(true);
+            gdBtn_1.setText("收割");
             enableGdBtn_1(true);
+        }
+    }
+
+    @Override
+    public void updateClockGdBtn_2() {
+        if (!model.isfinish_Gd2()) {
+            gdBtn_2.setText(model.getMinute_gd2() + ":" + model.getSecond_gd2());
+            enableGdBtn_2(false);
+        } else {
+            gdBtn_2.setText("收割");
+            enableGdBtn_2(true);
+        }
+    }
+
+    @Override
+    public void updateClockGdBtn_3() {
+        if (!model.isfinish_Gd3()) {
+            gdBtn_3.setText(model.getMinute_gd3() + ":" + model.getSecond_gd3());
+            enableGdBtn_3(false);
+        } else {
+            gdBtn_3.setText("收割");
+            enableGdBtn_3(true);
+        }
+    }
+
+    @Override
+    public void updateClockGdBtn_4() {
+        if (!model.isfinish_Gd4()) {
+            gdBtn_4.setText(model.getMinute_gd4() + ":" + model.getSecond_gd4());
+            enableGdBtn_4(false);
+        } else {
+            gdBtn_4.setText("收割");
+            enableGdBtn_4(true);
         }
     }
 
@@ -707,8 +775,32 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         gdBtn_1.setEnabled(b);
     }
 
+    public void enableGdBtn_2(boolean b) {
+        gdBtn_2.setEnabled(b);
+    }
+
+    public void enableGdBtn_3(boolean b) {
+        gdBtn_3.setEnabled(b);
+    }
+
+    public void enableGdBtn_4(boolean b) {
+        gdBtn_4.setEnabled(b);
+    }
+
     public void enableGdCb_1(boolean b) {
         gdCb_1.setEnabled(b);
+    }
+
+    public void enableGdCb_2(boolean b) {
+        gdCb_2.setEnabled(b);
+    }
+
+    public void enableGdCb_3(boolean b) {
+        gdCb_3.setEnabled(b);
+    }
+
+    public void enableGdCb_4(boolean b) {
+        gdCb_4.setEnabled(b);
     }
 
     public void enableProtectCheck(boolean b) {
