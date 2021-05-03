@@ -205,20 +205,20 @@ public class ControllerMain implements ControllerMainInterface {
         String msg = getformateTime();
         bonus = Rate.getDailyBouns();
         switch (bonus) {
-        case STONE:
-            plusStone(5);
-            viewMain.showDialog("獲得強化石*5");
-            viewMain.setdescription(msg + ", get 5 Stone");
-            break;
+            case STONE:
+                plusStone(5);
+                viewMain.showDialog("獲得強化石*5");
+                viewMain.setdescription(msg + ", get 5 Stone");
+                break;
 
-        case COIN:
-            plusCoin(5000);
-            viewMain.showDialog("獲得5000金幣");
-            viewMain.setdescription(msg + ", get 5000 coin");
-            break;
+            case COIN:
+                plusCoin(5000);
+                viewMain.showDialog("獲得5000金幣");
+                viewMain.setdescription(msg + ", get 5000 coin");
+                break;
 
-        default:
-            break;
+            default:
+                break;
         }
     }
 
@@ -264,26 +264,26 @@ public class ControllerMain implements ControllerMainInterface {
         }
 
         switch (result) {
-        case SUCCESS:
-            jProgressBar.setString("強化成功");
-            viewMain.setdescription(msg + ", enhance Success");
-            model.setCurrentLevel(model.getCurrentLevel() + 1);
-            break;
+            case SUCCESS:
+                jProgressBar.setString("強化成功");
+                viewMain.setdescription(msg + ", enhance Success");
+                model.setCurrentLevel(model.getCurrentLevel() + 1);
+                break;
 
-        case FAIL:
-            jProgressBar.setString("強化失敗");
-            viewMain.setdescription(msg + ", enhance Fail");
-            model.setFailureTimes(model.getFailureTimes() + 1);
-            viewMain.setFailureLabelText(model.getFailureTimes());
-            if (protect) {
-                model.setCurrentLevel(model.getCurrentLevel());
-            } else {
-                model.setCurrentLevel(model.getCurrentLevel() - 1);
-            }
-            break;
+            case FAIL:
+                jProgressBar.setString("強化失敗");
+                viewMain.setdescription(msg + ", enhance Fail");
+                model.setFailureTimes(model.getFailureTimes() + 1);
+                viewMain.setFailureLabelText(model.getFailureTimes());
+                if (protect) {
+                    model.setCurrentLevel(model.getCurrentLevel());
+                } else {
+                    model.setCurrentLevel(model.getCurrentLevel() - 1);
+                }
+                break;
 
-        default:
-            break;
+            default:
+                break;
         }
     }
 
@@ -334,7 +334,7 @@ public class ControllerMain implements ControllerMainInterface {
         viewMain.enableAlchemyBtn(true);
         viewMain.visibleAlchemybar(false);
         viewMain.enableEnhanceBtn(true);
-
+        viewMain.alchemyEndCheck();
     }
 
     public void alchemyThread(JProgressBar jProgressBar) {
@@ -378,46 +378,46 @@ public class ControllerMain implements ControllerMainInterface {
         sb.append(String.valueOf(viewMain.getMelonCombo()));
         System.out.println(sb);
         switch (sb.toString()) {
-        case "0010":
-            plusStone(1);
-            viewMain.showDialog("獲得強化石");
-            viewMain.setdescription(msg + ", Alchemy result : Stone +1");
-            break;
+            case "0010":
+                plusStone(1);
+                viewMain.showDialog("獲得強化石");
+                viewMain.setdescription(msg + ", Alchemy result : Stone +1");
+                break;
 
-        case "2222":
-            plusExtremeStone(1);
-            viewMain.showDialog("獲得凝縮強化石");
-            viewMain.setdescription(msg + ",Alchemy result : Extreme Stone +1");
-            break;
+            case "2222":
+                plusExtremeStone(1);
+                viewMain.showDialog("獲得凝縮強化石");
+                viewMain.setdescription(msg + ",Alchemy result : Extreme Stone +1");
+                break;
 
-        case "4444":
-            plusStone(5);
-            viewMain.showDialog("獲得強化石*5");
-            viewMain.setdescription(msg + ",Alchemy result : Stone +5");
-            break;
+            case "4444":
+                plusStone(5);
+                viewMain.showDialog("獲得強化石*5");
+                viewMain.setdescription(msg + ",Alchemy result : Stone +5");
+                break;
 
-        case "3333":
-            plusProtectStone(1);
-            viewMain.showDialog("獲得保護石");
-            viewMain.setdescription(msg + ",Alchemy result : Protect Stone +1");
-            break;
+            case "3333":
+                plusProtectStone(1);
+                viewMain.showDialog("獲得保護石");
+                viewMain.setdescription(msg + ",Alchemy result : Protect Stone +1");
+                break;
 
-        case "3132":
-            plusFailureTimes(15);
-            viewMain.showDialog("獲得失敗疊層*15");
-            viewMain.setdescription(msg + ",Alchemy result : FailureTimes +15");
-            break;
+            case "3132":
+                plusFailureTimes(15);
+                viewMain.showDialog("獲得失敗疊層*15");
+                viewMain.setdescription(msg + ",Alchemy result : FailureTimes +15");
+                break;
 
-        case "1211":
-            plusFailureTimes(5);
-            viewMain.showDialog("獲得失敗疊層*5");
-            viewMain.setdescription(msg + ",Alchemy result : FailureTimes +5");
-            break;
+            case "1211":
+                plusFailureTimes(5);
+                viewMain.showDialog("獲得失敗疊層*5");
+                viewMain.setdescription(msg + ",Alchemy result : FailureTimes +5");
+                break;
 
-        default:
-            viewMain.showDialog("沒發生什麼事");
-            viewMain.setdescription(msg + ", Nothing happened GG!");
-            break;
+            default:
+                viewMain.showDialog("沒發生什麼事");
+                viewMain.setdescription(msg + ", Nothing happened GG!");
+                break;
         }
     }
 

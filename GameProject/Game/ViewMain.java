@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.security.interfaces.EdECKey;
 import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
@@ -707,12 +706,12 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
             controller.enhanceEnd();
             String name = tempItem.getName();
             switch (name) {
-            case "Sword":
-                model.setSwordLevel(model.getCurrentLevel());
-                break;
-            case "Bow":
-                model.setBowLevel(model.getCurrentLevel());
-                break;
+                case "Sword":
+                    model.setSwordLevel(model.getCurrentLevel());
+                    break;
+                case "Bow":
+                    model.setBowLevel(model.getCurrentLevel());
+                    break;
             }
             tempItem.setlevel(model.getCurrentLevel());
             String level = tempItem.getLeveltext();
@@ -735,7 +734,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
     @Override
     public void updateApple() {
-        appleNum.setText(String.valueOf(model.getBanana()));
+        appleNum.setText(String.valueOf(model.getApple()));
 
     }
 
@@ -823,7 +822,10 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     }
 
     public int getBananaCombo() {
-        return (int) element1.getSelectedItem();
+        if (element1.getSelectedItem() != null) {
+            return (int) element1.getSelectedItem();
+        }
+        return 0;
     }
 
     public int getAppleCombo() {
@@ -900,6 +902,13 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
     public boolean isComboGd1Enable() {
         return gdCb_1.isEnabled();
+    }
+
+    public void alchemyEndCheck() {
+        int i = model.getBanana() - (int) element1.getSelectedItem();
+        if (i < 0) {
+            element1.setSelectedItem(null);
+        }
     }
 
 }
