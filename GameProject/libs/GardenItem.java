@@ -33,5 +33,29 @@ class Banana extends GardenItem {
         super(icon);
         setName("Banana");
     }
+}
+
+class Apple extends GardenItem {
+
+    public Apple(Icon icon) {
+        super(icon);
+        setName("Apple");
+    }
+}
+
+class Orange extends GardenItem {
+
+    public Orange(Icon icon) {
+        super(icon);
+        setName("Orange");
+    }
+}
+
+class Melon extends GardenItem {
+
+    public Melon(Icon icon) {
+        super(icon);
+        setName("Melon");
+    }
 
 }

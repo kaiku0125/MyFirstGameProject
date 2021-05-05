@@ -71,8 +71,8 @@ public class ProgressBar {
                     jProgressBar.setString("");
                     jProgressBar.setValue(0);
                     alchemyRunning = false;
-                    controller.alchemyProgressEnd();
                     controller.getAlchemyResult();
+                    controller.alchemyProgressEnd();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

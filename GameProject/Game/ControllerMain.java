@@ -95,6 +95,7 @@ public class ControllerMain implements ControllerMainInterface {
         return true;
     }
 
+    // Extreme Stone
     @Override
     public void minusExtremeStone(int stone) {
         tempstone = model.getExtremeStone();
@@ -120,6 +121,7 @@ public class ControllerMain implements ControllerMainInterface {
         return true;
     }
 
+    // Protect Stone
     @Override
     public void minusProtectStone(int stone) {
         tempstone = model.getProtectStone();
@@ -150,6 +152,7 @@ public class ControllerMain implements ControllerMainInterface {
         model.setFailureTimes(tempFail);
     }
 
+    // Element Checker
     @Override
     public boolean bananChecker(int banana) {
         int i = model.getBanana();
@@ -362,7 +365,7 @@ public class ControllerMain implements ControllerMainInterface {
         e = model.getOrange();
         model.setOrange(e - orange);
         e = model.getMelon();
-        model.setMelon(e - orange);
+        model.setMelon(e - melon);
     }
 
     @Override

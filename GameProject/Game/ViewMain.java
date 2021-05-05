@@ -26,6 +26,8 @@ import javax.swing.SwingConstants;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
+import org.w3c.dom.css.RGBColor;
+
 import GameProject.libs.GardenItemComboBox;
 import GameProject.libs.Weapon;
 import GameProject.libs.WeaponComboBox;
@@ -68,6 +70,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         model.regStoneCallback(this);
     }
 
+    // create all component in frame
     public void createMainView() {
         mainFrame = new JFrame("KaiKuKu's Game");
         mainFrame.setLayout(null);
@@ -81,19 +84,19 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         menuBar.add(menu);
         mainFrame.setJMenuBar(menuBar);
 
+        // Panel area ..................................//
         mainPanel = new JPanel();
         leftPanel = new JPanel();
         leftPanel.setLayout(null);
         leftPanel.setBackground(Color.BLACK);
-        leftPanel.setBounds(0, 0, 200, 500);
+        leftPanel.setBounds(0, 0, 200, 450);
 
         middlePanel = new JPanel();
         middlePanel.setLayout(null);
-        middlePanel.setBackground(Color.RED);
+        middlePanel.setBackground(Color.BLACK);
         middlePanel.setBounds(200, 0, 300, 320);
 
         downPanel = new JPanel();
-        // downPanel.setLayout(null);
         downPanel.setBackground(Color.BLUE);
         downPanel.setOpaque(true);
         downPanel.setBounds(200, 320, 300, 30);
@@ -116,29 +119,32 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
         gardenPanel = new JPanel();
         gardenPanel.setLayout(null);
-        gardenPanel.setBounds(500, 50, 200, 400);
+        gardenPanel.setBounds(500, 50, 200, 350);
         gardenPanel.setOpaque(true);
         gardenPanel.setBackground(Color.GREEN);
 
         rightPanel = new JPanel();
         rightPanel.setLayout(null);
-        rightPanel.setBounds(500, 450, 200, 50);
+        rightPanel.setBounds(500, 400, 200, 50);
         rightPanel.setOpaque(true);
         rightPanel.setBackground(Color.PINK);
-        // component.............//
+        // component.............................................//
         weaponCombo = new WeaponComboBox(model);
         weaponCombo.setBounds(0, 0, 200, 50);
         weaponCombo.setSelectedItem(null);
 
         failcheck = new JCheckBox();
-        failcheck.setBounds(145, 0, 20, 20);
+        failcheck.setBounds(150, 0, 20, 20);
         failcheck.setToolTipText("使用累積失敗疊層，增加下次強化成功機率");
+        failcheck.setOpaque(true);
+        failcheck.setBackground(Color.BLACK);
 
         failureTimesLabel = new JLabel("0", SwingConstants.CENTER);
-        failureTimesLabel.setBounds(165, 0, 35, 20);
+        failureTimesLabel.setBounds(170, 0, 30, 20);
         failureTimesLabel.setOpaque(true);
         failureTimesLabel.setForeground(Color.white);
         failureTimesLabel.setBackground(Color.BLACK);
+        failureTimesLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 13));
 
         weaponLevelLabel = new JLabel("", SwingConstants.CENTER);
         weaponLevelLabel.setBounds(75, 140, 50, 20);
@@ -170,22 +176,25 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         stoneLabel.setBackground(Color.lightGray);
         stoneLabel.setOpaque(true);
         stoneLabel.setBounds(0, 270, 50, 20);
+        stoneLabel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
         extremeLabel = new JLabel("凝縮的強化石", SwingConstants.CENTER);
         extremeLabel.setBackground(Color.lightGray);
         extremeLabel.setOpaque(true);
         extremeLabel.setBounds(50, 270, 80, 20);
+        extremeLabel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
         protectcheck = new JCheckBox();
-        protectcheck.setBounds(130, 270, 20, 20);
+        protectcheck.setHorizontalAlignment(JCheckBox.LEFT);
+        protectcheck.setBounds(131, 271, 19, 18);
         protectcheck.setOpaque(true);
         protectcheck.setBackground(Color.orange);
         protectcheck.setToolTipText("下次強化將注入保護石");
 
-        protectLabel = new JLabel("保護石");
+        protectLabel = new JLabel("保護石", SwingConstants.CENTER);
         protectLabel.setBackground(Color.ORANGE);
         protectLabel.setOpaque(true);
-        protectLabel.setBounds(150, 270, 50, 20);
+        protectLabel.setBounds(150, 271, 49, 18);
 
         stoneNumLabel = new JLabel("0", SwingConstants.CENTER);
         stoneNumLabel.setBackground(Color.white);
@@ -214,25 +223,27 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         enhanceBtn = new JButton("強化");
         enhanceBtn.setBorder(BorderFactory.createLineBorder(Color.black, 1));
         enhanceBtn.setBounds(50, 310, 150, 40);
-        // enhanceBtn.setBounds(0, 0, 150, 40);
-
-        // JLayeredPane pane1 = new JLayeredPane();
-        // pane1.setBounds(50, 310, 150, 40);
-
-        // pane1.add(protectcheck);
-        // pane1.add(enhanceBtn);
 
         descriptionLabel = new JLabel("...");
         descriptionLabel.setVerticalAlignment(JLabel.NORTH);
         descriptionLabel.setHorizontalAlignment(JLabel.LEFT);
         descriptionLabel.setBackground(Color.GRAY);
         descriptionLabel.setOpaque(true);
-        descriptionLabel.setBounds(0, 350, 200, 150);
+        descriptionLabel.setBounds(0, 350, 200, 100);
+
+        alchemyBtn = new JButton("煉金");
+        alchemyBtn.setBounds(120, 275, 60, 20);
 
         alchemyImgLabel = new JLabel();
         alchemyImgLabel.setBackground(Color.PINK);
         alchemyImgLabel.setOpaque(true);
         alchemyImgLabel.setBounds(0, 0, 300, 300);
+
+        JLayeredPane ALpane = new JLayeredPane();
+        ALpane.setBounds(0, 0, 300, 300);
+
+        ALpane.add(alchemyBtn);
+        ALpane.add(alchemyImgLabel);
 
         alchemyBar = new JProgressBar(0, 100);
         alchemyBar.setBounds(0, 300, 300, 20);
@@ -244,7 +255,6 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         for (int i = 0; i < 5; i++) {
             allelement[i] = i;
         }
-        // String[] element77 = { "0", "1", "2", "3", "4" };
         element1 = new JComboBox<Integer>(allelement);
         element1.setPreferredSize(new Dimension(60, 20));
         element1.setOpaque(true);
@@ -317,7 +327,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         gardenLabel = new JLabel("花園", SwingConstants.CENTER);
         gardenLabel.setBounds(0, 20, 184, 30);
         gardenLabel.setOpaque(true);
-        gardenLabel.setBackground(Color.WHITE);
+        gardenLabel.setBackground(new Color(0, 204, 0));
         gardenLabel.setBorder(BorderFactory.createLineBorder(Color.green, 5));
 
         gdCb_1 = new GardenItemComboBox(model);
@@ -348,10 +358,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         gdBtn_4 = new JButton("00:00");
         gdBtn_4.setBounds(95, 180, 75, 20);
 
-        alchemyBtn = new JButton("alchemy");
-        alchemyBtn.setBounds(0, 0, 80, 20);
-
-        // panel add component...................//
+        // panel add component...................................//
         leftPanel.add(weaponCombo);
         leftPanel.add(pane);
         leftPanel.add(enhancementBar);
@@ -362,12 +369,11 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         leftPanel.add(protectLabel);
         leftPanel.add(protectNumLabel);
         leftPanel.add(stoneClockLabel);
-        // leftPanel.add(pane1);
         leftPanel.add(enhanceBtn);
         leftPanel.add(protectcheck);
         leftPanel.add(descriptionLabel);
 
-        middlePanel.add(alchemyImgLabel);
+        middlePanel.add(ALpane);
         middlePanel.add(alchemyBar);
 
         downPanel.add(element1);
@@ -403,7 +409,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         gardenPanel.add(gdBtn_3);
         gardenPanel.add(gdBtn_4);
 
-        rightPanel.add(alchemyBtn);
+        // rightPanel.add(alchemyBtn);
 
         // mainFrame add panel................//
         mainFrame.add(leftPanel);
@@ -414,7 +420,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         mainFrame.add(elementNumPanel);
         mainFrame.add(CoinDailyPanel);
         mainFrame.add(gardenPanel);
-        mainFrame.setSize(700, 600);
+        mainFrame.setSize(700, 520);
         mainFrame.setVisible(true);
     }
 
@@ -829,15 +835,24 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     }
 
     public int getAppleCombo() {
-        return (int) element2.getSelectedItem();
+        if (element2.getSelectedItem() != null) {
+            return (int) element2.getSelectedItem();
+        }
+        return 0;
     }
 
     public int getOrangeCombo() {
-        return (int) element3.getSelectedItem();
+        if (element3.getSelectedItem() != null) {
+            return (int) element3.getSelectedItem();
+        }
+        return 0;
     }
 
     public int getMelonCombo() {
-        return (int) element4.getSelectedItem();
+        if (element4.getSelectedItem() != null) {
+            return (int) element4.getSelectedItem();
+        }
+        return 0;
     }
 
     public void showDialog(String msg) {
@@ -907,7 +922,23 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     public void alchemyEndCheck() {
         int i = model.getBanana() - (int) element1.getSelectedItem();
         if (i < 0) {
+            System.out.println(i);
             element1.setSelectedItem(null);
+        }
+        int x = model.getApple() - (int) element2.getSelectedItem();
+        if (x < 0) {
+            System.out.println(x);
+            element2.setSelectedItem(null);
+        }
+        int y = model.getOrange() - (int) element3.getSelectedItem();
+        if (y < 0) {
+            System.out.println(y);
+            element3.setSelectedItem(null);
+        }
+        int z = model.getMelon() - (int) element4.getSelectedItem();
+        if (z < 0) {
+            System.out.println(z);
+            element4.setSelectedItem(null);
         }
     }
 
