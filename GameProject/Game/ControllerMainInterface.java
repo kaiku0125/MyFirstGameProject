@@ -1,13 +1,18 @@
 package GameProject.Game;
 
+import javax.swing.JButton;
 import javax.swing.JProgressBar;
 
+import GameProject.libs.GardenItem;
+import GameProject.libs.GardenItemComboBox;
 import GameProject.libs.Weapon;
 
 public interface ControllerMainInterface {
     void login();
 
     void stop();
+
+    void closeStore();
 
     // Coin
     void minusCoin(int coin);
@@ -80,11 +85,14 @@ public interface ControllerMainInterface {
     void getAlchemyResult();
 
     // Garden
-    void gd1_start();
+    void gd_start(JButton btn);
 
-    void gd2_start();
+    void harvest(GardenItem gardenItem);
 
-    void gd3_start();
+    void plusHarvest();
 
-    void gd4_start();
+    void eventGdBtn(JButton btn, GardenItemComboBox gdCb);
+
+    // Store
+    void openStore();
 }

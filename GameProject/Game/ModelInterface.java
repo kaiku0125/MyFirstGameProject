@@ -1,5 +1,8 @@
 package GameProject.Game;
 
+import GameProject.libs.GardenItem;
+import GameProject.libs.GardenItemEntity;
+
 public interface ModelInterface {
     void on();
 
@@ -186,5 +189,16 @@ public interface ModelInterface {
     int getCurrentLevel();
 
     void setCurrentLevel(int level);
+
+    // Garden
+    GardenItemEntity getGardenEntity();
+
+    // GardenItem getBananaEntity();
+
+    // GardenItem getAppleEntity();
+
+    // GardenItem getOrangeEntity();
+
+    // GardenItem getMelonEntity();
 
 }

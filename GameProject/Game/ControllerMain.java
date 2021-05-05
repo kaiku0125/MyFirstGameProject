@@ -4,10 +4,13 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
 
+import javax.swing.JButton;
 import javax.swing.JProgressBar;
 
 import GameProject.Game.Rate.BounsItem;
 import GameProject.Game.Rate.Result;
+import GameProject.libs.GardenItem;
+import GameProject.libs.GardenItemComboBox;
 import GameProject.libs.Weapon;
 
 public class ControllerMain implements ControllerMainInterface {
@@ -17,6 +20,7 @@ public class ControllerMain implements ControllerMainInterface {
     ProgressBar progress;
     ViewLogin viewlogin;
     ViewMain viewMain;
+    ViewStore viewStore;
     BounsItem bonus;
     Result result;
     int tempcoin, tempstone, tempFail;
@@ -24,13 +28,16 @@ public class ControllerMain implements ControllerMainInterface {
     int failurePlus;
     StringBuilder sb;
     boolean success, protect, notFailure;
+    GardenItem bananaItem, appleItem, orangeItem, melonItem;
 
     public ControllerMain(ModelInterface model) {
         this.model = model;
         ViewLogin viewlogin = new ViewLogin(this, model);
         ViewMain viewMain = new ViewMain(this, model);
+        ViewStore viewStore = new ViewStore(this, model);
         this.viewlogin = viewlogin;
         this.viewMain = viewMain;
+        this.viewStore = viewStore;
         viewlogin.createLoginView();
     }
 
@@ -40,6 +47,7 @@ public class ControllerMain implements ControllerMainInterface {
         viewMain.createMainView();
         viewMain.createControls();
         model.on();
+        setGardenItem();
     }
 
     @Override
@@ -225,6 +233,8 @@ public class ControllerMain implements ControllerMainInterface {
         }
     }
 
+    // ................................Enhance part
+    // ...............................//
     @Override
     public void initEnhanceImg(Weapon weapon) {
         viewMain.setEnhanceLabelImg(weapon.getImgEntity());
@@ -325,6 +335,8 @@ public class ControllerMain implements ControllerMainInterface {
         this.notFailure = b;
     }
 
+    // ................................Alchemy part
+    // ...............................//
     @Override
     public void alchemyStart() {
         viewMain.enableAlchemyBtn(false);
@@ -424,24 +436,107 @@ public class ControllerMain implements ControllerMainInterface {
         }
     }
 
+    // ................................Garden part ...............................//
     @Override
-    public void gd1_start() {
-        model.restartTimer_Gd1();
+    public void gd_start(JButton btn) {
+        String name = btn.getName();
+        switch (name) {
+            case "1":
+                model.restartTimer_Gd1();
+                break;
+            case "2":
+                model.restartTimer_Gd2();
+                break;
+            case "3":
+                model.restartTimer_Gd3();
+                break;
+            case "4":
+                model.restartTimer_Gd4();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void setGardenItem() {
+        bananaItem = model.getGardenEntity().getBananaEntity();
+        appleItem = model.getGardenEntity().getAppleEntity();
+        orangeItem = model.getGardenEntity().getOrangeEntity();
+        melonItem = model.getGardenEntity().getMelonEntity();
     }
 
     @Override
-    public void gd2_start() {
-        model.restartTimer_Gd2();
+    public void harvest(GardenItem gardenItem) {
+        String name = gardenItem.getName();
+        switch (name) {
+            case "Banana":
+                bananaItem.setHarvest(bananaItem.getHarvest() + 1);
+                break;
+            case "Apple":
+                appleItem.setHarvest(appleItem.getHarvest() + 1);
+                break;
+            case "Orange":
+                orangeItem.setHarvest(orangeItem.getHarvest() + 1);
+                break;
+            case "Melon":
+                melonItem.setHarvest(melonItem.getHarvest() + 1);
+                break;
+            default:
+                break;
+        }
+        System.out.println("banana harvest : " + bananaItem.getHarvest());
+    }
+
+    public void plusHarvest() {
+        int b = bananaItem.getHarvest();
+        model.setBanana(model.getBanana() + b);
+        int a = appleItem.getHarvest();
+        model.setApple(model.getApple() + a);
+        int o = orangeItem.getHarvest();
+        model.setOrange(model.getOrange() + o);
+        int m = melonItem.getHarvest();
+        model.setMelon(model.getMelon() + m);
+        setAllHarvsetToZero(0);
+    }
+
+    public void setAllHarvsetToZero(int num) {
+        bananaItem.setHarvest(num);
+        appleItem.setHarvest(num);
+        orangeItem.setHarvest(num);
+        melonItem.setHarvest(num);
     }
 
     @Override
-    public void gd3_start() {
-        model.restartTimer_Gd3();
+    public void eventGdBtn(JButton btn, GardenItemComboBox gdCb) {
+        if (btn.getText() == "start" && gdCb.getSelectedItem() == null) {
+            viewMain.showDialog("選擇一種煉金素材種植");
+        }
+        if (btn.getText() == "收割") {
+            harvest((GardenItem) gdCb.getSelectedItem());
+            gdCb.setSelectedItem(null);
+            gdCb.setEnabled(true);
+            viewMain.enableGdBtn(true, btn);
+            btn.setText("start");
+        }
+        if (gdCb.getSelectedItem() != null) {
+            plusHarvest();
+            viewMain.enableGdBtn(false, btn);
+            viewMain.enableGdCb(false, gdCb);
+            gd_start(btn);
+        }
     }
 
     @Override
-    public void gd4_start() {
-        model.restartTimer_Gd4();
+    public void openStore() {
+        viewStore.createStoreView();
+        viewStore.createControls();
+        viewStore.enableStoreFrame(true);
+    }
+
+    @Override
+    public void closeStore() {
+        viewStore.enableStoreFrame(false);
+        viewStore.dispose();
     }
 
     public String getformateTime() {

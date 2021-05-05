@@ -25,9 +25,6 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
-
-import org.w3c.dom.css.RGBColor;
-
 import GameProject.libs.GardenItemComboBox;
 import GameProject.libs.Weapon;
 import GameProject.libs.WeaponComboBox;
@@ -38,19 +35,19 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     ModelInterface model;
 
     JFrame mainFrame;
-    JPanel mainPanel, leftPanel, rightPanel, downPanel, middlePanel, CoinDailyPanel;
+    JPanel mainPanel, leftPanel, storePanel, downPanel, middlePanel, CoinDailyPanel;
     JPanel elementPanel, elementNumPanel, gardenPanel;
-
+    JLayeredPane pane, ALpane, Gdpane;
     JLabel coinLabel, coinImgLabel, dailyImgLabel, stoneClockLabel, descriptionLabel;
     JLabel stoneLabel, stoneNumLabel, extremeLabel, extremeNumLabel;
     JLabel protectLabel, protectNumLabel, failureTimesLabel;
     JLabel alchemyImgLabel, enhanceImgLabel, weaponLevelLabel;
     JLabel bananaLabel, appleLabel, orangeLabel, melonLabel;
     JLabel bananaNum, appleNum, orangeNum, melonNum;
-    JLabel gardenLabel;
+    JLabel gardenTitleLabel, gardenImgLabel;
     JCheckBox failcheck, protectcheck;
     JComboBox<Integer> element1, element2, element3, element4;
-    JButton enhanceBtn, dailyBtn, alchemyBtn;
+    JButton enhanceBtn, dailyBtn, alchemyBtn, storeBtn;
     WeaponComboBox weaponCombo;
     JMenuBar menuBar;
     JMenu menu;
@@ -58,8 +55,8 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     JProgressBar enhancementBar, alchemyBar;
     Weapon tempItem;
     // Garden Component
-    GardenItemComboBox gdCb_1, gdCb_2, gdCb_3, gdCb_4;
-    JButton gdBtn_1, gdBtn_2, gdBtn_3, gdBtn_4;
+    GardenItemComboBox gdCb_1, gdCb_2, gdCb_3, gdCb_4, gdCb_5, gdCb_6;
+    JButton gdBtn_1, gdBtn_2, gdBtn_3, gdBtn_4, gdBtn_5, gdBtn_6;
     String gdBtnText;
 
     public ViewMain(ControllerMainInterface controller, ModelInterface model) {
@@ -97,17 +94,17 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         middlePanel.setBounds(200, 0, 300, 320);
 
         downPanel = new JPanel();
-        downPanel.setBackground(Color.BLUE);
+        downPanel.setBackground(Color.blue);
         downPanel.setOpaque(true);
         downPanel.setBounds(200, 320, 300, 30);
 
         elementPanel = new JPanel();
-        elementPanel.setBackground(Color.BLUE);
+        elementPanel.setBackground(Color.blue);
         elementPanel.setOpaque(true);
         elementPanel.setBounds(200, 350, 300, 30);
 
         elementNumPanel = new JPanel();
-        elementNumPanel.setBackground(Color.BLUE);
+        elementNumPanel.setBackground(Color.blue);
         elementNumPanel.setOpaque(true);
         elementNumPanel.setBounds(200, 380, 300, 30);
 
@@ -123,11 +120,11 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         gardenPanel.setOpaque(true);
         gardenPanel.setBackground(Color.GREEN);
 
-        rightPanel = new JPanel();
-        rightPanel.setLayout(null);
-        rightPanel.setBounds(500, 400, 200, 50);
-        rightPanel.setOpaque(true);
-        rightPanel.setBackground(Color.PINK);
+        storePanel = new JPanel();
+        storePanel.setLayout(null);
+        storePanel.setBounds(500, 400, 200, 50);
+        storePanel.setOpaque(true);
+        storePanel.setBackground(Color.PINK);
         // component.............................................//
         weaponCombo = new WeaponComboBox(model);
         weaponCombo.setBounds(0, 0, 200, 50);
@@ -158,7 +155,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         enhanceImgLabel.setBackground(Color.BLACK);
         enhanceImgLabel.setBounds(0, 0, 200, 200);
 
-        JLayeredPane pane = new JLayeredPane();
+        pane = new JLayeredPane();
         pane.setBounds(0, 50, 200, 200);
 
         pane.add(failcheck);
@@ -227,19 +224,19 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         descriptionLabel = new JLabel("...");
         descriptionLabel.setVerticalAlignment(JLabel.NORTH);
         descriptionLabel.setHorizontalAlignment(JLabel.LEFT);
-        descriptionLabel.setBackground(Color.GRAY);
+        descriptionLabel.setBackground(new Color(204, 204, 204));
         descriptionLabel.setOpaque(true);
         descriptionLabel.setBounds(0, 350, 200, 100);
 
         alchemyBtn = new JButton("煉金");
         alchemyBtn.setBounds(120, 275, 60, 20);
 
-        alchemyImgLabel = new JLabel();
+        alchemyImgLabel = new JLabel(new ImageIcon("GameProject//res//pics//alchemy.jpg"));
         alchemyImgLabel.setBackground(Color.PINK);
         alchemyImgLabel.setOpaque(true);
         alchemyImgLabel.setBounds(0, 0, 300, 300);
 
-        JLayeredPane ALpane = new JLayeredPane();
+        ALpane = new JLayeredPane();
         ALpane.setBounds(0, 0, 300, 300);
 
         ALpane.add(alchemyBtn);
@@ -268,7 +265,8 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         setElementComboNull();
 
         bananaLabel = new JLabel("Banana", SwingConstants.CENTER);
-        bananaLabel.setBackground(Color.yellow);
+        bananaLabel.setBackground(Color.black);
+        bananaLabel.setForeground(Color.yellow);
         bananaLabel.setOpaque(true);
         bananaLabel.setPreferredSize(new Dimension(60, 20));
 
@@ -312,7 +310,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         coinImgLabel.setBounds(0, 0, 20, 20);
 
         coinLabel = new JLabel("0", SwingConstants.CENTER);
-        coinLabel.setBackground(Color.YELLOW);
+        coinLabel.setBackground(new Color(255, 204, 51));
         coinLabel.setFont(new Font("Serif", Font.BOLD, 13));
         coinLabel.setOpaque(true);
         coinLabel.setBounds(20, 0, 70, 20);
@@ -324,11 +322,11 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         dailyBtn = new JButton("00:00");
         dailyBtn.setBounds(110, 0, 74, 20);
 
-        gardenLabel = new JLabel("花園", SwingConstants.CENTER);
-        gardenLabel.setBounds(0, 20, 184, 30);
-        gardenLabel.setOpaque(true);
-        gardenLabel.setBackground(new Color(0, 204, 0));
-        gardenLabel.setBorder(BorderFactory.createLineBorder(Color.green, 5));
+        gardenTitleLabel = new JLabel("花園", SwingConstants.CENTER);
+        gardenTitleLabel.setBounds(0, 20, 184, 30);
+        gardenTitleLabel.setOpaque(true);
+        gardenTitleLabel.setBackground(new Color(0, 204, 0));
+        gardenTitleLabel.setBorder(BorderFactory.createLineBorder(Color.green, 1));
 
         gdCb_1 = new GardenItemComboBox(model);
         gdCb_1.setBounds(10, 10, 75, 60);
@@ -346,17 +344,64 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         gdCb_4.setBounds(95, 115, 75, 60);
         gdCb_4.setEnabled(false);
 
+        gdCb_5 = new GardenItemComboBox(model);
+        gdCb_5.setBounds(10, 220, 75, 60);
+        gdCb_5.setEnabled(false);
+        gdCb_5.setSelectedItem(null);
+
+        gdCb_6 = new GardenItemComboBox(model);
+        gdCb_6.setBounds(95, 220, 75, 60);
+        gdCb_6.setEnabled(false);
+        gdCb_6.setSelectedItem(null);
+
         gdBtn_1 = new JButton("00:00");
         gdBtn_1.setBounds(10, 75, 75, 20);
+        gdBtn_1.setName("1");
 
         gdBtn_2 = new JButton("00:00");
         gdBtn_2.setBounds(95, 75, 75, 20);
+        gdBtn_2.setName("2");
 
         gdBtn_3 = new JButton("00:00");
         gdBtn_3.setBounds(10, 180, 75, 20);
+        gdBtn_3.setName("3");
 
         gdBtn_4 = new JButton("00:00");
         gdBtn_4.setBounds(95, 180, 75, 20);
+        gdBtn_4.setName("4");
+
+        gdBtn_5 = new JButton("00:00");
+        gdBtn_5.setBounds(10, 285, 75, 20);
+        gdBtn_5.setName("5");
+        gdBtn_5.setEnabled(false);
+
+        gdBtn_6 = new JButton("00:00");
+        gdBtn_6.setBounds(95, 285, 75, 20);
+        gdBtn_6.setName("6");
+        gdBtn_6.setEnabled(false);
+
+        gardenImgLabel = new JLabel(new ImageIcon("GameProject//res//pics//garden.jpg"));
+        gardenImgLabel.setBounds(0, 0, 200, 350);
+
+        Gdpane = new JLayeredPane();
+        Gdpane.setBounds(0, 0, 200, 350);
+
+        Gdpane.add(gdCb_1);
+        Gdpane.add(gdCb_2);
+        Gdpane.add(gdCb_3);
+        Gdpane.add(gdCb_4);
+        Gdpane.add(gdCb_5);
+        Gdpane.add(gdCb_6);
+        Gdpane.add(gdBtn_1);
+        Gdpane.add(gdBtn_2);
+        Gdpane.add(gdBtn_3);
+        Gdpane.add(gdBtn_4);
+        Gdpane.add(gdBtn_5);
+        Gdpane.add(gdBtn_6);
+        Gdpane.add(gardenImgLabel);
+
+        storeBtn = new JButton("商店");
+        storeBtn.setBounds(0, 0, 70, 30);
 
         // panel add component...................................//
         leftPanel.add(weaponCombo);
@@ -391,29 +436,19 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         elementNumPanel.add(orangeNum);
         elementNumPanel.add(melonNum);
 
-        // rightPanel.add(coinLabel);
-        // rightPanel.add(dailyBtn);
-
         CoinDailyPanel.add(coinImgLabel);
         CoinDailyPanel.add(coinLabel);
         CoinDailyPanel.add(dailyImgLabel);
         CoinDailyPanel.add(dailyBtn);
-        CoinDailyPanel.add(gardenLabel);
+        CoinDailyPanel.add(gardenTitleLabel);
 
-        gardenPanel.add(gdCb_1);
-        gardenPanel.add(gdCb_2);
-        gardenPanel.add(gdCb_3);
-        gardenPanel.add(gdCb_4);
-        gardenPanel.add(gdBtn_1);
-        gardenPanel.add(gdBtn_2);
-        gardenPanel.add(gdBtn_3);
-        gardenPanel.add(gdBtn_4);
+        gardenPanel.add(Gdpane);
 
-        // rightPanel.add(alchemyBtn);
+        storePanel.add(storeBtn);
 
         // mainFrame add panel................//
         mainFrame.add(leftPanel);
-        mainFrame.add(rightPanel);
+        mainFrame.add(storePanel);
         mainFrame.add(middlePanel);
         mainFrame.add(downPanel);
         mainFrame.add(elementPanel);
@@ -506,6 +541,9 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         gdBtn_2.addActionListener(this);
         gdBtn_3.addActionListener(this);
         gdBtn_4.addActionListener(this);
+        gdBtn_5.addActionListener(this);
+        gdBtn_6.addActionListener(this);
+        storeBtn.addActionListener(this);
     }
 
     @Override
@@ -568,26 +606,19 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
             weaponLevelLabel.setText(level);
             controller.initEnhanceImg(tempItem);
         } else if (e.getSource() == gdBtn_1) {
-            if (gdBtn_1.getText() == "start" && gdCb_1.getSelectedItem() == null) {
-                showDialog("選擇一種煉金素材種植");
-            }
-            if (gdBtn_1.getText() == "收割") {
-                gdCb_1.setSelectedItem(null);
-                gdCb_1.setEnabled(true);
-                enableGdBtn_1(true);
-                gdBtn_1.setText("start");
-            }
-            if (gdCb_1.getSelectedItem() != null) {
-                enableGdBtn_1(false);
-                enableGdCb_1(false);
-                controller.gd1_start();
-            }
+            controller.eventGdBtn(gdBtn_1, gdCb_1);
         } else if (e.getSource() == gdBtn_2) {
-
+            controller.eventGdBtn(gdBtn_2, gdCb_2);
         } else if (e.getSource() == gdBtn_3) {
-
+            controller.eventGdBtn(gdBtn_3, gdCb_3);
         } else if (e.getSource() == gdBtn_4) {
-
+            controller.eventGdBtn(gdBtn_4, gdCb_4);
+        } else if (e.getSource() == gdBtn_5) {
+            controller.eventGdBtn(gdBtn_5, gdCb_5);
+        } else if (e.getSource() == gdBtn_6) {
+            controller.eventGdBtn(gdBtn_6, gdCb_6);
+        } else if (e.getSource() == storeBtn) {
+            controller.openStore();
         }
     }
 
@@ -792,6 +823,10 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         gdBtn_4.setEnabled(b);
     }
 
+    public void enableGdBtn(boolean b, JButton btn) {
+        btn.setEnabled(b);
+    }
+
     public void enableGdCb_1(boolean b) {
         gdCb_1.setEnabled(b);
     }
@@ -806,6 +841,10 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
     public void enableGdCb_4(boolean b) {
         gdCb_4.setEnabled(b);
+    }
+
+    public void enableGdCb(boolean b, GardenItemComboBox gdCb) {
+        gdCb.setEnabled(b);
     }
 
     public void enableProtectCheck(boolean b) {

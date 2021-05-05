@@ -3,6 +3,8 @@ package GameProject.Game;
 import java.util.*;
 import java.util.logging.Logger;
 
+import GameProject.libs.GardenItemEntity;
+
 public class Model implements ModelInterface {
     private static Logger logger = Logger.getLogger(Model.class.getName());
     ArrayList<CoinObserver> coinObservers = new ArrayList<CoinObserver>();
@@ -10,6 +12,7 @@ public class Model implements ModelInterface {
     Dataset dataset;
     Callback callback;
     ClockTask stoneTask, dailyTask, gd1_Task, gd2_Task, gd3_Task, gd4_Task;
+    GardenItemEntity gardenItemEntity;
     String password = null;
     public static int coin;
     public int stone, extremeStone, protectStone, failureTimes;
@@ -19,6 +22,7 @@ public class Model implements ModelInterface {
 
     public Model() {
         dataset = new Dataset(this);
+        gardenItemEntity = new GardenItemEntity(this);
     }
 
     @Override
@@ -175,7 +179,6 @@ public class Model implements ModelInterface {
 
     @Override
     public boolean isDailyfinish() {
-        // logger.info(String.valueOf(dailyTask.isfinish()));
         return dailyTask.isfinish();
     }
 
@@ -559,4 +562,34 @@ public class Model implements ModelInterface {
     public void setCurrentLevel(int level) {
         this.currentLevel = level;
     }
+
+    // Garden
+    @Override
+    public GardenItemEntity getGardenEntity() {
+        return this.gardenItemEntity;
+    }
+
+    // @Override
+    // public GardenItem getBananaEntity() {
+    // // TODO Auto-generated method stub
+    // return null;
+    // }
+
+    // @Override
+    // public GardenItem getAppleEntity() {
+    // // TODO Auto-generated method stub
+    // return null;
+    // }
+
+    // @Override
+    // public GardenItem getOrangeEntity() {
+    // // TODO Auto-generated method stub
+    // return null;
+    // }
+
+    // @Override
+    // public GardenItem getMelonEntity() {
+    // // TODO Auto-generated method stub
+    // return null;
+    // }
 }

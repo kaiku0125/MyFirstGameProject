@@ -5,6 +5,7 @@ import javax.swing.Icon;
 public abstract class GardenItem {
     private String name;
     private Icon icon;
+    public int harvestNum = 0;
 
     public GardenItem(Icon icon) {
         this.icon = icon;
@@ -25,6 +26,14 @@ public abstract class GardenItem {
     public void setImg(Icon img) {
         this.icon = img;
     }
+
+    public void setHarvest(int item_harvest) {
+        this.harvestNum = item_harvest;
+    }
+
+    public int getHarvest() {
+        return harvestNum;
+    }
 }
 
 class Banana extends GardenItem {
@@ -33,6 +42,14 @@ class Banana extends GardenItem {
         super(icon);
         setName("Banana");
     }
+
+    // public void setharvest(int item_harvest){
+    // this.banana_harvest = item_harvest;
+    // }
+
+    // public int getHarvest(){
+    // return this.banana_harvest;
+    // }
 }
 
 class Apple extends GardenItem {
