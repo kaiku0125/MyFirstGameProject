@@ -80,7 +80,6 @@ public class ViewLogin extends JFrame implements KeyListener, ActionListener {
             regID = IDtextField.getText();
             model.regID();
         }
-
     }
 
     public void createControls() {

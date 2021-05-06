@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JProgressBar;
 
 import GameProject.Game.Rate.BounsItem;
@@ -29,6 +30,8 @@ public class ControllerMain implements ControllerMainInterface {
     StringBuilder sb;
     boolean success, protect, notFailure;
     GardenItem bananaItem, appleItem, orangeItem, melonItem;
+    public static final boolean SOLD = true;
+    public static final boolean UNSOLD = false;
 
     public ControllerMain(ModelInterface model) {
         this.model = model;
@@ -545,6 +548,12 @@ public class ControllerMain implements ControllerMainInterface {
     public void closeStore() {
         viewStore.enableStoreFrame(false);
 
+    }
+
+    @Override
+    public void buyControl(JButton btn) {
+        btn.setEnabled(false);
+        model.setFarm1Sold(SOLD);
     }
 
     public String getformateTime() {

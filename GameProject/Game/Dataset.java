@@ -9,6 +9,8 @@ public class Dataset {
     ArrayList<String> allClock = new ArrayList<String>();
     ArrayList<String> weaponLevel = new ArrayList<String>();
     ArrayList<String> stone = new ArrayList<String>();
+    ArrayList<String> sold = new ArrayList<String>();
+    ArrayList<Boolean> issold = new ArrayList<Boolean>();
     HashMap<String, Integer> allElement = new HashMap<String, Integer>();
     ModelInterface model;
     BufferedReader reader = null;
@@ -217,6 +219,45 @@ public class Dataset {
         }
     }
 
+    public void readSoldState() {
+        try {
+            reader = new BufferedReader(new FileReader("GameProject//res//StoreSold.txt"));
+            temp = reader.readLine();
+            String[] s = temp.split(",");
+            sold.add(s[0]);
+            sold.add(s[1]);
+            for (int i = 0; i < sold.size(); i++) {
+                System.out.println(s[i]);
+                if ((s[i]).equals("false")) {
+                    issold.add(false);
+                } else if (s[i].equals("true")) {
+                    issold.add(true);
+                } else {
+                    logger.warning("無法儲存狀態");
+                }
+            }
+            model.setFarm1Sold(issold.get(0));
+            System.out.println("Farm1Sold =" + model.getFarm1Sold());
+            model.setFarm2Sold(issold.get(1));
+            System.out.println("Farm2Sold =" + model.getFarm2Sold());
+            reader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveSoldState() {
+        try {
+            fw = new FileWriter("GameProject//res//StoreSold.txt");
+            sold.set(0, String.valueOf(model.getFarm1Sold()));
+            sold.set(1, String.valueOf(model.getFarm2Sold()));
+            fw.write(sold.get(0) + "," + sold.get(1));
+            fw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void readFailure() {
         try {
             reader = new BufferedReader(new FileReader("GameProject//res//Failure.txt"));
@@ -239,5 +280,24 @@ public class Dataset {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void initAllData() {
+        readcoin();
+        readStone();
+        readClock();
+        readElement();
+        readFailure();
+        readSoldState();
+    }
+
+    public void saveAllData() {
+        savecoin();
+        saveStone();
+        saveClock();
+        saveElement();
+        saveWeaponLevel();
+        saveFailure();
+        saveSoldState();
     }
 }

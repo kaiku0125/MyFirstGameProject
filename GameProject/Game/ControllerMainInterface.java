@@ -1,6 +1,7 @@
 package GameProject.Game;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JProgressBar;
 
 import GameProject.libs.GardenItem;
@@ -95,4 +96,6 @@ public interface ControllerMainInterface {
 
     // Store
     void openStore();
+
+    void buyControl(JButton btn);
 }

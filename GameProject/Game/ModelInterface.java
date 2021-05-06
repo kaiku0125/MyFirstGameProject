@@ -195,12 +195,12 @@ public interface ModelInterface {
     // Garden
     GardenItemEntity getGardenEntity();
 
-    // GardenItem getBananaEntity();
+    // Store
+    boolean getFarm1Sold();
 
-    // GardenItem getAppleEntity();
+    void setFarm1Sold(boolean b);
 
-    // GardenItem getOrangeEntity();
+    boolean getFarm2Sold();
 
-    // GardenItem getMelonEntity();
-
+    void setFarm2Sold(boolean b);
 }

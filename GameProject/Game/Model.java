@@ -19,6 +19,7 @@ public class Model implements ModelInterface {
     boolean ismain = false;
     int banana, apple, orange, melon;
     int swordLevel, bowLevel, currentLevel;
+    boolean isfarm1_sold, isfarm2_sold;
 
     public Model() {
         dataset = new Dataset(this);
@@ -49,21 +50,25 @@ public class Model implements ModelInterface {
 
     @Override
     public void initData() {
-        dataset.readcoin();
-        dataset.readStone();
-        dataset.readClock();
-        dataset.readElement();
-        dataset.readFailure();
+        // dataset.readcoin();
+        // dataset.readStone();
+        // dataset.readClock();
+        // dataset.readElement();
+        // dataset.readFailure();
+        // dataset.readSoldState();
+        dataset.initAllData();
     }
 
     @Override
     public void saveData() {
-        dataset.savecoin();
-        dataset.saveStone();
-        dataset.saveClock();
-        dataset.saveElement();
-        dataset.saveWeaponLevel();
-        dataset.saveFailure();
+        // dataset.savecoin();
+        // dataset.saveStone();
+        // dataset.saveClock();
+        // dataset.saveElement();
+        // dataset.saveWeaponLevel();
+        // dataset.saveFailure();
+        // dataset.saveSoldState();
+        dataset.saveAllData();
     }
 
     @Override
@@ -574,27 +579,25 @@ public class Model implements ModelInterface {
         return this.gardenItemEntity;
     }
 
-    // @Override
-    // public GardenItem getBananaEntity() {
-    // // TODO Auto-generated method stub
-    // return null;
-    // }
+    // Store
+    @Override
+    public boolean getFarm1Sold() {
+        return this.isfarm1_sold;
+    }
 
-    // @Override
-    // public GardenItem getAppleEntity() {
-    // // TODO Auto-generated method stub
-    // return null;
-    // }
+    @Override
+    public void setFarm1Sold(boolean b) {
+        this.isfarm1_sold = b;
+    }
 
-    // @Override
-    // public GardenItem getOrangeEntity() {
-    // // TODO Auto-generated method stub
-    // return null;
-    // }
+    @Override
+    public boolean getFarm2Sold() {
+        return isfarm2_sold;
+    }
 
-    // @Override
-    // public GardenItem getMelonEntity() {
-    // // TODO Auto-generated method stub
-    // return null;
-    // }
+    @Override
+    public void setFarm2Sold(boolean b) {
+        this.isfarm2_sold = b;
+    }
+
 }
