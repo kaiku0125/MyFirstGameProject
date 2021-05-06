@@ -12,16 +12,21 @@ public class ViewStore extends JFrame implements ActionListener {
     JFrame storeFrame;
     JPanel mainPanel;
     JButton backBtn;
+    public static volatile ViewStore instance = null;
 
     public ViewStore(ControllerMainInterface controller, ModelInterface model) {
         this.controller = controller;
         this.model = model;
+        createStoreView();
+        createControls();
     }
 
     public void createStoreView() {
         storeFrame = new JFrame("Store");
+        storeFrame.setSize(400, 300);
         storeFrame.setResizable(false);
         storeFrame.setLocationRelativeTo(null);
+        storeFrame.setLocation(new Point(ViewMain.WIDTH + 600, ViewMain.HEIGHT));
         storeFrame.setLayout(null);
         storeFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
@@ -35,8 +40,7 @@ public class ViewStore extends JFrame implements ActionListener {
 
         storeFrame.getContentPane().add(mainPanel);
 
-        storeFrame.setSize(400, 300);
-        storeFrame.setVisible(true);
+        storeFrame.setVisible(false);
     }
 
     public void createControls() {
@@ -46,10 +50,7 @@ public class ViewStore extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == backBtn) {
-            // WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-            // Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
             controller.closeStore();
-            System.out.println("...............");
         }
 
     }

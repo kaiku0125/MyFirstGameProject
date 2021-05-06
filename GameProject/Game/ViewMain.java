@@ -31,6 +31,8 @@ import GameProject.libs.WeaponComboBox;
 
 public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Callback {
     private Logger logger = Logger.getLogger(ViewMain.class.getName());
+    static int WIDTH = 700;
+    static int HEIGHT = 520;
     ControllerMainInterface controller;
     ModelInterface model;
 
@@ -57,7 +59,6 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     // Garden Component
     GardenItemComboBox gdCb_1, gdCb_2, gdCb_3, gdCb_4, gdCb_5, gdCb_6;
     JButton gdBtn_1, gdBtn_2, gdBtn_3, gdBtn_4, gdBtn_5, gdBtn_6;
-    String gdBtnText;
 
     public ViewMain(ControllerMainInterface controller, ModelInterface model) {
         this.controller = controller;
@@ -70,6 +71,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     // create all component in frame
     public void createMainView() {
         mainFrame = new JFrame("KaiKuKu's Game");
+        mainFrame.setSize(WIDTH, HEIGHT);
         mainFrame.setLayout(null);
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
@@ -455,7 +457,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         mainFrame.add(elementNumPanel);
         mainFrame.add(CoinDailyPanel);
         mainFrame.add(gardenPanel);
-        mainFrame.setSize(700, 520);
+
         mainFrame.setVisible(true);
     }
 

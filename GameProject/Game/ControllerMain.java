@@ -34,10 +34,8 @@ public class ControllerMain implements ControllerMainInterface {
         this.model = model;
         ViewLogin viewlogin = new ViewLogin(this, model);
         ViewMain viewMain = new ViewMain(this, model);
-        ViewStore viewStore = new ViewStore(this, model);
         this.viewlogin = viewlogin;
         this.viewMain = viewMain;
-        this.viewStore = viewStore;
         viewlogin.createLoginView();
     }
 
@@ -233,8 +231,7 @@ public class ControllerMain implements ControllerMainInterface {
         }
     }
 
-    // ................................Enhance part
-    // ...............................//
+    // ................................Enhance part...............................//
     @Override
     public void initEnhanceImg(Weapon weapon) {
         viewMain.setEnhanceLabelImg(weapon.getImgEntity());
@@ -335,8 +332,7 @@ public class ControllerMain implements ControllerMainInterface {
         this.notFailure = b;
     }
 
-    // ................................Alchemy part
-    // ...............................//
+    // ...............................Alchemy part ...............................//
     @Override
     public void alchemyStart() {
         viewMain.enableAlchemyBtn(false);
@@ -526,17 +522,29 @@ public class ControllerMain implements ControllerMainInterface {
         }
     }
 
+    // ...............................View Store..........................//
+    public ViewStore getViewStoreInstance() {
+        if (ViewStore.instance == null) {
+            synchronized (ViewStore.class) {
+                if (ViewStore.instance == null) {
+                    ViewStore.instance = new ViewStore(this, model);
+                }
+            }
+        }
+        return ViewStore.instance;
+    }
+
     @Override
     public void openStore() {
-        viewStore.createStoreView();
-        viewStore.createControls();
+        getViewStoreInstance();
+        this.viewStore = ViewStore.instance;
         viewStore.enableStoreFrame(true);
     }
 
     @Override
     public void closeStore() {
         viewStore.enableStoreFrame(false);
-        viewStore.dispose();
+
     }
 
     public String getformateTime() {

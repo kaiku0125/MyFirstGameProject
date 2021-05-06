@@ -16,6 +16,8 @@ public interface ModelInterface {
 
     void checkID();
 
+    void regID();
+
     String getpassword();
 
     // Coin

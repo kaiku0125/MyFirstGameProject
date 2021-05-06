@@ -78,6 +78,11 @@ public class Model implements ModelInterface {
     }
 
     @Override
+    public void regID() {
+        dataset.regUserID();
+    }
+
+    @Override
     public String getpassword() {
         return password;
     }

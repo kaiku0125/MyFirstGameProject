@@ -46,6 +46,18 @@ public class Dataset {
         }
     }
 
+    public void regUserID() {
+        try {
+            fw = new FileWriter("GameProject//res//UserID.txt");
+            String tempPassword = ViewLogin.regID;
+            fw.write(tempPassword);
+            logger.info("reg ID :" + tempPassword);
+            fw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void checkUserID() {
         try {
             reader = new BufferedReader(new FileReader("GameProject//res//UserID.txt"));
