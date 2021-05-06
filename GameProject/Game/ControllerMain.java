@@ -101,7 +101,7 @@ public class ControllerMain implements ControllerMainInterface {
         return true;
     }
 
-    // Extreme Stone
+    // .......................Extreme Stone.....................//
     @Override
     public void minusExtremeStone(int stone) {
         tempstone = model.getExtremeStone();
