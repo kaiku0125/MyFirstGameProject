@@ -2,7 +2,6 @@ package GameProject.Game;
 
 import java.util.*;
 import java.util.logging.Logger;
-
 import GameProject.libs.GardenItemEntity;
 
 public class Model implements ModelInterface {

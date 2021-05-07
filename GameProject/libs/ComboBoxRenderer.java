@@ -2,11 +2,15 @@ package GameProject.libs;
 
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
 public class ComboBoxRenderer extends JLabel implements ListCellRenderer<Object> {
+    public ComboBoxRenderer() {
+        setBorder(BorderFactory.createLineBorder(Color.white, 1));
+    }
 
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,

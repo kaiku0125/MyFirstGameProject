@@ -541,19 +541,30 @@ public class ControllerMain implements ControllerMainInterface {
     public void openStore() {
         getViewStoreInstance();
         this.viewStore = ViewStore.instance;
-        viewStore.enableStoreFrame(true);
+        // viewStore.enableStoreFrame(true);
+
     }
 
     @Override
     public void closeStore() {
-        viewStore.enableStoreFrame(false);
-
+        // viewStore.enableStoreFrame(false);
+        viewStore.closeStore();
     }
 
     @Override
     public void buyControl(JButton btn) {
         btn.setEnabled(false);
-        model.setFarm1Sold(SOLD);
+        if (btn.getName() == "buy1") {
+            model.setFarm1Sold(SOLD);
+        } else if (btn.getName() == "buy2") {
+            model.setFarm2Sold(SOLD);
+        }
+    }
+
+    @Override
+    public void sold(int have, int sell, int price) {
+        int temppluscoin = (have - sell) * price;
+        model.setCoin(temppluscoin);
     }
 
     public String getformateTime() {

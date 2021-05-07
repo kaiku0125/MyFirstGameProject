@@ -98,4 +98,6 @@ public interface ControllerMainInterface {
     void openStore();
 
     void buyControl(JButton btn);
+
+    void sold(int have, int sell, int price);
 }
