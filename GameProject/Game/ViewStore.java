@@ -4,8 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import GameProject.libs.GardenItemComboBox;
-
 import java.util.logging.Logger;
 
 public class ViewStore extends JFrame implements ActionListener, CoinObserver {

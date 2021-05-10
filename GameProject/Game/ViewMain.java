@@ -39,14 +39,14 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     JFrame mainFrame;
     JPanel mainPanel, leftPanel, storePanel, elementCbPanel, middlePanel, CoinDailyPanel;
     JPanel elementPanel, elementNumPanel, downPanel, gardenPanel;
-    JLayeredPane pane, ALpane, Gdpane;
+    JLayeredPane pane, ALpane, Gdpane, Storepane;
     JLabel coinLabel, coinImgLabel, dailyImgLabel, stoneClockLabel, descriptionLabel;
     JLabel stoneLabel, stoneNumLabel, extremeLabel, extremeNumLabel;
     JLabel protectLabel, protectNumLabel, failureTimesLabel;
     JLabel alchemyImgLabel, enhanceImgLabel, weaponLevelLabel;
     JLabel bananaLabel, appleLabel, orangeLabel, melonLabel, dregsLabel;
     JLabel bananaNum, appleNum, orangeNum, melonNum, dregsNum;
-    JLabel gardenTitleLabel, gardenImgLabel;
+    JLabel gardenTitleLabel, gardenImgLabel, storeImgLabel;
     JCheckBox failcheck, protectcheck;
     JComboBox<Integer> element1, element2, element3, element4;
     JButton enhanceBtn, dailyBtn, alchemyBtn, storeBtn;
@@ -124,15 +124,15 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
         gardenPanel = new JPanel();
         gardenPanel.setLayout(null);
-        gardenPanel.setBounds(500, 50, 200, 350);
+        gardenPanel.setBounds(500, 50, 200, 330);
         gardenPanel.setOpaque(true);
         gardenPanel.setBackground(Color.GREEN);
 
         storePanel = new JPanel();
         storePanel.setLayout(null);
-        storePanel.setBounds(500, 400, 200, 50);
+        storePanel.setBounds(500, 380, 200, 120);
         storePanel.setOpaque(true);
-        storePanel.setBackground(Color.PINK);
+        storePanel.setBackground(Color.RED);
         // component.............................................//
         weaponCombo = new WeaponComboBox(model);
         weaponCombo.setBounds(0, 0, 200, 50);
@@ -402,7 +402,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         gardenImgLabel.setBounds(0, 0, 200, 350);
 
         Gdpane = new JLayeredPane();
-        Gdpane.setBounds(0, 0, 200, 350);
+        Gdpane.setBounds(0, 0, 200, 330);
 
         Gdpane.add(gdCb_1);
         Gdpane.add(gdCb_2);
@@ -419,7 +419,15 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         Gdpane.add(gardenImgLabel);
 
         storeBtn = new JButton("商店");
-        storeBtn.setBounds(0, 0, 70, 30);
+        storeBtn.setBounds(100, 50, 60, 20);
+
+        storeImgLabel = new JLabel(new ImageIcon("GameProject//res//pics//store1.jpg"));
+        storeImgLabel.setBounds(0, 0, 200, 120);
+
+        Storepane = new JLayeredPane();
+        Storepane.setBounds(0, 0, 200, 120);
+        Storepane.add(storeBtn);
+        Storepane.add(storeImgLabel);
 
         // panel add component...................................//
         leftPanel.add(weaponCombo);
@@ -465,7 +473,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
         gardenPanel.add(Gdpane);
 
-        storePanel.add(storeBtn);
+        storePanel.add(Storepane);
 
         // mainFrame add panel................//
         mainFrame.add(leftPanel);
