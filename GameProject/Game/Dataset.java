@@ -104,6 +104,14 @@ public class Dataset {
             allClock.set(8, model.getClock_gd3().getMinute());
             allClock.set(11, model.getClock_gd4().getSecond());
             allClock.set(10, model.getClock_gd4().getMinute());
+            if (model.getFarm1Sold()) {
+                allClock.set(13, model.getClock_gd5().getSecond());
+                allClock.set(12, model.getClock_gd5().getMinute());
+            }
+            if (model.getFarm2Sold()) {
+                allClock.set(15, model.getClock_gd6().getSecond());
+                allClock.set(14, model.getClock_gd6().getMinute());
+            }
             for (int i = 0; i < allClock.size(); i = i + 2) {
                 fw.write(allClock.get(i) + "," + allClock.get(i + 1) + "\n");
             }

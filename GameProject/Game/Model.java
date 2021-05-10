@@ -11,6 +11,7 @@ public class Model implements ModelInterface {
     Dataset dataset;
     Callback callback;
     ClockTask stoneTask, dailyTask, gd1_Task, gd2_Task, gd3_Task, gd4_Task;
+    ClockTask gd5_Task, gd6_Task;
     GardenItemEntity gardenItemEntity;
     String password = null;
     public static int coin;
@@ -45,6 +46,8 @@ public class Model implements ModelInterface {
         initTimer_Gd2();
         initTimer_Gd3();
         initTimer_Gd4();
+        initTimer_Gd5();
+        initTimer_Gd6();
     }
 
     @Override
@@ -277,12 +280,62 @@ public class Model implements ModelInterface {
         gd4_Task.setMinute(1);
         gd4_Task.setSecond(1);
         gd4_Task.getTimer().scheduleAtFixedRate(gd4_Task, 0, 1000);
-
     }
 
     @Override
     public boolean isfinish_Gd4() {
         return gd4_Task.isfinish();
+    }
+
+    @Override
+    public void initTimer_Gd5() {
+        if (getFarm1Sold()) {
+            gd5_Task = new Gd5_Clock(this);
+            gd5_Task.setMinute(dataset.getClockindex(12));
+            gd5_Task.setSecond(dataset.getClockindex(13));
+            gd5_Task.getTimer().scheduleAtFixedRate(gd5_Task, 0, 1000);
+        }
+    }
+
+    @Override
+    public void restartTimer_Gd5() {
+        gd5_Task = new Gd5_Clock(this);
+        gd5_Task.again();
+        gd5_Task.setMinute(1);
+        gd5_Task.setSecond(1);
+        gd5_Task.getTimer().scheduleAtFixedRate(gd5_Task, 0, 1000);
+    }
+
+    @Override
+    public boolean isfinish_Gd5() {
+        return gd5_Task.isfinish();
+    }
+
+    @Override
+    public void initTimer_Gd6() {
+        if (getFarm2Sold()) {
+            gd6_Task = new Gd6_Clock(this);
+            gd6_Task.setMinute(dataset.getClockindex(14));
+            gd6_Task.setSecond(dataset.getClockindex(15));
+            gd6_Task.getTimer().scheduleAtFixedRate(gd6_Task, 0, 1000);
+        }
+    }
+
+    @Override
+    public void restartTimer_Gd6() {
+        if (getFarm2Sold()) {
+            gd6_Task = new Gd6_Clock(this);
+            gd6_Task.again();
+            gd6_Task.setMinute(1);
+            gd6_Task.setSecond(1);
+            gd6_Task.getTimer().scheduleAtFixedRate(gd6_Task, 0, 1000);
+        }
+
+    }
+
+    @Override
+    public boolean isfinish_Gd6() {
+        return gd6_Task.isfinish();
     }
 
     @Override
@@ -313,6 +366,16 @@ public class Model implements ModelInterface {
     @Override
     public ClockTask getClock_gd4() {
         return gd4_Task;
+    }
+
+    @Override
+    public ClockTask getClock_gd5() {
+        return gd5_Task;
+    }
+
+    @Override
+    public ClockTask getClock_gd6() {
+        return gd6_Task;
     }
 
     @Override
@@ -423,6 +486,26 @@ public class Model implements ModelInterface {
     }
 
     @Override
+    public String getSecond_gd5() {
+        return gd5_Task.dsecond;
+    }
+
+    @Override
+    public String getMinute_gd5() {
+        return gd5_Task.dminute;
+    }
+
+    @Override
+    public String getSecond_gd6() {
+        return gd6_Task.dsecond;
+    }
+
+    @Override
+    public String getMinute_gd6() {
+        return gd6_Task.dminute;
+    }
+
+    @Override
     public void stoneListener() {
         callback.updateStone();
     }
@@ -496,6 +579,16 @@ public class Model implements ModelInterface {
     @Override
     public void gdBtn_4Listener() {
         callback.updateClockGdBtn_4();
+    }
+
+    @Override
+    public void gdBtn_5Listener() {
+        callback.updateClockGdBtn_5();
+    }
+
+    @Override
+    public void gdBtn_6Listener() {
+        callback.updateClockGdBtn_6();
     }
 
     @Override

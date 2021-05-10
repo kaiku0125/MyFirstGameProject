@@ -367,12 +367,10 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         gdCb_5 = new GardenItemComboBox(model);
         gdCb_5.setBounds(10, 220, 75, 60);
         gdCb_5.setEnabled(false);
-        gdCb_5.setSelectedItem(null);
 
         gdCb_6 = new GardenItemComboBox(model);
         gdCb_6.setBounds(95, 220, 75, 60);
         gdCb_6.setEnabled(false);
-        gdCb_6.setSelectedItem(null);
 
         gdBtn_1 = new JButton("00:00");
         gdBtn_1.setBounds(10, 75, 75, 20);
@@ -390,12 +388,12 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         gdBtn_4.setBounds(95, 180, 75, 20);
         gdBtn_4.setName("4");
 
-        gdBtn_5 = new JButton("start");
+        gdBtn_5 = new JButton("收割");
         gdBtn_5.setBounds(10, 285, 75, 20);
         gdBtn_5.setName("5");
         gdBtn_5.setEnabled(false);
 
-        gdBtn_6 = new JButton("start");
+        gdBtn_6 = new JButton("收割");
         gdBtn_6.setBounds(95, 285, 75, 20);
         gdBtn_6.setName("6");
         gdBtn_6.setEnabled(false);
@@ -741,6 +739,32 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     }
 
     @Override
+    public void updateClockGdBtn_5() {
+        if (model.getFarm1Sold()) {
+            if (!model.isfinish_Gd5()) {
+                gdBtn_5.setText(model.getMinute_gd5() + ":" + model.getSecond_gd5());
+                enableGdBtn(false, gdBtn_5);
+            } else {
+                gdBtn_5.setText("收割");
+                enableGdBtn(true, gdBtn_5);
+            }
+        }
+    }
+
+    @Override
+    public void updateClockGdBtn_6() {
+        if (model.getFarm2Sold()) {
+            if (!model.isfinish_Gd6()) {
+                gdBtn_6.setText(model.getMinute_gd6() + ":" + model.getSecond_gd6());
+                enableGdBtn(false, gdBtn_6);
+            } else {
+                gdBtn_6.setText("收割");
+                enableGdBtn(true, gdBtn_6);
+            }
+        }
+    }
+
+    @Override
     public void updateStone() {
         stoneNumLabel.setText(String.valueOf(model.getStone()));
     }
@@ -850,6 +874,14 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         gdBtn_4.setEnabled(b);
     }
 
+    public void enableGdBtn_5(boolean b) {
+        gdBtn_5.setEnabled(b);
+    }
+
+    public void enableGdBtn_6(boolean b) {
+        gdBtn_6.setEnabled(b);
+    }
+
     public void enableGdBtn(boolean b, JButton btn) {
         btn.setEnabled(b);
     }
@@ -868,6 +900,14 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
     public void enableGdCb_4(boolean b) {
         gdCb_4.setEnabled(b);
+    }
+
+    public void enableGdCb_5(boolean b) {
+        gdCb_5.setEnabled(b);
+    }
+
+    public void enableGdCb_6(boolean b) {
+        gdCb_6.setEnabled(b);
     }
 
     public void enableGdCb(boolean b, GardenItemComboBox gdCb) {
@@ -1006,6 +1046,10 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
             System.out.println(z);
             element4.setSelectedItem(null);
         }
+    }
+
+    public void enableGdCb(GardenItemComboBox gdCb, boolean b) {
+        gdCb.setEnabled(b);
     }
 
 }

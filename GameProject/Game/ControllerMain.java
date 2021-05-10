@@ -454,6 +454,13 @@ public class ControllerMain implements ControllerMainInterface {
             case "4":
                 model.restartTimer_Gd4();
                 break;
+            case "5":
+                model.restartTimer_Gd5();
+                break;
+            case "6":
+                model.restartTimer_Gd6();
+                break;
+
             default:
                 break;
         }
@@ -556,8 +563,14 @@ public class ControllerMain implements ControllerMainInterface {
         btn.setEnabled(false);
         if (btn.getName() == "buy1") {
             model.setFarm1Sold(SOLD);
+            viewMain.enableGdCb_5(true);
+            viewMain.enableGdBtn_5(true);
+            model.restartTimer_Gd5();
         } else if (btn.getName() == "buy2") {
             model.setFarm2Sold(SOLD);
+            // viewMain.enableGdCb_6(true);
+            viewMain.enableGdBtn_6(true);
+            model.restartTimer_Gd6();
         }
     }
 

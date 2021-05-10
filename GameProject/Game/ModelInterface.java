@@ -80,6 +80,18 @@ public interface ModelInterface {
 
     boolean isfinish_Gd4();
 
+    void initTimer_Gd5();
+
+    void restartTimer_Gd5();
+
+    boolean isfinish_Gd5();
+
+    void initTimer_Gd6();
+
+    void restartTimer_Gd6();
+
+    boolean isfinish_Gd6();
+
     ClockTask getStoneClock();
 
     ClockTask getDailyClock();
@@ -91,6 +103,10 @@ public interface ModelInterface {
     ClockTask getClock_gd3();
 
     ClockTask getClock_gd4();
+
+    ClockTask getClock_gd5();
+
+    ClockTask getClock_gd6();
 
     // Observer
     void registerCoinObserver(CoinObserver o);
@@ -131,6 +147,14 @@ public interface ModelInterface {
 
     String getMinute_gd4();
 
+    String getSecond_gd5();
+
+    String getMinute_gd5();
+
+    String getSecond_gd6();
+
+    String getMinute_gd6();
+
     // Listener
     void regStoneCallback(Callback callback);
 
@@ -163,6 +187,10 @@ public interface ModelInterface {
     void gdBtn_3Listener();
 
     void gdBtn_4Listener();
+
+    void gdBtn_5Listener();
+
+    void gdBtn_6Listener();
 
     // Element
     int getBanana();

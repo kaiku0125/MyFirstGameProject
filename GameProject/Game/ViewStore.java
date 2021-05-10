@@ -3,6 +3,9 @@ package GameProject.Game;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+import GameProject.libs.GardenItemComboBox;
+
 import java.util.logging.Logger;
 
 public class ViewStore extends JFrame implements ActionListener, CoinObserver {
@@ -94,6 +97,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             farmBtn_1.setBounds(10, 115, 80, 20);
             farmBtn_1.setFont(new Font("Arial", Font.PLAIN, 11));
             farmBtn_1.setName("buy1");
+            // farmBtn_1.setEnabled(false);
 
             farmTitle_2 = new JLabel("田地+1", SwingConstants.CENTER);
             farmTitle_2.setBounds(100, 10, 80, 20);
@@ -274,8 +278,10 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
                 enableBtn(farmBtn_3, false);
             }
 
-            if (model.getCoin() >= 50000) {
-                enableBtn(farmBtn_1, true);
+            if (model.getCoin() >= 50000 && model.getFarm1Sold() == false) {
+                if (model.getFarm1Sold() == false) {
+                    enableBtn(farmBtn_1, true);
+                }
             } else {
                 enableBtn(farmBtn_1, false);
             }

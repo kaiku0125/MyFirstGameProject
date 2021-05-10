@@ -100,4 +100,5 @@ public interface ControllerMainInterface {
     void buyControl(JButton btn);
 
     void sold(int have, int sell, int price);
+
 }
