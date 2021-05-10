@@ -268,6 +268,8 @@ public class ControllerMain implements ControllerMainInterface {
         }
         String msg = getformateTime();
         int level = viewMain.getWeaponLabel();
+        // System.out.println("................." + level);
+        // System.out.println("GGGGGGGGGGGGGGGGGGGGGGGG" + model.getCurrentLevel());
         if (level < 5) {
             result = Rate.getResult(Rate.NORMAL, failurePlus);
         } else if (level >= 5 && level < 10) {

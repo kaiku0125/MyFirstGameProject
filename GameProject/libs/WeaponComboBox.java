@@ -25,12 +25,14 @@ public class WeaponComboBox extends JComboBox<Object> {
 
     public void sword_init() {
         sword = new Weapon(new ImageIcon("GameProject//res//pics//Sword.jpg"), "   Sword");
+        sword.setName("Sword");
         sword.setlevel(modelInterface.getSwordLevel());
         sword.setImgEntity(new ImageIcon("GameProject//res//pics//SwordEntity.jpg"));
     }
 
     public void bow_init() {
         bow = new Weapon(new ImageIcon("GameProject//res//pics//Bow.jpg"), "   Bow");
+        bow.setName("Bow");
         bow.setlevel(modelInterface.getBowLevel());
         bow.setImgEntity(new ImageIcon("GameProject//res//pics//BowEntity.jpg"));
     }

@@ -12,6 +12,10 @@ public class Weapon {
         this.img = img;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

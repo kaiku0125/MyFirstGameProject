@@ -764,22 +764,24 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     public void enhanceProgressEnd() {
         tempItem = (Weapon) weaponCombo.getSelectedItem();
         if (controller.isEnhanceRunning() == false) {
-            controller.enhanceEnd();
+            controller.enhanceEnd(); // UI contorll
+            tempItem.setlevel(model.getCurrentLevel());
+            String level = tempItem.getLeveltext();
+            weaponLevelLabel.setText(level);
             String name = tempItem.getName();
             switch (name) {
                 case "Sword":
                     model.setSwordLevel(model.getCurrentLevel());
+
                     break;
                 case "Bow":
                     model.setBowLevel(model.getCurrentLevel());
                     break;
             }
-            tempItem.setlevel(model.getCurrentLevel());
-            String level = tempItem.getLeveltext();
-            weaponLevelLabel.setText(level);
         }
     }
 
+    // Alchemy
     @Override
     public void alchemyProgressEnd() {
         if (controller.isAlchemyRunning() == false) {
