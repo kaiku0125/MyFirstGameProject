@@ -37,15 +37,15 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     ModelInterface model;
 
     JFrame mainFrame;
-    JPanel mainPanel, leftPanel, storePanel, downPanel, middlePanel, CoinDailyPanel;
-    JPanel elementPanel, elementNumPanel, gardenPanel;
+    JPanel mainPanel, leftPanel, storePanel, elementCbPanel, middlePanel, CoinDailyPanel;
+    JPanel elementPanel, elementNumPanel, downPanel, gardenPanel;
     JLayeredPane pane, ALpane, Gdpane;
     JLabel coinLabel, coinImgLabel, dailyImgLabel, stoneClockLabel, descriptionLabel;
     JLabel stoneLabel, stoneNumLabel, extremeLabel, extremeNumLabel;
     JLabel protectLabel, protectNumLabel, failureTimesLabel;
     JLabel alchemyImgLabel, enhanceImgLabel, weaponLevelLabel;
-    JLabel bananaLabel, appleLabel, orangeLabel, melonLabel;
-    JLabel bananaNum, appleNum, orangeNum, melonNum;
+    JLabel bananaLabel, appleLabel, orangeLabel, melonLabel, dregsLabel;
+    JLabel bananaNum, appleNum, orangeNum, melonNum, dregsNum;
     JLabel gardenTitleLabel, gardenImgLabel;
     JCheckBox failcheck, protectcheck;
     JComboBox<Integer> element1, element2, element3, element4;
@@ -95,10 +95,10 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         middlePanel.setBackground(Color.BLACK);
         middlePanel.setBounds(200, 0, 300, 320);
 
-        downPanel = new JPanel();
-        downPanel.setBackground(Color.blue);
-        downPanel.setOpaque(true);
-        downPanel.setBounds(200, 320, 300, 30);
+        elementCbPanel = new JPanel();
+        elementCbPanel.setBackground(Color.blue);
+        elementCbPanel.setOpaque(true);
+        elementCbPanel.setBounds(200, 320, 300, 30);
 
         elementPanel = new JPanel();
         elementPanel.setBackground(Color.blue);
@@ -109,6 +109,12 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         elementNumPanel.setBackground(Color.blue);
         elementNumPanel.setOpaque(true);
         elementNumPanel.setBounds(200, 380, 300, 30);
+
+        downPanel = new JPanel();
+        downPanel.setLayout(null);
+        downPanel.setBounds(200, 410, 300, 50);
+        downPanel.setOpaque(true);
+        downPanel.setBackground(Color.BLACK);
 
         CoinDailyPanel = new JPanel();
         CoinDailyPanel.setLayout(null);
@@ -307,6 +313,18 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         melonNum.setOpaque(true);
         melonNum.setPreferredSize(new Dimension(60, 20));
 
+        dregsLabel = new JLabel("煉金殘渣", SwingConstants.CENTER);
+        dregsLabel.setBackground(Color.BLACK);
+        dregsLabel.setForeground(Color.RED);
+        dregsLabel.setOpaque(true);
+        dregsLabel.setBounds(10, 10, 70, 20);
+
+        dregsNum = new JLabel("0", SwingConstants.LEFT);
+        dregsNum.setBackground(Color.BLACK);
+        dregsNum.setForeground(Color.RED);
+        dregsNum.setOpaque(true);
+        dregsNum.setBounds(80, 10, 20, 20);
+
         coinImgLabel = new JLabel();
         coinImgLabel.setIcon(new ImageIcon("GameProject//res//pics//Coin.png"));
         coinImgLabel.setBounds(0, 0, 20, 20);
@@ -372,12 +390,12 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         gdBtn_4.setBounds(95, 180, 75, 20);
         gdBtn_4.setName("4");
 
-        gdBtn_5 = new JButton("00:00");
+        gdBtn_5 = new JButton("start");
         gdBtn_5.setBounds(10, 285, 75, 20);
         gdBtn_5.setName("5");
         gdBtn_5.setEnabled(false);
 
-        gdBtn_6 = new JButton("00:00");
+        gdBtn_6 = new JButton("start");
         gdBtn_6.setBounds(95, 285, 75, 20);
         gdBtn_6.setName("6");
         gdBtn_6.setEnabled(false);
@@ -423,10 +441,10 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         middlePanel.add(ALpane);
         middlePanel.add(alchemyBar);
 
-        downPanel.add(element1);
-        downPanel.add(element2);
-        downPanel.add(element3);
-        downPanel.add(element4);
+        elementCbPanel.add(element1);
+        elementCbPanel.add(element2);
+        elementCbPanel.add(element3);
+        elementCbPanel.add(element4);
 
         elementPanel.add(bananaLabel);
         elementPanel.add(appleLabel);
@@ -437,6 +455,9 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         elementNumPanel.add(appleNum);
         elementNumPanel.add(orangeNum);
         elementNumPanel.add(melonNum);
+
+        downPanel.add(dregsLabel);
+        downPanel.add(dregsNum);
 
         CoinDailyPanel.add(coinImgLabel);
         CoinDailyPanel.add(coinLabel);
@@ -452,9 +473,10 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         mainFrame.add(leftPanel);
         mainFrame.add(storePanel);
         mainFrame.add(middlePanel);
-        mainFrame.add(downPanel);
+        mainFrame.add(elementCbPanel);
         mainFrame.add(elementPanel);
         mainFrame.add(elementNumPanel);
+        mainFrame.add(downPanel);
         mainFrame.add(CoinDailyPanel);
         mainFrame.add(gardenPanel);
 
@@ -768,25 +790,26 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     @Override
     public void updateBanana(int num) {
         bananaNum.setText(String.valueOf(num));
-
     }
 
     @Override
     public void updateApple() {
         appleNum.setText(String.valueOf(model.getApple()));
-
     }
 
     @Override
     public void updateOrange() {
         orangeNum.setText(String.valueOf(model.getOrange()));
-
     }
 
     @Override
     public void updateMelon() {
         melonNum.setText(String.valueOf(model.getMelon()));
+    }
 
+    @Override
+    public void updateDregs() {
+        dregsNum.setText(String.valueOf(model.getDredgs()));
     }
 
     public void enableEnhanceBtn(boolean b) {

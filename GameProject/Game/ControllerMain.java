@@ -541,13 +541,11 @@ public class ControllerMain implements ControllerMainInterface {
     public void openStore() {
         getViewStoreInstance();
         this.viewStore = ViewStore.instance;
-        // viewStore.enableStoreFrame(true);
 
     }
 
     @Override
     public void closeStore() {
-        // viewStore.enableStoreFrame(false);
         viewStore.closeStore();
     }
 
@@ -563,8 +561,9 @@ public class ControllerMain implements ControllerMainInterface {
 
     @Override
     public void sold(int have, int sell, int price) {
-        int temppluscoin = (have - sell) * price;
-        model.setCoin(temppluscoin);
+        int temppluscoin = sell * price;
+        model.setCoin(model.getCoin() + temppluscoin);
+        viewStore.showDialog("獲得" + temppluscoin + "金幣");
     }
 
     public String getformateTime() {

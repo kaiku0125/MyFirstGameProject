@@ -142,6 +142,7 @@ public class Dataset {
             weaponLevel.set(0, String.valueOf(model.getSwordLevel()));
             weaponLevel.set(1, String.valueOf(model.getBowLevel()));
             fw.write(weaponLevel.get(0) + "," + weaponLevel.get(1));
+            logger.info("...");
             fw.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -161,10 +162,12 @@ public class Dataset {
             allElement.put("element2", Integer.parseInt(s[1]));
             allElement.put("element3", Integer.parseInt(s[2]));
             allElement.put("element4", Integer.parseInt(s[3]));
+            allElement.put("dregs", Integer.parseInt(s[4]));
             model.setBanana(allElement.get("element1"));
             model.setApple(allElement.get("element2"));
             model.setOrange(allElement.get("element3"));
             model.setMelon(allElement.get("element4"));
+            model.setDregs(allElement.get("dregs"));
             reader.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -178,8 +181,9 @@ public class Dataset {
             allElement.put("element2", model.getApple());
             allElement.put("element3", model.getOrange());
             allElement.put("element4", model.getMelon());
+            allElement.put("dregs", model.getDredgs());
             fw.write(allElement.get("element1") + "," + allElement.get("element2") + "," + allElement.get("element3")
-                    + "," + allElement.get("element4"));
+                    + "," + allElement.get("element4") + "," + allElement.get("dregs"));
             fw.close();
         } catch (Exception e) {
             e.printStackTrace();

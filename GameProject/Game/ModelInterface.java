@@ -154,6 +154,8 @@ public interface ModelInterface {
 
     void melonListener();
 
+    void dregsListener();
+
     void gdBtn_1Listener();
 
     void gdBtn_2Listener();
@@ -178,6 +180,10 @@ public interface ModelInterface {
     int getMelon();
 
     void setMelon(int num);
+
+    int getDredgs();
+
+    void setDregs(int num);
 
     // Weapon
     int getSwordLevel();

@@ -16,7 +16,7 @@ public class Model implements ModelInterface {
     public static int coin;
     public int stone, extremeStone, protectStone, failureTimes;
     boolean ismain = false;
-    int banana, apple, orange, melon;
+    int banana, apple, orange, melon, dregs;
     int swordLevel, bowLevel, currentLevel;
     boolean isfarm1_sold, isfarm2_sold;
 
@@ -474,6 +474,11 @@ public class Model implements ModelInterface {
     }
 
     @Override
+    public void dregsListener() {
+        callback.updateDregs();
+    }
+
+    @Override
     public void gdBtn_1Listener() {
         callback.updateClockGdBtn_1();
     }
@@ -543,6 +548,18 @@ public class Model implements ModelInterface {
     }
 
     @Override
+    public int getDredgs() {
+        return dregs;
+    }
+
+    @Override
+    public void setDregs(int num) {
+        this.dregs = num;
+        dregsListener();
+    }
+
+    // Weapon
+    @Override
     public int getSwordLevel() {
         return swordLevel;
     }
@@ -550,6 +567,7 @@ public class Model implements ModelInterface {
     @Override
     public void setSwordLevel(int level) {
         this.swordLevel = level;
+        dataset.saveWeaponLevel();
     }
 
     @Override
@@ -560,6 +578,7 @@ public class Model implements ModelInterface {
     @Override
     public void setBowLevel(int level) {
         this.bowLevel = level;
+        dataset.saveWeaponLevel();
     }
 
     @Override
