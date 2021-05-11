@@ -88,7 +88,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         leftPanel = new JPanel();
         leftPanel.setLayout(null);
         leftPanel.setBackground(Color.BLACK);
-        leftPanel.setBounds(0, 0, 200, 450);
+        leftPanel.setBounds(0, 0, 200, 470);
 
         middlePanel = new JPanel();
         middlePanel.setLayout(null);
@@ -96,17 +96,17 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         middlePanel.setBounds(200, 0, 300, 320);
 
         elementCbPanel = new JPanel();
-        elementCbPanel.setBackground(Color.blue);
+        elementCbPanel.setBackground(Color.black);
         elementCbPanel.setOpaque(true);
         elementCbPanel.setBounds(200, 320, 300, 30);
 
         elementPanel = new JPanel();
-        elementPanel.setBackground(Color.blue);
+        elementPanel.setBackground(Color.black);
         elementPanel.setOpaque(true);
         elementPanel.setBounds(200, 350, 300, 30);
 
         elementNumPanel = new JPanel();
-        elementNumPanel.setBackground(Color.blue);
+        elementNumPanel.setBackground(Color.black);
         elementNumPanel.setOpaque(true);
         elementNumPanel.setBounds(200, 380, 300, 30);
 
@@ -234,7 +234,8 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         descriptionLabel.setHorizontalAlignment(JLabel.LEFT);
         descriptionLabel.setBackground(new Color(204, 204, 204));
         descriptionLabel.setOpaque(true);
-        descriptionLabel.setBounds(0, 350, 200, 100);
+        descriptionLabel.setBounds(0, 350, 200, 120);
+        descriptionLabel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
         alchemyBtn = new JButton("煉金");
         alchemyBtn.setBounds(120, 275, 60, 20);
@@ -274,44 +275,59 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
         bananaLabel = new JLabel("Banana", SwingConstants.CENTER);
         bananaLabel.setBackground(Color.black);
-        bananaLabel.setForeground(Color.yellow);
+        bananaLabel.setForeground(new Color(255, 204, 0));
         bananaLabel.setOpaque(true);
         bananaLabel.setPreferredSize(new Dimension(60, 20));
+        bananaLabel.setBorder(BorderFactory.createLineBorder(new Color(255, 204, 0), 1));
 
         appleLabel = new JLabel("Apple", SwingConstants.CENTER);
-        appleLabel.setBackground(Color.RED);
+        appleLabel.setBackground(Color.BLACK);
+        appleLabel.setForeground(new Color(255, 51, 51));
         appleLabel.setOpaque(true);
         appleLabel.setPreferredSize(new Dimension(60, 20));
+        appleLabel.setBorder(BorderFactory.createLineBorder(new Color(255, 51, 51), 1));
 
         orangeLabel = new JLabel("Orange", SwingConstants.CENTER);
-        orangeLabel.setBackground(Color.orange);
+        orangeLabel.setBackground(Color.black);
+        orangeLabel.setForeground(new Color(255, 153, 0));
         orangeLabel.setOpaque(true);
         orangeLabel.setPreferredSize(new Dimension(60, 20));
+        orangeLabel.setBorder(BorderFactory.createLineBorder(new Color(255, 153, 0), 1));
 
         melonLabel = new JLabel("Melon", SwingConstants.CENTER);
-        melonLabel.setBackground(Color.green);
+        melonLabel.setBackground(Color.black);
+        melonLabel.setForeground(new Color(0, 255, 51));
         melonLabel.setOpaque(true);
         melonLabel.setPreferredSize(new Dimension(60, 20));
+        melonLabel.setBorder(BorderFactory.createLineBorder(new Color(0, 255, 51), 1));
 
         bananaNum = new JLabel("0", SwingConstants.CENTER);
-        bananaNum.setBackground(Color.yellow);
+        bananaNum.setBackground(Color.black);
+        bananaNum.setForeground(new Color(255, 204, 0));
         bananaNum.setOpaque(true);
         bananaNum.setPreferredSize(new Dimension(60, 20));
+        bananaNum.setBorder(BorderFactory.createLineBorder(new Color(255, 204, 0), 1));
 
         appleNum = new JLabel("0", SwingConstants.CENTER);
-        appleNum.setBackground(Color.RED);
+        appleNum.setBackground(Color.black);
+        appleNum.setForeground(new Color(255, 51, 51));
         appleNum.setOpaque(true);
         appleNum.setPreferredSize(new Dimension(60, 20));
+        appleNum.setBorder(BorderFactory.createLineBorder(new Color(255, 51, 51), 1));
 
         orangeNum = new JLabel("0", SwingConstants.CENTER);
-        orangeNum.setBackground(Color.orange);
+        orangeNum.setBackground(Color.black);
+        orangeNum.setForeground(new Color(255, 153, 0));
         orangeNum.setOpaque(true);
         orangeNum.setPreferredSize(new Dimension(60, 20));
+        orangeNum.setBorder(BorderFactory.createLineBorder(new Color(255, 153, 0), 1));
 
         melonNum = new JLabel("0", SwingConstants.CENTER);
-        melonNum.setBackground(Color.green);
+        melonNum.setBackground(Color.black);
+        melonNum.setForeground(new Color(0, 255, 51));
         melonNum.setOpaque(true);
         melonNum.setPreferredSize(new Dimension(60, 20));
+        melonNum.setBorder(BorderFactory.createLineBorder(new Color(0, 255, 51), 1));
 
         dregsLabel = new JLabel("煉金殘渣", SwingConstants.CENTER);
         dregsLabel.setBackground(Color.BLACK);
@@ -399,7 +415,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         gdBtn_6.setEnabled(false);
 
         gardenImgLabel = new JLabel(new ImageIcon("GameProject//res//pics//garden.jpg"));
-        gardenImgLabel.setBounds(0, 0, 200, 350);
+        gardenImgLabel.setBounds(0, 0, 200, 330);
 
         Gdpane = new JLayeredPane();
         Gdpane.setBounds(0, 0, 200, 330);
@@ -419,10 +435,10 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         Gdpane.add(gardenImgLabel);
 
         storeBtn = new JButton("商店");
-        storeBtn.setBounds(100, 50, 60, 20);
+        storeBtn.setBounds(125, 58, 60, 20);
 
         storeImgLabel = new JLabel(new ImageIcon("GameProject//res//pics//store1.jpg"));
-        storeImgLabel.setBounds(0, 0, 200, 120);
+        storeImgLabel.setBounds(-1, -25, 200, 120);
 
         Storepane = new JLayeredPane();
         Storepane.setBounds(0, 0, 200, 120);
@@ -930,8 +946,9 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         failcheck.setEnabled(b);
     }
 
-    public void setdescription(String msg) {
+    public void setdescription(String msg, Color color) {
         descriptionLabel.setText(msg);
+        descriptionLabel.setForeground(color);
     }
 
     public void setElementComboNull() {

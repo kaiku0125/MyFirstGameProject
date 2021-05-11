@@ -1,5 +1,6 @@
 package GameProject.Game;
 
+import java.awt.Color;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
@@ -220,13 +221,13 @@ public class ControllerMain implements ControllerMainInterface {
             case STONE:
                 plusStone(5);
                 viewMain.showDialog("獲得強化石*5");
-                viewMain.setdescription(msg + ", get 5 Stone");
+                viewMain.setdescription(msg + ", get 5 Stone", Color.BLACK);
                 break;
 
             case COIN:
                 plusCoin(5000);
                 viewMain.showDialog("獲得5000金幣");
-                viewMain.setdescription(msg + ", get 5000 coin");
+                viewMain.setdescription(msg + ", get 5000 coin", Color.BLACK);
                 break;
 
             default:
@@ -268,8 +269,6 @@ public class ControllerMain implements ControllerMainInterface {
         }
         String msg = getformateTime();
         int level = viewMain.getWeaponLabel();
-        // System.out.println("................." + level);
-        // System.out.println("GGGGGGGGGGGGGGGGGGGGGGGG" + model.getCurrentLevel());
         if (level < 5) {
             result = Rate.getResult(Rate.NORMAL, failurePlus);
         } else if (level >= 5 && level < 10) {
@@ -281,13 +280,13 @@ public class ControllerMain implements ControllerMainInterface {
         switch (result) {
             case SUCCESS:
                 jProgressBar.setString("強化成功");
-                viewMain.setdescription(msg + ", enhance Success");
+                viewMain.setdescription(msg + ", enhance Success", Color.green);
                 model.setCurrentLevel(model.getCurrentLevel() + 1);
                 break;
 
             case FAIL:
                 jProgressBar.setString("強化失敗");
-                viewMain.setdescription(msg + ", enhance Fail");
+                viewMain.setdescription(msg + ", enhance Fail", Color.RED);
                 model.setFailureTimes(model.getFailureTimes() + 1);
                 viewMain.setFailureLabelText(model.getFailureTimes());
                 if (protect) {
@@ -397,42 +396,42 @@ public class ControllerMain implements ControllerMainInterface {
             case "0010":
                 plusStone(1);
                 viewMain.showDialog("獲得強化石");
-                viewMain.setdescription(msg + ", Alchemy result : Stone +1");
+                viewMain.setdescription(msg + ", Alchemy result : Stone +1", Color.BLACK);
                 break;
 
             case "2222":
                 plusExtremeStone(1);
                 viewMain.showDialog("獲得凝縮強化石");
-                viewMain.setdescription(msg + ",Alchemy result : Extreme Stone +1");
+                viewMain.setdescription(msg + ",Alchemy result : Extreme Stone +1", Color.BLACK);
                 break;
 
             case "4444":
                 plusStone(5);
                 viewMain.showDialog("獲得強化石*5");
-                viewMain.setdescription(msg + ",Alchemy result : Stone +5");
+                viewMain.setdescription(msg + ",Alchemy result : Stone +5", Color.BLACK);
                 break;
 
             case "3333":
                 plusProtectStone(1);
                 viewMain.showDialog("獲得保護石");
-                viewMain.setdescription(msg + ",Alchemy result : Protect Stone +1");
+                viewMain.setdescription(msg + ",Alchemy result : Protect Stone +1", Color.BLACK);
                 break;
 
             case "3132":
                 plusFailureTimes(15);
                 viewMain.showDialog("獲得失敗疊層*15");
-                viewMain.setdescription(msg + ",Alchemy result : FailureTimes +15");
+                viewMain.setdescription(msg + ",Alchemy result : FailureTimes +15", Color.BLACK);
                 break;
 
             case "1211":
                 plusFailureTimes(5);
                 viewMain.showDialog("獲得失敗疊層*5");
-                viewMain.setdescription(msg + ",Alchemy result : FailureTimes +5");
+                viewMain.setdescription(msg + ",Alchemy result : FailureTimes +5", Color.BLACK);
                 break;
 
             default:
                 viewMain.showDialog("沒發生什麼事");
-                viewMain.setdescription(msg + ", Nothing happened GG!");
+                viewMain.setdescription(msg + ", Nothing happened GG!", Color.BLACK);
                 break;
         }
     }
