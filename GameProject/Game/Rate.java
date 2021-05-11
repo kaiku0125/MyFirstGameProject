@@ -9,7 +9,8 @@ public class Rate {
     public static int NORMAL = 0;
     public static int MEDIUM = 1;
     public static int HARD = 2;
-    public static int ALCHEMY = 3;
+    public static int EXTREME = 3;
+    public static int ALCHEMY = 4;
 
     enum BounsItem {
         STONE, COIN
@@ -59,6 +60,10 @@ public class Rate {
             int[] rate = { 30 + x, 70 - x };
             setRate(rate);
             System.out.println(String.valueOf(30 + x) + "," + String.valueOf(70 - x));
+        } else if (state == EXTREME) {
+            int[] rate = { 10 + x, 90 - x };
+            setRate(rate);
+            System.out.println(String.valueOf(10 + x) + "," + String.valueOf(90 - x));
         } else if (state == ALCHEMY) {
             int[] rate = { 100, 0 };
             setRate(rate);

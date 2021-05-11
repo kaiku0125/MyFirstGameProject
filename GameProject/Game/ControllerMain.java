@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JProgressBar;
 
 import GameProject.Game.Rate.BounsItem;
@@ -33,6 +32,7 @@ public class ControllerMain implements ControllerMainInterface {
     GardenItem bananaItem, appleItem, orangeItem, melonItem;
     public static final boolean SOLD = true;
     public static final boolean UNSOLD = false;
+    private static final Color DARK_GREEN = new Color(0, 153, 0);
 
     public ControllerMain(ModelInterface model) {
         this.model = model;
@@ -253,10 +253,16 @@ public class ControllerMain implements ControllerMainInterface {
     @Override
     public void enhanceEnd() {
         viewMain.visibleProgressbar(false);
-        viewMain.enableEnhanceBtn(true);
+        if (model.getCurrentLevel() == 20) {
+            viewMain.enableEnhanceBtn(false);
+        } else {
+            viewMain.enableEnhanceBtn(true);
+        }
         viewMain.enableAlchemyBtn(true);
         viewMain.enableFailureCheck(true);
         viewMain.enableProtectCheck(true);
+        viewMain.setFailureCkeck(false);
+        viewMain.setProtectCheck(false);
     }
 
     @Override
@@ -275,12 +281,14 @@ public class ControllerMain implements ControllerMainInterface {
             result = Rate.getResult(Rate.MEDIUM, failurePlus);
         } else if (level >= 10 && level < 16) {
             result = Rate.getResult(Rate.HARD, failurePlus);
+        } else if (level >= 16 && level <= 20) {
+            result = Rate.getResult(Rate.EXTREME, failurePlus);
         }
 
         switch (result) {
             case SUCCESS:
                 jProgressBar.setString("強化成功");
-                viewMain.setdescription(msg + ", enhance Success", Color.green);
+                viewMain.setdescription(msg + ", enhance Success", DARK_GREEN);
                 model.setCurrentLevel(model.getCurrentLevel() + 1);
                 break;
 
@@ -289,10 +297,14 @@ public class ControllerMain implements ControllerMainInterface {
                 viewMain.setdescription(msg + ", enhance Fail", Color.RED);
                 model.setFailureTimes(model.getFailureTimes() + 1);
                 viewMain.setFailureLabelText(model.getFailureTimes());
-                if (protect) {
+                if (model.getCurrentLevel() == 0) {
                     model.setCurrentLevel(model.getCurrentLevel());
                 } else {
-                    model.setCurrentLevel(model.getCurrentLevel() - 1);
+                    if (protect) {
+                        model.setCurrentLevel(model.getCurrentLevel());
+                    } else {
+                        model.setCurrentLevel(model.getCurrentLevel() - 1);
+                    }
                 }
                 break;
 

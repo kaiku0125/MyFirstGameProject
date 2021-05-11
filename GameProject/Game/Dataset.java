@@ -150,7 +150,6 @@ public class Dataset {
             weaponLevel.set(0, String.valueOf(model.getSwordLevel()));
             weaponLevel.set(1, String.valueOf(model.getBowLevel()));
             fw.write(weaponLevel.get(0) + "," + weaponLevel.get(1));
-            logger.info("...");
             fw.close();
         } catch (Exception e) {
             e.printStackTrace();

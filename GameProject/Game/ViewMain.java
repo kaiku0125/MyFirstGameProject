@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.function.BiPredicate;
 import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
@@ -647,7 +648,13 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
             }
         } else if (e.getSource() == weaponCombo) {
             tempItem = (Weapon) weaponCombo.getSelectedItem();
-            model.setCurrentLevel(tempItem.getLevel());
+            int templevel = tempItem.getLevel();
+            model.setCurrentLevel(templevel);
+            if (templevel == 20) {
+                enhanceBtn.setEnabled(false);
+            } else {
+                enhanceBtn.setEnabled(true);
+            }
             String level = tempItem.getLeveltext();
             weaponLevelLabel.setText(level);
             controller.initEnhanceImg(tempItem);
@@ -675,7 +682,11 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
                     controller.minusProtectStone(1);
                 }
                 controller.minusCoin(1000);
-                controller.minusStone(1);
+                if (model.getCurrentLevel() < 16) {
+                    controller.minusStone(1);
+                } else {
+                    controller.minusExtremeStone(1);
+                }
                 controller.enhanceStart();
                 controller.enhanceThread(enhancementBar);
                 enhancementBar.setString("強化中...");
@@ -825,6 +836,9 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
                 case "Bow":
                     model.setBowLevel(model.getCurrentLevel());
                     break;
+            }
+            if (tempItem.getLevel() == 20) {
+                showDialog("恭喜!武器已達最大強化層數");
             }
         }
     }
@@ -1075,6 +1089,14 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
     public void enableGdCb(GardenItemComboBox gdCb, boolean b) {
         gdCb.setEnabled(b);
+    }
+
+    public void setFailureCkeck(boolean b) {
+        failcheck.setSelected(b);
+    }
+
+    public void setProtectCheck(boolean b) {
+        protectcheck.setSelected(b);
     }
 
 }
