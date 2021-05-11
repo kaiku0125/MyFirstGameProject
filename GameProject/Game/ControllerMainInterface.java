@@ -86,13 +86,15 @@ public interface ControllerMainInterface {
     void getAlchemyResult();
 
     // Garden
+    void setAllGdCb();
+
     void gd_start(JButton btn);
 
     void harvest(GardenItem gardenItem);
 
     void plusHarvest();
 
-    void eventGdBtn(JButton btn, GardenItemComboBox gdCb);
+    void eventGdBtn(JButton btn, GardenItemComboBox gdCb, int index);
 
     // Store
     void openStore();

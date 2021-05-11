@@ -8,6 +8,7 @@ public class Model implements ModelInterface {
     private static Logger logger = Logger.getLogger(Model.class.getName());
     ArrayList<CoinObserver> coinObservers = new ArrayList<CoinObserver>();
     ArrayList<ClockObserver> clockObservers = new ArrayList<ClockObserver>();
+    ArrayList<String> gdCbItemList = new ArrayList<String>();
     Dataset dataset;
     Callback callback;
     ClockTask stoneTask, dailyTask, gd1_Task, gd2_Task, gd3_Task, gd4_Task;
@@ -52,30 +53,32 @@ public class Model implements ModelInterface {
 
     @Override
     public void initData() {
-        // dataset.readcoin();
-        // dataset.readStone();
-        // dataset.readClock();
-        // dataset.readElement();
-        // dataset.readFailure();
-        // dataset.readSoldState();
         dataset.initAllData();
     }
 
     @Override
     public void saveData() {
-        // dataset.savecoin();
-        // dataset.saveStone();
-        // dataset.saveClock();
-        // dataset.saveElement();
-        // dataset.saveWeaponLevel();
-        // dataset.saveFailure();
-        // dataset.saveSoldState();
         dataset.saveAllData();
     }
 
     @Override
     public void initWeapon() {
         dataset.readWeaponLevel();
+    }
+
+    @Override
+    public void initGdCbList(String gdCbItem) {
+        gdCbItemList.add(gdCbItem);
+    }
+
+    @Override
+    public String getGdCbList(int index) {
+        return gdCbItemList.get(index);
+    }
+
+    @Override
+    public void setGdCbLiset(int index, String gdCbItem) {
+        gdCbItemList.set(index, gdCbItem);
     }
 
     @Override

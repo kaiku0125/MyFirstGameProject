@@ -1,6 +1,5 @@
 package GameProject.Game;
 
-import GameProject.libs.GardenItem;
 import GameProject.libs.GardenItemEntity;
 
 public interface ModelInterface {
@@ -13,6 +12,12 @@ public interface ModelInterface {
     void saveData();
 
     void initWeapon();
+
+    void initGdCbList(String gdCbItem);
+
+    String getGdCbList(int index);
+
+    void setGdCbLiset(int index, String gdCbItem);
 
     void checkID();
 

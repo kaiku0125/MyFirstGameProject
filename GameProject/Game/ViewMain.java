@@ -368,18 +368,22 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         gdCb_1 = new GardenItemComboBox(model);
         gdCb_1.setBounds(10, 10, 75, 60);
         gdCb_1.setEnabled(false);
+        gdCb_1.setSelectedItem(null);
 
         gdCb_2 = new GardenItemComboBox(model);
         gdCb_2.setBounds(95, 10, 75, 60);
         gdCb_2.setEnabled(false);
+        gdCb_2.setSelectedItem(null);
 
         gdCb_3 = new GardenItemComboBox(model);
         gdCb_3.setBounds(10, 115, 75, 60);
         gdCb_3.setEnabled(false);
+        gdCb_3.setSelectedItem(null);
 
         gdCb_4 = new GardenItemComboBox(model);
         gdCb_4.setBounds(95, 115, 75, 60);
         gdCb_4.setEnabled(false);
+        gdCb_4.setSelectedItem(null);
 
         gdCb_5 = new GardenItemComboBox(model);
         gdCb_5.setBounds(10, 220, 75, 60);
@@ -659,17 +663,17 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
             weaponLevelLabel.setText(level);
             controller.initEnhanceImg(tempItem);
         } else if (e.getSource() == gdBtn_1) {
-            controller.eventGdBtn(gdBtn_1, gdCb_1);
+            controller.eventGdBtn(gdBtn_1, gdCb_1, 0);
         } else if (e.getSource() == gdBtn_2) {
-            controller.eventGdBtn(gdBtn_2, gdCb_2);
+            controller.eventGdBtn(gdBtn_2, gdCb_2, 1);
         } else if (e.getSource() == gdBtn_3) {
-            controller.eventGdBtn(gdBtn_3, gdCb_3);
+            controller.eventGdBtn(gdBtn_3, gdCb_3, 2);
         } else if (e.getSource() == gdBtn_4) {
-            controller.eventGdBtn(gdBtn_4, gdCb_4);
+            controller.eventGdBtn(gdBtn_4, gdCb_4, 3);
         } else if (e.getSource() == gdBtn_5) {
-            controller.eventGdBtn(gdBtn_5, gdCb_5);
+            controller.eventGdBtn(gdBtn_5, gdCb_5, 4);
         } else if (e.getSource() == gdBtn_6) {
-            controller.eventGdBtn(gdBtn_6, gdCb_6);
+            controller.eventGdBtn(gdBtn_6, gdCb_6, 5);
         } else if (e.getSource() == storeBtn) {
             controller.openStore();
         }
@@ -1097,6 +1101,15 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
     public void setProtectCheck(boolean b) {
         protectcheck.setSelected(b);
+    }
+
+    public void setallGdCbItem(int one, int two, int three, int four, int five, int six) {
+        gdCb_1.setSelectedIndex(one);
+        gdCb_2.setSelectedIndex(two);
+        gdCb_3.setSelectedIndex(three);
+        gdCb_4.setSelectedIndex(four);
+        gdCb_5.setSelectedIndex(five);
+        gdCb_6.setSelectedIndex(six);
     }
 
 }

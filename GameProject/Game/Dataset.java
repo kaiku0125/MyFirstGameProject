@@ -293,6 +293,33 @@ public class Dataset {
         }
     }
 
+    public void readGdCb() {
+        try {
+            reader = new BufferedReader(new FileReader("GameProject//res//GdCbItem.txt"));
+            temp = reader.readLine();
+            String[] s = temp.split(",");
+            for (int i = 0; i < 6; i++) {
+                model.initGdCbList(s[i]);
+                System.out.print(s[i] + ",");
+            }
+            reader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveGdCb() {
+        try {
+            fw = new FileWriter("GameProject//res//GdCbItem.txt");
+            for (int i = 0; i < 6; i++) {
+                fw.write(model.getGdCbList(i) + ",");
+            }
+            fw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void initAllData() {
         readcoin();
         readStone();
@@ -300,6 +327,7 @@ public class Dataset {
         readElement();
         readFailure();
         readSoldState();
+        readGdCb();
     }
 
     public void saveAllData() {
@@ -310,5 +338,6 @@ public class Dataset {
         saveWeaponLevel();
         saveFailure();
         saveSoldState();
+        saveGdCb();
     }
 }

@@ -50,6 +50,7 @@ public class ControllerMain implements ControllerMainInterface {
         viewMain.createControls();
         model.on();
         setGardenItem();
+        setAllGdCb();
     }
 
     @Override
@@ -450,6 +451,32 @@ public class ControllerMain implements ControllerMainInterface {
 
     // ................................Garden part ...............................//
     @Override
+    public void setAllGdCb() {
+        int[] a = new int[6];
+        for (int i = 0; i < 6; i++) {
+            String str = model.getGdCbList(i);
+            switch (str) {
+                case "b":
+                    a[i] = 0;
+                    break;
+                case "a":
+                    a[i] = 1;
+                    break;
+                case "o":
+                    a[i] = 2;
+                    break;
+                case "m":
+                    a[i] = 3;
+                    break;
+                default:
+                    break;
+            }
+            System.out.println(a[i]);
+        }
+        viewMain.setallGdCbItem(a[0], a[1], a[2], a[3], a[4], a[5]);
+    }
+
+    @Override
     public void gd_start(JButton btn) {
         String name = btn.getName();
         switch (name) {
@@ -526,7 +553,7 @@ public class ControllerMain implements ControllerMainInterface {
     }
 
     @Override
-    public void eventGdBtn(JButton btn, GardenItemComboBox gdCb) {
+    public void eventGdBtn(JButton btn, GardenItemComboBox gdCb, int index) {
         if (btn.getText() == "start" && gdCb.getSelectedItem() == null) {
             viewMain.showDialog("選擇一種煉金素材種植");
         }
@@ -541,6 +568,7 @@ public class ControllerMain implements ControllerMainInterface {
             plusHarvest();
             viewMain.enableGdBtn(false, btn);
             viewMain.enableGdCb(false, gdCb);
+            model.setGdCbLiset(index, ((GardenItem) gdCb.getSelectedItem()).getCodeName());
             gd_start(btn);
         }
     }

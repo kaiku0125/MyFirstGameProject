@@ -3,7 +3,7 @@ package GameProject.libs;
 import javax.swing.Icon;
 
 public abstract class GardenItem {
-    private String name;
+    private String name, codeName;
     private Icon icon;
     public int harvestNum = 0;
 
@@ -13,6 +13,14 @@ public abstract class GardenItem {
 
     public String getName() {
         return name;
+    }
+
+    public void setCodeName(String name) {
+        this.codeName = name;
+    }
+
+    public String getCodeName() {
+        return codeName;
     }
 
     public void setName(String name) {
@@ -41,15 +49,8 @@ class Banana extends GardenItem {
     public Banana(Icon icon) {
         super(icon);
         setName("Banana");
+        setCodeName("b");
     }
-
-    // public void setharvest(int item_harvest){
-    // this.banana_harvest = item_harvest;
-    // }
-
-    // public int getHarvest(){
-    // return this.banana_harvest;
-    // }
 }
 
 class Apple extends GardenItem {
@@ -57,6 +58,7 @@ class Apple extends GardenItem {
     public Apple(Icon icon) {
         super(icon);
         setName("Apple");
+        setCodeName("a");
     }
 }
 
@@ -65,6 +67,7 @@ class Orange extends GardenItem {
     public Orange(Icon icon) {
         super(icon);
         setName("Orange");
+        setCodeName("o");
     }
 }
 
@@ -73,6 +76,7 @@ class Melon extends GardenItem {
     public Melon(Icon icon) {
         super(icon);
         setName("Melon");
+        setCodeName("m");
     }
 
 }
