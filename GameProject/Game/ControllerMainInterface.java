@@ -13,7 +13,8 @@ public interface ControllerMainInterface {
 
     void stop();
 
-    void closeStore();
+    // Exp
+    void expController(JProgressBar pb, int plus_exp);
 
     // Coin
     void minusCoin(int coin);
@@ -98,6 +99,8 @@ public interface ControllerMainInterface {
 
     // Store
     void openStore();
+
+    void closeStore();
 
     void buyControl(JButton btn);
 

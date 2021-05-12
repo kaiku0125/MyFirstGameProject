@@ -39,7 +39,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
     JFrame mainFrame;
     JPanel mainPanel, leftPanel, storePanel, elementCbPanel, middlePanel, CoinDailyPanel;
-    JPanel elementPanel, elementNumPanel, downPanel, gardenPanel;
+    JPanel elementPanel, elementNumPanel, downPanel, gardenPanel, playerPanel;
     JLayeredPane pane, ALpane, Gdpane, Storepane;
     JLabel coinLabel, coinImgLabel, dailyImgLabel, stoneClockLabel, descriptionLabel;
     JLabel stoneLabel, stoneNumLabel, extremeLabel, extremeNumLabel;
@@ -57,6 +57,9 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     JMenuItem saveItem;
     JProgressBar enhancementBar, alchemyBar;
     Weapon tempItem;
+    // Player Component
+    JLabel IDLabel, levelLabel, levelNum, explabel;
+    JProgressBar expBar;
     // Garden Component
     GardenItemComboBox gdCb_1, gdCb_2, gdCb_3, gdCb_4, gdCb_5, gdCb_6;
     JButton gdBtn_1, gdBtn_2, gdBtn_3, gdBtn_4, gdBtn_5, gdBtn_6;
@@ -89,7 +92,13 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         leftPanel = new JPanel();
         leftPanel.setLayout(null);
         leftPanel.setBackground(Color.BLACK);
-        leftPanel.setBounds(0, 0, 200, 470);
+        leftPanel.setBounds(0, 0, 200, 350);
+
+        playerPanel = new JPanel();
+        playerPanel.setLayout(null);
+        playerPanel.setOpaque(true);
+        playerPanel.setBackground(Color.green);
+        playerPanel.setBounds(0, 350, 200, 120);
 
         middlePanel = new JPanel();
         middlePanel.setLayout(null);
@@ -232,12 +241,41 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         enhanceBtn.setBorder(BorderFactory.createLineBorder(Color.black, 1));
         enhanceBtn.setBounds(50, 310, 150, 40);
 
+        IDLabel = new JLabel("ID : " + model.getpassword(), SwingConstants.CENTER);
+        IDLabel.setBounds(5, 5, 110, 25);
+        IDLabel.setOpaque(true);
+        IDLabel.setBackground(Color.white);
+
+        levelLabel = new JLabel("等級", SwingConstants.CENTER);
+        levelLabel.setBounds(115, 5, 45, 25);
+        levelLabel.setOpaque(true);
+        levelLabel.setBackground(Color.gray);
+
+        levelNum = new JLabel("", SwingConstants.CENTER);
+        levelNum.setBounds(160, 5, 35, 25);
+        levelNum.setOpaque(true);
+        levelNum.setBackground(Color.white);
+
+        explabel = new JLabel("exp.", SwingConstants.CENTER);
+        explabel.setBounds(5, 32, 30, 20);
+        explabel.setOpaque(true);
+        explabel.setBackground(Color.white);
+
+        expBar = new JProgressBar(0, 100);
+        expBar.setBounds(35, 32, 160, 20);
+        expBar.setStringPainted(true);
+        expBar.setString("");
+        expBar.setVisible(true);
+        expBar.setForeground(Color.yellow);
+        expBar.setBackground(new Color(220, 220, 220));
+        expBar.setValue(0);
+
         descriptionLabel = new JLabel("...");
         descriptionLabel.setVerticalAlignment(JLabel.NORTH);
         descriptionLabel.setHorizontalAlignment(JLabel.LEFT);
         descriptionLabel.setBackground(new Color(204, 204, 204));
         descriptionLabel.setOpaque(true);
-        descriptionLabel.setBounds(0, 350, 200, 120);
+        descriptionLabel.setBounds(0, 88, 200, 20);
         descriptionLabel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
         alchemyBtn = new JButton("煉金");
@@ -466,7 +504,14 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         leftPanel.add(stoneClockLabel);
         leftPanel.add(enhanceBtn);
         leftPanel.add(protectcheck);
-        leftPanel.add(descriptionLabel);
+        // leftPanel.add(descriptionLabel);
+
+        playerPanel.add(IDLabel);
+        playerPanel.add(levelLabel);
+        playerPanel.add(levelNum);
+        playerPanel.add(explabel);
+        playerPanel.add(expBar);
+        playerPanel.add(descriptionLabel);
 
         middlePanel.add(ALpane);
         middlePanel.add(alchemyBar);
@@ -501,6 +546,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
         // mainFrame add panel................//
         mainFrame.add(leftPanel);
+        mainFrame.add(playerPanel);
         mainFrame.add(storePanel);
         mainFrame.add(middlePanel);
         mainFrame.add(elementCbPanel);
@@ -715,6 +761,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         }
     }
 
+    // ............................Listener Part..........................//
     @Override
     public void updateCoin() {
         coinLabel.setText(String.valueOf(model.getCoin()));
@@ -896,6 +943,11 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     }
 
     @Override
+    public void updateLevel() {
+        levelNum.setText(String.valueOf(model.getPlayerlevel()));
+    }
+
+    @Override
     public void updateBanana(int num) {
         bananaNum.setText(String.valueOf(num));
     }
@@ -920,6 +972,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         dregsNum.setText(String.valueOf(model.getDredgs()));
     }
 
+    // ............................Enable UI..........................//
     public void enableEnhanceBtn(boolean b) {
         enhanceBtn.setEnabled(b);
     }
@@ -1179,6 +1232,15 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         } else {
             gdCb_6.setSelectedItem(null);
         }
+    }
+
+    public JProgressBar getExpBar() {
+        return expBar;
+    }
+
+    public void setExpBar(int value, String expbarString) {
+        expBar.setValue(value);
+        expBar.setString(expbarString);
     }
 
 }

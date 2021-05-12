@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
 import javax.swing.JButton;
@@ -17,6 +19,7 @@ import GameProject.libs.Weapon;
 
 public class ControllerMain implements ControllerMainInterface {
     private static Logger logger = Logger.getLogger(ControllerMain.class.getName());
+    ExecutorService agent;
     ModelInterface model;
     JProgressBar jProgressBar;
     ProgressBar progress;
@@ -33,6 +36,7 @@ public class ControllerMain implements ControllerMainInterface {
     GardenItem bananaItem, appleItem, orangeItem, melonItem;
     public static final boolean SOLD = true;
     public static final boolean UNSOLD = false;
+    public static final int EXP30 = 30;
     private static final Color DARK_GREEN = new Color(0, 153, 0);
 
     public ControllerMain(ModelInterface model) {
@@ -52,11 +56,47 @@ public class ControllerMain implements ControllerMainInterface {
         model.on();
         setGardenItem();
         setAllGdCb();
+        setPlayerInformation();
     }
 
     @Override
     public void stop() {
         model.off();
+    }
+
+    public void setPlayerInformation() {
+        viewMain.setExpBar(model.getExp(), String.valueOf(model.getExp()) + " / 100");
+    }
+
+    @Override
+    public void expController(JProgressBar expb, int plus_exp) {
+        int originExp = expb.getValue();
+        int templevel = model.getPlayerlevel();
+        agent = Executors.newSingleThreadExecutor();
+        agent.execute(new Runnable() {
+            @Override
+            public void run() {
+                for (int exp = originExp; exp <= originExp + plus_exp; exp++) {
+                    try {
+                        Thread.sleep(25);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (exp > 100) {
+                        model.setPlayerlevel(templevel + 1);
+                        model.setExp(exp - 100);
+                        expb.setValue(model.getExp());
+                        expb.setString(exp - 100 + " / 100");
+
+                    } else {
+                        model.setExp(exp);
+                        expb.setValue(model.getExp());
+                        expb.setString(exp + " / 100");
+                    }
+                }
+            }
+        });
+        agent.shutdown();
     }
 
     @Override
@@ -313,6 +353,7 @@ public class ControllerMain implements ControllerMainInterface {
             default:
                 break;
         }
+        expController(viewMain.getExpBar(), 70);
     }
 
     @Override
@@ -550,10 +591,10 @@ public class ControllerMain implements ControllerMainInterface {
 
     }
 
-    public void setHarvestMap(GardenItemComboBox gdCb, int num) {
-        HashMap<String, Integer> harvsetMap = new HashMap<>();
-        harvsetMap.put(((GardenItem) gdCb.getSelectedItem()).getCodeName(), num);
-    }
+    // public void setHarvestMap(GardenItemComboBox gdCb, int num) {
+    // HashMap<String, Integer> harvsetMap = new HashMap<>();
+    // harvsetMap.put(((GardenItem) gdCb.getSelectedItem()).getCodeName(), num);
+    // }
 
     public void setAllHarvsetToZero(int num) {
         bananaItem.setHarvest(num);

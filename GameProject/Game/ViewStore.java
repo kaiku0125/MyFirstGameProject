@@ -215,6 +215,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
         }
     }
 
+    // ............................actionPerformed..........................//
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == backBtn) {

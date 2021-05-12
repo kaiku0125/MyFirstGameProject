@@ -21,6 +21,7 @@ public class Model implements ModelInterface {
     int banana, apple, orange, melon, dregs;
     int swordLevel, bowLevel, currentLevel;
     boolean isfarm1_sold, isfarm2_sold;
+    int playerLevel = 0, exp;
 
     public Model() {
         dataset = new Dataset(this);
@@ -98,6 +99,27 @@ public class Model implements ModelInterface {
     @Override
     public String getpassword() {
         return password;
+    }
+
+    @Override
+    public void setPlayerlevel(int level) {
+        this.playerLevel = level;
+        playerlevelListener();
+    }
+
+    @Override
+    public int getPlayerlevel() {
+        return playerLevel;
+    }
+
+    @Override
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+
+    @Override
+    public int getExp() {
+        return exp;
     }
 
     @Override
@@ -542,9 +564,13 @@ public class Model implements ModelInterface {
     }
 
     @Override
+    public void playerlevelListener() {
+        callback.updateLevel();
+    }
+
+    @Override
     public void bananaListener(int num) {
         callback.updateBanana(banana);
-
     }
 
     @Override

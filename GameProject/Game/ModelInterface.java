@@ -25,6 +25,14 @@ public interface ModelInterface {
 
     String getpassword();
 
+    void setPlayerlevel(int level);
+
+    int getPlayerlevel();
+
+    void setExp(int exp);
+
+    int getExp();
+
     // Coin
     void coincounter();
 
@@ -174,6 +182,8 @@ public interface ModelInterface {
     void enhanceProgressListener();
 
     void alchemyProgressListener();
+
+    void playerlevelListener();
 
     void bananaListener(int num);
 

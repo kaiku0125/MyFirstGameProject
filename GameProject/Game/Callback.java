@@ -13,6 +13,8 @@ public interface Callback {
 
     void alchemyProgressEnd();
 
+    void updateLevel();
+
     void updateBanana(int num);
 
     void updateApple();

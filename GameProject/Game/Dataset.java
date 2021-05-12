@@ -320,6 +320,30 @@ public class Dataset {
         }
     }
 
+    public void readPlayer() {
+        try {
+            reader = new BufferedReader(new FileReader("GameProject//res//Player.txt"));
+            temp = reader.readLine();
+            String[] s = temp.split(",");
+            model.setPlayerlevel(Integer.parseInt(s[0]));
+            model.setExp(Integer.parseInt(s[1]));
+            System.out.println(s[0] + "," + s[1]);
+            reader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void savePlayer() {
+        try {
+            fw = new FileWriter("GameProject//res//Player.txt");
+            fw.write(String.valueOf(model.getPlayerlevel()) + "," + String.valueOf(model.getExp()));
+            fw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void initAllData() {
         readcoin();
         readStone();
@@ -328,6 +352,7 @@ public class Dataset {
         readFailure();
         readSoldState();
         readGdCb();
+        readPlayer();
     }
 
     public void saveAllData() {
@@ -339,5 +364,6 @@ public class Dataset {
         saveFailure();
         saveSoldState();
         saveGdCb();
+        savePlayer();
     }
 }
