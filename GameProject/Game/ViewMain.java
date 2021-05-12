@@ -102,13 +102,13 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         elementCbPanel.setBounds(200, 320, 300, 30);
 
         elementPanel = new JPanel();
-        elementPanel.setBackground(Color.green);
+        elementPanel.setBackground(Color.black);
         elementPanel.setOpaque(true);
         elementPanel.setBounds(200, 350, 300, 30);
         // elementPanel.setLayout(null);
 
         elementNumPanel = new JPanel();
-        elementNumPanel.setBackground(Color.blue);
+        elementNumPanel.setBackground(Color.black);
         elementNumPanel.setOpaque(true);
         elementNumPanel.setBounds(200, 380, 300, 30);
         // elementNumPanel.setLayout(null);
@@ -1046,6 +1046,15 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
     public void showDialog(String msg) {
         JOptionPane.showMessageDialog(null, msg);
+    }
+
+    public boolean showConfirmDialong(String msg, String title) {
+        int result = JOptionPane.showConfirmDialog(null, msg, title, JOptionPane.OK_CANCEL_OPTION);
+
+        if (result == JOptionPane.OK_OPTION) {
+            return true;
+        }
+        return false;
     }
 
     public boolean rightSet() {

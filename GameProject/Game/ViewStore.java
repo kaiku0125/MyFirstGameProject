@@ -86,7 +86,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             farmTitle_1.setOpaque(true);
             farmTitle_1.setBackground(Color.gray);
 
-            farmImg_1 = new JLabel();
+            farmImg_1 = new JLabel(new ImageIcon("GameProject//res//pics//farm.jpg"));
             farmImg_1.setBounds(10, 30, 80, 80);
             farmImg_1.setOpaque(true);
             farmImg_1.setBackground(Color.white);
@@ -102,7 +102,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             farmTitle_2.setOpaque(true);
             farmTitle_2.setBackground(Color.gray);
 
-            farmImg_2 = new JLabel();
+            farmImg_2 = new JLabel(new ImageIcon("GameProject//res//pics//farm.jpg"));
             farmImg_2.setBounds(100, 30, 80, 80);
             farmImg_2.setOpaque(true);
             farmImg_2.setBackground(Color.white);
@@ -258,8 +258,11 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
                 showDialog("是不會輸入數字逆?");
             }
         } else if (e.getSource() == farmBtn_3) {
-            controller.minusCoin(10000);
-            model.setStone(model.getStone() + 1);
+            if (showConfirmDialong("是否購買強化石?", "購買確認")) {
+                controller.minusCoin(10000);
+                model.setStone(model.getStone() + 1);
+            }
+
         }
     }
 
@@ -333,6 +336,15 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
 
     public void showDialog(String msg) {
         JOptionPane.showMessageDialog(null, msg);
+    }
+
+    public boolean showConfirmDialong(String msg, String title) {
+        int result = JOptionPane.showConfirmDialog(null, msg, title, JOptionPane.OK_CANCEL_OPTION);
+
+        if (result == JOptionPane.OK_OPTION) {
+            return true;
+        }
+        return false;
     }
 
     private boolean isNumber(String Userinput) {
