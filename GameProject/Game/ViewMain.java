@@ -102,14 +102,16 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         elementCbPanel.setBounds(200, 320, 300, 30);
 
         elementPanel = new JPanel();
-        elementPanel.setBackground(Color.black);
+        elementPanel.setBackground(Color.green);
         elementPanel.setOpaque(true);
         elementPanel.setBounds(200, 350, 300, 30);
+        // elementPanel.setLayout(null);
 
         elementNumPanel = new JPanel();
-        elementNumPanel.setBackground(Color.black);
+        elementNumPanel.setBackground(Color.blue);
         elementNumPanel.setOpaque(true);
         elementNumPanel.setBounds(200, 380, 300, 30);
+        // elementNumPanel.setLayout(null);
 
         downPanel = new JPanel();
         downPanel.setLayout(null);
@@ -308,6 +310,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         bananaNum.setOpaque(true);
         bananaNum.setPreferredSize(new Dimension(60, 20));
         bananaNum.setBorder(BorderFactory.createLineBorder(new Color(255, 204, 0), 1));
+        // bananaNum.setBounds(5, 10, 50, 20);
 
         appleNum = new JLabel("0", SwingConstants.CENTER);
         appleNum.setBackground(Color.black);
@@ -440,7 +443,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         Gdpane.add(gardenImgLabel);
 
         storeBtn = new JButton("商店");
-        storeBtn.setBounds(125, 58, 60, 20);
+        storeBtn.setBounds(124, 58, 60, 20);
 
         storeImgLabel = new JLabel(new ImageIcon("GameProject//res//pics//store1.jpg"));
         storeImgLabel.setBounds(-1, -25, 200, 120);
@@ -739,7 +742,13 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
             gdBtn_1.setText(model.getMinute_gd1() + ":" + model.getSecond_gd1());
             enableGdBtn_1(false);
         } else {
-            gdBtn_1.setText("收割");
+            if (model.getGdCbList(0).equals("N")) {
+                gdCb_1.setEnabled(true);
+                gdBtn_1.setText("start");
+
+            } else {
+                gdBtn_1.setText("收割");
+            }
             enableGdBtn_1(true);
         }
     }
@@ -750,7 +759,13 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
             gdBtn_2.setText(model.getMinute_gd2() + ":" + model.getSecond_gd2());
             enableGdBtn_2(false);
         } else {
-            gdBtn_2.setText("收割");
+            if (model.getGdCbList(1).equals("N")) {
+                gdCb_2.setEnabled(true);
+                gdBtn_2.setText("start");
+
+            } else {
+                gdBtn_2.setText("收割");
+            }
             enableGdBtn_2(true);
         }
     }
@@ -761,7 +776,13 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
             gdBtn_3.setText(model.getMinute_gd3() + ":" + model.getSecond_gd3());
             enableGdBtn_3(false);
         } else {
-            gdBtn_3.setText("收割");
+            if (model.getGdCbList(2).equals("N")) {
+                gdCb_3.setEnabled(true);
+                gdBtn_3.setText("start");
+
+            } else {
+                gdBtn_3.setText("收割");
+            }
             enableGdBtn_3(true);
         }
     }
@@ -772,7 +793,13 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
             gdBtn_4.setText(model.getMinute_gd4() + ":" + model.getSecond_gd4());
             enableGdBtn_4(false);
         } else {
-            gdBtn_4.setText("收割");
+            if (model.getGdCbList(3).equals("N")) {
+                gdCb_4.setEnabled(true);
+                gdBtn_4.setText("start");
+
+            } else {
+                gdBtn_4.setText("收割");
+            }
             enableGdBtn_4(true);
         }
     }
@@ -784,7 +811,13 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
                 gdBtn_5.setText(model.getMinute_gd5() + ":" + model.getSecond_gd5());
                 enableGdBtn(false, gdBtn_5);
             } else {
-                gdBtn_5.setText("收割");
+                if (model.getGdCbList(4).equals("N")) {
+                    gdCb_5.setEnabled(true);
+                    gdBtn_5.setText("start");
+
+                } else {
+                    gdBtn_5.setText("收割");
+                }
                 enableGdBtn(true, gdBtn_5);
             }
         }
@@ -798,6 +831,13 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
                 enableGdBtn(false, gdBtn_6);
             } else {
                 gdBtn_6.setText("收割");
+                if (model.getGdCbList(5).equals("N")) {
+                    gdCb_6.setEnabled(true);
+                    gdBtn_6.setText("start");
+
+                } else {
+                    gdBtn_6.setText("收割");
+                }
                 enableGdBtn(true, gdBtn_6);
             }
         }
@@ -1064,10 +1104,6 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         return false;
     }
 
-    public boolean isComboGd1Enable() {
-        return gdCb_1.isEnabled();
-    }
-
     public void alchemyEndCheck() {
         int i = model.getBanana() - (int) element1.getSelectedItem();
         if (i < 0) {
@@ -1104,12 +1140,36 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     }
 
     public void setallGdCbItem(int one, int two, int three, int four, int five, int six) {
-        gdCb_1.setSelectedIndex(one);
-        gdCb_2.setSelectedIndex(two);
-        gdCb_3.setSelectedIndex(three);
-        gdCb_4.setSelectedIndex(four);
-        gdCb_5.setSelectedIndex(five);
-        gdCb_6.setSelectedIndex(six);
+        if (one != 99) {
+            gdCb_1.setSelectedIndex(one);
+        } else {
+            gdCb_1.setSelectedItem(null);
+        }
+        if (two != 99) {
+            gdCb_2.setSelectedIndex(two);
+        } else {
+            gdCb_2.setSelectedItem(null);
+        }
+        if (three != 99) {
+            gdCb_3.setSelectedIndex(three);
+        } else {
+            gdCb_3.setSelectedItem(null);
+        }
+        if (four != 99) {
+            gdCb_4.setSelectedIndex(four);
+        } else {
+            gdCb_4.setSelectedItem(null);
+        }
+        if (five != 99) {
+            gdCb_5.setSelectedIndex(five);
+        } else {
+            gdCb_5.setSelectedItem(null);
+        }
+        if (six != 99) {
+            gdCb_6.setSelectedIndex(six);
+        } else {
+            gdCb_6.setSelectedItem(null);
+        }
     }
 
 }

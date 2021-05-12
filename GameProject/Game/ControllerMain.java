@@ -3,6 +3,7 @@ package GameProject.Game;
 import java.awt.Color;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import javax.swing.JButton;
@@ -468,6 +469,9 @@ public class ControllerMain implements ControllerMainInterface {
                 case "m":
                     a[i] = 3;
                     break;
+                case "N":
+                    a[i] = 99;
+                    break;
                 default:
                     break;
             }
@@ -543,6 +547,12 @@ public class ControllerMain implements ControllerMainInterface {
         int m = melonItem.getHarvest();
         model.setMelon(model.getMelon() + m);
         setAllHarvsetToZero(0);
+
+    }
+
+    public void setHarvestMap(GardenItemComboBox gdCb, int num) {
+        HashMap<String, Integer> harvsetMap = new HashMap<>();
+        harvsetMap.put(((GardenItem) gdCb.getSelectedItem()).getCodeName(), num);
     }
 
     public void setAllHarvsetToZero(int num) {
@@ -557,15 +567,22 @@ public class ControllerMain implements ControllerMainInterface {
         if (btn.getText() == "start" && gdCb.getSelectedItem() == null) {
             viewMain.showDialog("選擇一種煉金素材種植");
         }
+        if (btn.getText() == "收割" && gdCb.getSelectedItem() == null) {
+            btn.setText("start");
+        }
+
         if (btn.getText() == "收割") {
             harvest((GardenItem) gdCb.getSelectedItem());
+            // setHarvestMap(gdCb, );
+            plusHarvest();
+            model.setGdCbLiset(index, "N");
             gdCb.setSelectedItem(null);
             gdCb.setEnabled(true);
             viewMain.enableGdBtn(true, btn);
             btn.setText("start");
         }
         if (gdCb.getSelectedItem() != null) {
-            plusHarvest();
+            // plusHarvest();
             viewMain.enableGdBtn(false, btn);
             viewMain.enableGdCb(false, gdCb);
             model.setGdCbLiset(index, ((GardenItem) gdCb.getSelectedItem()).getCodeName());

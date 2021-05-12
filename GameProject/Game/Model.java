@@ -78,6 +78,9 @@ public class Model implements ModelInterface {
 
     @Override
     public void setGdCbLiset(int index, String gdCbItem) {
+        if (gdCbItem == null) {
+            gdCbItemList.set(index, "N");
+        }
         gdCbItemList.set(index, gdCbItem);
     }
 
