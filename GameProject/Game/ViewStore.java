@@ -117,7 +117,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             farmTitle_3.setOpaque(true);
             farmTitle_3.setBackground(Color.gray);
 
-            farmImg_3 = new JLabel();
+            farmImg_3 = new JLabel(new ImageIcon("GameProject//res//pics//stone.jpg"));
             farmImg_3.setBounds(190, 30, 80, 80);
             farmImg_3.setOpaque(true);
             farmImg_3.setBackground(Color.white);

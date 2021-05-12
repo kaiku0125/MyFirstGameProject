@@ -330,13 +330,13 @@ public class ControllerMain implements ControllerMainInterface {
         switch (result) {
             case SUCCESS:
                 jProgressBar.setString("強化成功");
-                viewMain.setdescription(msg + ", enhance Success", DARK_GREEN);
+                viewMain.setdescription(msg + ", enhance Success!", DARK_GREEN);
                 model.setCurrentLevel(model.getCurrentLevel() + 1);
                 break;
 
             case FAIL:
                 jProgressBar.setString("強化失敗");
-                viewMain.setdescription(msg + ", enhance Fail", Color.RED);
+                viewMain.setdescription(msg + ", enhance Fail!", Color.RED);
                 model.setFailureTimes(model.getFailureTimes() + 1);
                 viewMain.setFailureLabelText(model.getFailureTimes());
                 if (model.getCurrentLevel() == 0) {

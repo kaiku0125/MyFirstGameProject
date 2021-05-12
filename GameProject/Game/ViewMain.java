@@ -26,6 +26,9 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
+import javax.swing.plaf.ProgressBarUI;
+import javax.swing.plaf.metal.MetalProgressBarUI;
+
 import GameProject.libs.GardenItemComboBox;
 import GameProject.libs.Weapon;
 import GameProject.libs.WeaponComboBox;
@@ -97,8 +100,9 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         playerPanel = new JPanel();
         playerPanel.setLayout(null);
         playerPanel.setOpaque(true);
-        playerPanel.setBackground(Color.green);
+        playerPanel.setBackground(new Color(51, 0, 0));
         playerPanel.setBounds(0, 350, 200, 120);
+        playerPanel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
         middlePanel = new JPanel();
         middlePanel.setLayout(null);
@@ -241,10 +245,11 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         enhanceBtn.setBorder(BorderFactory.createLineBorder(Color.black, 1));
         enhanceBtn.setBounds(50, 310, 150, 40);
 
-        IDLabel = new JLabel("ID : " + model.getpassword(), SwingConstants.CENTER);
+        IDLabel = new JLabel("ID : " + model.getpassword(), SwingConstants.LEFT);
         IDLabel.setBounds(5, 5, 110, 25);
         IDLabel.setOpaque(true);
         IDLabel.setBackground(Color.white);
+        IDLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 13));
 
         levelLabel = new JLabel("等級", SwingConstants.CENTER);
         levelLabel.setBounds(115, 5, 45, 25);
@@ -261,6 +266,16 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         explabel.setOpaque(true);
         explabel.setBackground(Color.white);
 
+        ProgressBarUI ui = new MetalProgressBarUI() {
+            protected Color getSelectionBackground() {
+                return new Color(51, 51, 51);
+            };
+
+            protected Color getSelectionForeground() {
+                return new Color(51, 51, 51);
+            };
+        };
+
         expBar = new JProgressBar(0, 100);
         expBar.setBounds(35, 32, 160, 20);
         expBar.setStringPainted(true);
@@ -269,9 +284,9 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         expBar.setForeground(Color.yellow);
         expBar.setBackground(new Color(220, 220, 220));
         expBar.setValue(0);
+        expBar.setUI(ui);
 
         descriptionLabel = new JLabel("...");
-        descriptionLabel.setVerticalAlignment(JLabel.NORTH);
         descriptionLabel.setHorizontalAlignment(JLabel.LEFT);
         descriptionLabel.setBackground(new Color(204, 204, 204));
         descriptionLabel.setOpaque(true);
