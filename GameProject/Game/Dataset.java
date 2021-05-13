@@ -238,7 +238,7 @@ public class Dataset {
             sold.add(s[0]);
             sold.add(s[1]);
             for (int i = 0; i < sold.size(); i++) {
-                System.out.println(s[i]);
+                // System.out.println(s[i]);
                 if ((s[i]).equals("false")) {
                     issold.add(false);
                 } else if (s[i].equals("true")) {
@@ -298,6 +298,7 @@ public class Dataset {
             reader = new BufferedReader(new FileReader("GameProject//res//GdCbItem.txt"));
             temp = reader.readLine();
             String[] s = temp.split(",");
+            System.out.print("花園種植:");
             for (int i = 0; i < 6; i++) {
                 model.initGdCbList(s[i]);
                 System.out.print(s[i] + ",");
@@ -327,7 +328,7 @@ public class Dataset {
             String[] s = temp.split(",");
             model.setPlayerlevel(Integer.parseInt(s[0]));
             model.setExp(Integer.parseInt(s[1]));
-            System.out.println(s[0] + "," + s[1]);
+            System.out.println("\n" + "level:" + s[0] + "," + "exp:" + s[1]);
             reader.close();
         } catch (Exception e) {
             e.printStackTrace();

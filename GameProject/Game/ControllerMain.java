@@ -33,7 +33,6 @@ public class ControllerMain implements ControllerMainInterface {
     boolean success, protect, notFailure;
     GardenItem bananaItem, appleItem, orangeItem, melonItem;
     public static final boolean SOLD = true;
-    public static final boolean UNSOLD = false;
     Random random;
     int rInt;
     private static final Color DARK_GREEN = new Color(0, 153, 0);
@@ -112,17 +111,6 @@ public class ControllerMain implements ControllerMainInterface {
         model.setCoin(tempcoin);
     }
 
-    // @Override
-    // public boolean coinchecker(int coin) {
-    // int i = model.getCoin();
-    // i = i - coin;
-    // if (i < 0) {
-    // logger.warning("coin < 0");
-    // return false;
-    // }
-    // return true;
-    // }
-
     @Override
     public void minusStone(int stone) {
         tempstone = model.getStone();
@@ -135,17 +123,6 @@ public class ControllerMain implements ControllerMainInterface {
         tempstone += stone;
         model.setStone(tempstone);
     }
-
-    // @Override
-    // public boolean stoneChecker(int stone) {
-    // int i = model.getStone();
-    // i = i - stone;
-    // if (i < 0) {
-    // logger.warning("stone < 0");
-    // return false;
-    // }
-    // return true;
-    // }
 
     // .......................Extreme Stone.....................//
     @Override
@@ -162,18 +139,7 @@ public class ControllerMain implements ControllerMainInterface {
         model.setExtrmeneStone(tempstone);
     }
 
-    // @Override
-    // public boolean extremeStoneChecker(int stone) {
-    // int i = model.getExtremeStone();
-    // i = i - stone;
-    // if (i < 0) {
-    // logger.warning("stone < 0");
-    // return false;
-    // }
-    // return true;
-    // }
-
-    // Protect Stone
+    // .........................Protect Stone......................//
     @Override
     public void minusProtectStone(int stone) {
         tempstone = model.getProtectStone();
@@ -187,24 +153,14 @@ public class ControllerMain implements ControllerMainInterface {
         model.setProtectStone(tempstone);
     }
 
-    @Override
-    public boolean protectStoneChecker(int stone) {
-        int i = model.getProtectStone();
-        i = i - stone;
-        if (i < 0) {
-            logger.warning("prtectstone < 0");
-            return false;
-        }
-        return true;
-    }
-
+    // .........................Failure Times......................//
     public void plusFailureTimes(int fail) {
         tempFail = model.getFailureTimes();
         tempFail += fail;
         model.setFailureTimes(tempFail);
     }
 
-    // Element Checker
+    // check all minus item..............................//
     @Override
     public boolean checker(int inputNum, String name) {
         switch (name) {
@@ -240,12 +196,12 @@ public class ControllerMain implements ControllerMainInterface {
         return true;
     }
 
+    // ...............................Daily controller...................//
     @Override
     public void setDailybtnEnable(boolean b) {
         viewMain.enableDailybtn(b);
     }
 
-    // ...............................Daily controller...................//
     @Override
     public void dailystart() {
         model.restartDailyTimer();
@@ -526,7 +482,7 @@ public class ControllerMain implements ControllerMainInterface {
                 default:
                     break;
             }
-            System.out.println(a[i]);
+            System.out.print(a[i] + "__");
         }
         viewMain.setallGdCbItem(a[0], a[1], a[2], a[3], a[4], a[5]);
     }
@@ -569,7 +525,7 @@ public class ControllerMain implements ControllerMainInterface {
     @Override
     public void harvest(GardenItem gardenItem) {
         String name = gardenItem.getName();
-        rInt = random.nextInt(2) + 1;
+        rInt = random.nextInt(2) + 1; // 調整收割數量
         System.out.println("機率為 : " + rInt);
         switch (name) {
             case "Banana":
@@ -587,18 +543,29 @@ public class ControllerMain implements ControllerMainInterface {
             default:
                 break;
         }
-        System.out.println("banana harvest : " + bananaItem.getHarvest());
     }
 
     public void plusHarvest() {
         int b = bananaItem.getHarvest();
         model.setBanana(model.getBanana() + b);
+        if (b != 0) {
+            viewMain.showDialog("獲得" + b + "個Banana");
+        }
         int a = appleItem.getHarvest();
         model.setApple(model.getApple() + a);
+        if (a != 0) {
+            viewMain.showDialog("獲得" + a + "個Apple");
+        }
         int o = orangeItem.getHarvest();
         model.setOrange(model.getOrange() + o);
+        if (o != 0) {
+            viewMain.showDialog("獲得" + o + "個Orange");
+        }
         int m = melonItem.getHarvest();
         model.setMelon(model.getMelon() + m);
+        if (m != 0) {
+            viewMain.showDialog("獲得" + m + "個Melon");
+        }
         setAllHarvsetToZero(0);
     }
 
