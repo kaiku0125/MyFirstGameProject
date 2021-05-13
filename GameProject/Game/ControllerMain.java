@@ -250,6 +250,7 @@ public class ControllerMain implements ControllerMainInterface {
         viewMain.enableDailybtn(b);
     }
 
+    // ...............................Daily controller...................//
     @Override
     public void dailystart() {
         model.restartDailyTimer();
@@ -660,7 +661,7 @@ public class ControllerMain implements ControllerMainInterface {
         btn.setEnabled(false);
         if (btn.getName() == "buy1") {
             model.setFarm1Sold(SOLD);
-            viewMain.enableGdCb_5(true);
+            // viewMain.enableGdCb_5(true);
             viewMain.enableGdBtn_5(true);
             model.restartTimer_Gd5();
         } else if (btn.getName() == "buy2") {

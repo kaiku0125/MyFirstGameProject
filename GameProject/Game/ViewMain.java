@@ -420,6 +420,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         dregsNum.setOpaque(true);
         dregsNum.setBounds(80, 10, 20, 20);
 
+        // ...................................right.............................//
         coinImgLabel = new JLabel();
         coinImgLabel.setIcon(new ImageIcon("GameProject//res//pics//Coin.png"));
         coinImgLabel.setBounds(0, 0, 20, 20);

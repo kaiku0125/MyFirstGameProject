@@ -289,7 +289,9 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             }
 
             if (model.getCoin() >= 100000 && model.getFarm1Sold() == true) {
-                if (model.getFarm2Sold() == false) {
+                if (model.getFarm2Sold() == true) {
+                    enableBtn(farmBtn_2, false);
+                } else if (model.getFarm2Sold() == false) {
                     enableBtn(farmBtn_2, true);
                 }
             } else {
