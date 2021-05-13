@@ -112,16 +112,16 @@ public class ControllerMain implements ControllerMainInterface {
         model.setCoin(tempcoin);
     }
 
-    @Override
-    public boolean coinchecker(int coin) {
-        int i = model.getCoin();
-        i = i - coin;
-        if (i < 0) {
-            logger.warning("coin < 0");
-            return false;
-        }
-        return true;
-    }
+    // @Override
+    // public boolean coinchecker(int coin) {
+    // int i = model.getCoin();
+    // i = i - coin;
+    // if (i < 0) {
+    // logger.warning("coin < 0");
+    // return false;
+    // }
+    // return true;
+    // }
 
     @Override
     public void minusStone(int stone) {
@@ -136,16 +136,16 @@ public class ControllerMain implements ControllerMainInterface {
         model.setStone(tempstone);
     }
 
-    @Override
-    public boolean stoneChecker(int stone) {
-        int i = model.getStone();
-        i = i - stone;
-        if (i < 0) {
-            logger.warning("stone < 0");
-            return false;
-        }
-        return true;
-    }
+    // @Override
+    // public boolean stoneChecker(int stone) {
+    // int i = model.getStone();
+    // i = i - stone;
+    // if (i < 0) {
+    // logger.warning("stone < 0");
+    // return false;
+    // }
+    // return true;
+    // }
 
     // .......................Extreme Stone.....................//
     @Override
@@ -162,16 +162,16 @@ public class ControllerMain implements ControllerMainInterface {
         model.setExtrmeneStone(tempstone);
     }
 
-    @Override
-    public boolean extremeStoneChecker(int stone) {
-        int i = model.getExtremeStone();
-        i = i - stone;
-        if (i < 0) {
-            logger.warning("stone < 0");
-            return false;
-        }
-        return true;
-    }
+    // @Override
+    // public boolean extremeStoneChecker(int stone) {
+    // int i = model.getExtremeStone();
+    // i = i - stone;
+    // if (i < 0) {
+    // logger.warning("stone < 0");
+    // return false;
+    // }
+    // return true;
+    // }
 
     // Protect Stone
     @Override
@@ -208,6 +208,9 @@ public class ControllerMain implements ControllerMainInterface {
     @Override
     public boolean checker(int inputNum, String name) {
         switch (name) {
+            case "Coin":
+                tempcheck = model.getCoin();
+                break;
             case "Banana":
                 tempcheck = model.getBanana();
                 break;
@@ -225,6 +228,9 @@ public class ControllerMain implements ControllerMainInterface {
                 break;
             case "ExtremeStone":
                 tempcheck = model.getExtremeStone();
+                break;
+            case "ProtectStone":
+                tempcheck = model.getProtectStone();
                 break;
         }
         tempcheck = tempcheck - inputNum;

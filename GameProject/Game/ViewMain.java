@@ -693,7 +693,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
                 if (isProtectEnable()) {
                     controller.setprotect(true);
                     logger.info("protect = true");
-                    if (controller.protectStoneChecker(1)) {
+                    if (controller.checker(1, "ProtectStone")) {
                         checkFailure();
                     } else {
                         showDialog("沒有保護石");
@@ -768,8 +768,8 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         }
     }
 
-    public void enhance() {
-        if (controller.coinchecker(1000)) {
+    public void enhanceCheck() {
+        if (controller.checker(1000, "Coin")) {
             if (controller.checker(1, "Stone")) {
                 if (protectcheck.isSelected()) {
                     controller.minusProtectStone(1);
@@ -797,10 +797,10 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     public void checkFailure() {
         if (isFailureEnabel()) {
             controller.setNotFailure(true);
-            enhance();
+            enhanceCheck();
         } else {
             controller.setNotFailure(false);
-            enhance();
+            enhanceCheck();
         }
     }
 

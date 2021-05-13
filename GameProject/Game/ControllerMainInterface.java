@@ -19,16 +19,16 @@ public interface ControllerMainInterface {
     // Coin
     void minusCoin(int coin);
 
-    boolean coinchecker(int coin);
+    // boolean coinchecker(int coin);
 
     // Stone
     void minusStone(int stone);
 
-    boolean stoneChecker(int stone);
+    // boolean stoneChecker(int stone);
 
     void minusExtremeStone(int stone);
 
-    boolean extremeStoneChecker(int stone);
+    // boolean extremeStoneChecker(int stone);
 
     void minusProtectStone(int stone);
 
