@@ -213,25 +213,29 @@ public class ControllerMain implements ControllerMainInterface {
         bonus = Rate.getDailyBouns();
         switch (bonus) {
             case STONE:
-                plusStone(5);
-                viewMain.showDialog("獲得5強化石");
-                viewMain.setdescription(msg + ", get 5 Stone", Color.BLACK);
+                rInt = random.nextInt(5) + 1;
+                plusStone(rInt);
+                viewMain.showDialog("獲得" + rInt + "強化石");
+                viewMain.setdescription(msg + ", get" + rInt + "Stone", Color.BLACK);
                 break;
 
             case COIN:
-                plusCoin(5000);
-                viewMain.showDialog("獲得5000金幣");
-                viewMain.setdescription(msg + ", get 5000 coin", Color.BLACK);
+                rInt = random.nextInt(5) + 1;
+                plusCoin(1000 * rInt);
+                viewMain.showDialog("獲得" + 1000 * rInt + "金幣");
+                viewMain.setdescription(msg + ", get" + 1000 * rInt + "coin", Color.BLACK);
                 break;
             case EXTREME:
-                plusExtremeStone(3);
-                viewMain.showDialog("獲得3凝縮強化石");
-                viewMain.setdescription(msg + ", get 3 exetreme Stone", Color.BLACK);
+                rInt = random.nextInt(3) + 1;
+                plusExtremeStone(rInt);
+                viewMain.showDialog("獲得" + rInt + "凝縮強化石");
+                viewMain.setdescription(msg + ", get" + rInt + "exetreme Stone", Color.BLACK);
                 break;
             case FAIL:
-                plusFailureTimes(10);
-                viewMain.showDialog("獲得10曾失敗強化");
-                viewMain.setdescription(msg + ", get 10 Failuer times", Color.BLACK);
+                rInt = random.nextInt(5) + 1;
+                plusFailureTimes(2 * rInt);
+                viewMain.showDialog("獲得" + 2 * rInt + "曾失敗強化");
+                viewMain.setdescription(msg + ", get" + 2 * rInt + "Failuer times", Color.BLACK);
                 break;
 
             default:
@@ -455,6 +459,8 @@ public class ControllerMain implements ControllerMainInterface {
                 viewMain.setdescription(msg + ", Nothing happened GG!", Color.BLACK);
                 break;
         }
+        rInt = random.nextInt(5) + 1;
+        model.setDregs(model.getDredgs() + rInt);
     }
 
     // ................................Garden part ...............................//

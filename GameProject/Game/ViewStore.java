@@ -301,19 +301,19 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
         int price = 0;
         switch (index) {
             case 0:
-                price = 2000;
+                price = 100;
                 break;
             case 1:
-                price = 1000;
+                price = 200;
                 break;
             case 2:
-                price = 1000;
+                price = 200;
                 break;
             case 3:
-                price = 1000;
+                price = 200;
                 break;
             case 4:
-                price = 1000;
+                price = 200;
                 break;
             case 5:
                 price = 1000;
