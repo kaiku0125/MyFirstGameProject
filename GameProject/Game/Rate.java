@@ -13,7 +13,7 @@ public class Rate {
     public static int ALCHEMY = 4;
 
     enum BounsItem {
-        STONE, COIN
+        STONE, COIN, EXTREME, FAIL
     }
 
     enum Result {
@@ -29,7 +29,7 @@ public class Rate {
     }
 
     public static BounsItem getDailyBouns() {
-        int[] rate = { 40, 60 };
+        int[] rate = { 30, 55, 10, 5 };
         setRate(rate);
         int total = 0;
         for (int i = 0; i < rate.length; i++) {
@@ -47,7 +47,8 @@ public class Rate {
         return null;
     }
 
-    public static Result getResult(int state, int x) {
+    public static Result getResult(int state, int x, int level) {
+        x = x + level;
         if (state == NORMAL) {
             int[] rate = { 70 + x, 30 - x };
             setRate(rate);

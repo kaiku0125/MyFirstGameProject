@@ -35,13 +35,7 @@ public interface ControllerMainInterface {
     boolean protectStoneChecker(int stone);
 
     // Element
-    boolean bananChecker(int banana);
-
-    boolean appleChecker(int apple);
-
-    boolean orangeChecker(int orange);
-
-    boolean melonChecker(int melon);
+    boolean checker(int inputNum, String name);
 
     // Daily
     void setDailybtnEnable(boolean b);

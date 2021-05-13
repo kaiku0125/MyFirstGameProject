@@ -720,22 +720,22 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
                 alchemyBar.setString("煉金中...");
             }
         } else if (e.getSource() == element1) {
-            if (!controller.bananChecker(getBananaCombo())) {
+            if (!controller.checker(getBananaCombo(), "Banana")) {
                 element1.setSelectedItem(null);
                 showDialog("Can't insert more than u have");
             }
         } else if (e.getSource() == element2) {
-            if (!controller.appleChecker(getAppleCombo())) {
+            if (!controller.checker(getAppleCombo(), "Apple")) {
                 element2.setSelectedItem(null);
                 showDialog("Can't insert more than u have");
             }
         } else if (e.getSource() == element3) {
-            if (!controller.orangeChecker(getOrangeCombo())) {
+            if (!controller.checker(getOrangeCombo(), "Orange")) {
                 element3.setSelectedItem(null);
                 showDialog("Can't insert more than u have");
             }
         } else if (e.getSource() == element4) {
-            if (!controller.melonChecker(getMelonCombo())) {
+            if (!controller.checker(getMelonCombo(), "Melon")) {
                 element4.setSelectedItem(null);
                 showDialog("Can't insert more than u have");
             }
@@ -770,19 +770,22 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
     public void enhance() {
         if (controller.coinchecker(1000)) {
-            if (controller.stoneChecker(1)) {
+            if (controller.checker(1, "Stone")) {
                 if (protectcheck.isSelected()) {
                     controller.minusProtectStone(1);
                 }
                 controller.minusCoin(1000);
                 if (model.getCurrentLevel() < 16) {
                     controller.minusStone(1);
+                    enhanceee();
                 } else {
-                    controller.minusExtremeStone(1);
+                    if (controller.checker(1, "ExtremeStone")) {
+                        controller.minusExtremeStone(1);
+                        enhanceee();
+                    } else {
+                        showDialog("No extremeStone");
+                    }
                 }
-                controller.enhanceStart();
-                controller.enhanceThread(enhancementBar);
-                enhancementBar.setString("強化中...");
             } else {
                 showDialog("No stone!");
             }
@@ -799,6 +802,12 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
             controller.setNotFailure(false);
             enhance();
         }
+    }
+
+    public void enhanceee() {
+        controller.enhanceStart();
+        controller.enhanceThread(enhancementBar);
+        enhancementBar.setString("強化中...");
     }
 
     // ............................Listener Part..........................//

@@ -140,7 +140,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             soldNumDes.setOpaque(true);
             soldNumDes.setBackground(Color.white);
 
-            String[] solditem = new String[] { "煉金殘渣", "Banana" };
+            String[] solditem = new String[] { "煉金殘渣", "Banana", "Apple", "Orange", "Melon" };
             myItemCb = new JComboBox<String>(solditem);
             myItemCb.setBounds(10, 175, 100, 20);
             myItemCb.setSelectedItem(null);
@@ -227,19 +227,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             controller.minusCoin(100000);
             controller.buyControl(farmBtn_2);
         } else if (e.getSource() == myItemCb) {
-            int i = myItemCb.getSelectedIndex();
-            switch (i) {
-                case 0:
-                    itemNumLabel.setText(String.valueOf(model.getDredgs()));
-                    itemNumLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                    soldPriceLabel.setText("$" + String.valueOf(getItemCbObjectPrice()));
-                    break;
-                case 1:
-                    itemNumLabel.setText(String.valueOf(model.getBanana()));
-                    itemNumLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                    soldPriceLabel.setText("$" + String.valueOf(getItemCbObjectPrice()));
-                    break;
-            }
+            myItemCb_controller();
         } else if (e.getSource() == soldBtn) {
             if (isNumber(soldNumTextField.getText())) {
                 int have = Integer.parseInt(itemNumLabel.getText());
@@ -263,7 +251,6 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
                 controller.minusCoin(10000);
                 model.setStone(model.getStone() + 1);
             }
-
         }
     }
 
@@ -319,6 +306,18 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             case 1:
                 price = 1000;
                 break;
+            case 2:
+                price = 1000;
+                break;
+            case 3:
+                price = 1000;
+                break;
+            case 4:
+                price = 1000;
+                break;
+            case 5:
+                price = 1000;
+                break;
         }
         return price;
     }
@@ -332,8 +331,57 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             case "Banana":
                 model.setBanana(num);
                 break;
+            case "Apple":
+                model.setApple(num);
+                break;
+            case "Orange":
+                model.setOrange(num);
+                break;
+            case "Melon":
+                model.setMelon(num);
+                break;
             default:
                 break;
+        }
+    }
+
+    private void myItemCb_controller() {
+        int i = myItemCb.getSelectedIndex();
+        switch (i) {
+            case 0:
+                itemNumLabel.setText(String.valueOf(model.getDredgs()));
+                itemNumLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                soldPriceLabel.setText("$" + String.valueOf(getItemCbObjectPrice()));
+                break;
+            case 1:
+                itemNumLabel.setText(String.valueOf(model.getBanana()));
+                itemNumLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                soldPriceLabel.setText("$" + String.valueOf(getItemCbObjectPrice()));
+                break;
+            case 2:
+                itemNumLabel.setText(String.valueOf(model.getApple()));
+                itemNumLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                soldPriceLabel.setText("$" + String.valueOf(getItemCbObjectPrice()));
+                break;
+            case 3:
+                itemNumLabel.setText(String.valueOf(model.getOrange()));
+                itemNumLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                soldPriceLabel.setText("$" + String.valueOf(getItemCbObjectPrice()));
+                break;
+            case 4:
+                itemNumLabel.setText(String.valueOf(model.getMelon()));
+                itemNumLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                soldPriceLabel.setText("$" + String.valueOf(getItemCbObjectPrice()));
+                break;
+        }
+    }
+
+    private boolean isNumber(String Userinput) {
+        try {
+            int i = Integer.valueOf(Userinput).intValue();
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 
@@ -348,15 +396,6 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             return true;
         }
         return false;
-    }
-
-    private boolean isNumber(String Userinput) {
-        try {
-            int i = Integer.valueOf(Userinput).intValue();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 
 }

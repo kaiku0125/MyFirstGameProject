@@ -3,14 +3,12 @@ package GameProject.Game;
 import java.awt.Color;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
-
 import javax.swing.JButton;
 import javax.swing.JProgressBar;
-
 import GameProject.Game.Rate.BounsItem;
 import GameProject.Game.Rate.Result;
 import GameProject.libs.GardenItem;
@@ -28,7 +26,7 @@ public class ControllerMain implements ControllerMainInterface {
     ViewStore viewStore;
     BounsItem bonus;
     Result result;
-    int tempcoin, tempstone, tempFail;
+    int tempcoin, tempstone, tempFail, tempcheck;
     int dailySecond, dailyMinute;
     int failurePlus;
     StringBuilder sb;
@@ -36,7 +34,8 @@ public class ControllerMain implements ControllerMainInterface {
     GardenItem bananaItem, appleItem, orangeItem, melonItem;
     public static final boolean SOLD = true;
     public static final boolean UNSOLD = false;
-    public static final int EXP30 = 30;
+    Random random;
+    int rInt;
     private static final Color DARK_GREEN = new Color(0, 153, 0);
 
     public ControllerMain(ModelInterface model) {
@@ -46,6 +45,7 @@ public class ControllerMain implements ControllerMainInterface {
         this.viewlogin = viewlogin;
         this.viewMain = viewMain;
         viewlogin.createLoginView();
+        random = new Random();
     }
 
     @Override
@@ -206,40 +206,29 @@ public class ControllerMain implements ControllerMainInterface {
 
     // Element Checker
     @Override
-    public boolean bananChecker(int banana) {
-        int i = model.getBanana();
-        i = i - banana;
-        if (i < 0) {
-            return false;
+    public boolean checker(int inputNum, String name) {
+        switch (name) {
+            case "Banana":
+                tempcheck = model.getBanana();
+                break;
+            case "Apple":
+                tempcheck = model.getApple();
+                break;
+            case "Orange":
+                tempcheck = model.getOrange();
+                break;
+            case "Melon":
+                tempcheck = model.getMelon();
+                break;
+            case "Stone":
+                tempcheck = model.getStone();
+                break;
+            case "ExtremeStone":
+                tempcheck = model.getExtremeStone();
+                break;
         }
-        return true;
-    }
-
-    @Override
-    public boolean appleChecker(int apple) {
-        int i = model.getApple();
-        i = i - apple;
-        if (i < 0) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean orangeChecker(int orange) {
-        int i = model.getOrange();
-        i = i - orange;
-        if (i < 0) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean melonChecker(int melon) {
-        int i = model.getMelon();
-        i = i - melon;
-        if (i < 0) {
+        tempcheck = tempcheck - inputNum;
+        if (tempcheck < 0) {
             return false;
         }
         return true;
@@ -263,7 +252,7 @@ public class ControllerMain implements ControllerMainInterface {
         switch (bonus) {
             case STONE:
                 plusStone(5);
-                viewMain.showDialog("獲得強化石*5");
+                viewMain.showDialog("獲得5強化石");
                 viewMain.setdescription(msg + ", get 5 Stone", Color.BLACK);
                 break;
 
@@ -271,6 +260,16 @@ public class ControllerMain implements ControllerMainInterface {
                 plusCoin(5000);
                 viewMain.showDialog("獲得5000金幣");
                 viewMain.setdescription(msg + ", get 5000 coin", Color.BLACK);
+                break;
+            case EXTREME:
+                plusExtremeStone(3);
+                viewMain.showDialog("獲得3凝縮強化石");
+                viewMain.setdescription(msg + ", get 3 exetreme Stone", Color.BLACK);
+                break;
+            case FAIL:
+                plusFailureTimes(10);
+                viewMain.showDialog("獲得10曾失敗強化");
+                viewMain.setdescription(msg + ", get 10 Failuer times", Color.BLACK);
                 break;
 
             default:
@@ -318,14 +317,15 @@ public class ControllerMain implements ControllerMainInterface {
         }
         String msg = getformateTime();
         int level = viewMain.getWeaponLabel();
+        int playerLevel = model.getPlayerlevel();
         if (level < 5) {
-            result = Rate.getResult(Rate.NORMAL, failurePlus);
+            result = Rate.getResult(Rate.NORMAL, failurePlus, playerLevel);
         } else if (level >= 5 && level < 10) {
-            result = Rate.getResult(Rate.MEDIUM, failurePlus);
+            result = Rate.getResult(Rate.MEDIUM, failurePlus, playerLevel);
         } else if (level >= 10 && level < 16) {
-            result = Rate.getResult(Rate.HARD, failurePlus);
+            result = Rate.getResult(Rate.HARD, failurePlus, playerLevel);
         } else if (level >= 16 && level <= 20) {
-            result = Rate.getResult(Rate.EXTREME, failurePlus);
+            result = Rate.getResult(Rate.EXTREME, failurePlus, playerLevel);
         }
 
         switch (result) {
@@ -333,12 +333,14 @@ public class ControllerMain implements ControllerMainInterface {
                 jProgressBar.setString("強化成功");
                 viewMain.setdescription(msg + ", enhance Success!", DARK_GREEN);
                 model.setCurrentLevel(model.getCurrentLevel() + 1);
+                expController(viewMain.getExpBar(), 7);
                 break;
 
             case FAIL:
                 jProgressBar.setString("強化失敗");
                 viewMain.setdescription(msg + ", enhance Fail!", Color.RED);
-                model.setFailureTimes(model.getFailureTimes() + 1);
+                int tempPlusfail = model.getCurrentLevel();
+                model.setFailureTimes(model.getFailureTimes() + tempPlusfail);
                 viewMain.setFailureLabelText(model.getFailureTimes());
                 if (model.getCurrentLevel() == 0) {
                     model.setCurrentLevel(model.getCurrentLevel());
@@ -349,12 +351,13 @@ public class ControllerMain implements ControllerMainInterface {
                         model.setCurrentLevel(model.getCurrentLevel() - 1);
                     }
                 }
+                expController(viewMain.getExpBar(), 3);
                 break;
 
             default:
                 break;
         }
-        expController(viewMain.getExpBar(), 70);
+
     }
 
     @Override
@@ -441,15 +444,15 @@ public class ControllerMain implements ControllerMainInterface {
         SimpleDateFormat form = new SimpleDateFormat("HH:mm:ss");
         Date date = new Date(System.currentTimeMillis());
         String msg = form.format(date);
-        result = Rate.getResult(Rate.ALCHEMY, 0);
+        result = Rate.getResult(Rate.ALCHEMY, 0, 0);
         sb = new StringBuilder();
         sb.append(String.valueOf(viewMain.getBananaCombo()));
         sb.append(String.valueOf(viewMain.getAppleCombo()));
         sb.append(String.valueOf(viewMain.getOrangeCombo()));
         sb.append(String.valueOf(viewMain.getMelonCombo()));
-        System.out.println(sb);
+        System.out.println("強化序號:" + sb);
         switch (sb.toString()) {
-            case "0010":
+            case "1111":
                 plusStone(1);
                 viewMain.showDialog("獲得強化石");
                 viewMain.setdescription(msg + ", Alchemy result : Stone +1", Color.BLACK);
@@ -560,18 +563,20 @@ public class ControllerMain implements ControllerMainInterface {
     @Override
     public void harvest(GardenItem gardenItem) {
         String name = gardenItem.getName();
+        rInt = random.nextInt(2) + 1;
+        System.out.println("機率為 : " + rInt);
         switch (name) {
             case "Banana":
-                bananaItem.setHarvest(bananaItem.getHarvest() + 1);
+                bananaItem.setHarvest(bananaItem.getHarvest() + rInt);
                 break;
             case "Apple":
-                appleItem.setHarvest(appleItem.getHarvest() + 1);
+                appleItem.setHarvest(appleItem.getHarvest() + rInt);
                 break;
             case "Orange":
-                orangeItem.setHarvest(orangeItem.getHarvest() + 1);
+                orangeItem.setHarvest(orangeItem.getHarvest() + rInt);
                 break;
             case "Melon":
-                melonItem.setHarvest(melonItem.getHarvest() + 1);
+                melonItem.setHarvest(melonItem.getHarvest() + rInt);
                 break;
             default:
                 break;
@@ -589,13 +594,7 @@ public class ControllerMain implements ControllerMainInterface {
         int m = melonItem.getHarvest();
         model.setMelon(model.getMelon() + m);
         setAllHarvsetToZero(0);
-
     }
-
-    // public void setHarvestMap(GardenItemComboBox gdCb, int num) {
-    // HashMap<String, Integer> harvsetMap = new HashMap<>();
-    // harvsetMap.put(((GardenItem) gdCb.getSelectedItem()).getCodeName(), num);
-    // }
 
     public void setAllHarvsetToZero(int num) {
         bananaItem.setHarvest(num);
