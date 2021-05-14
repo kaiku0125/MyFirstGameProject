@@ -212,7 +212,7 @@ public class Model implements ModelInterface {
     public void restartDailyTimer() {
         dailyTask.again();
         dailyTask = new DailyClock(this);
-        dailyTask.setMinute(1);
+        dailyTask.setMinute(3);
         dailyTask.setSecond(1);
         dailyTask.getTimer().scheduleAtFixedRate(dailyTask, 0, 1000);
     }

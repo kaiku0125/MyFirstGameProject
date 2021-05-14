@@ -77,7 +77,7 @@ public class ControllerMain implements ControllerMainInterface {
             public void run() {
                 for (int exp = originExp; exp <= originExp + plus_exp; exp++) {
                     try {
-                        Thread.sleep(25);
+                        Thread.sleep(150);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
