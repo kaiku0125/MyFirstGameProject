@@ -75,24 +75,31 @@ public class ControllerMain implements ControllerMainInterface {
         agent.execute(new Runnable() {
             @Override
             public void run() {
-                for (int exp = originExp; exp <= originExp + plus_exp; exp++) {
-                    try {
-                        Thread.sleep(150);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    if (exp > 100) {
-                        model.setPlayerlevel(templevel + 1);
-                        model.setExp(exp - 100);
-                        expb.setValue(model.getExp());
-                        expb.setString(exp - 100 + " / 100");
-
-                    } else {
-                        model.setExp(exp);
-                        expb.setValue(model.getExp());
-                        expb.setString(exp + " / 100");
+                if (templevel < 10) {
+                    for (int exp = originExp; exp <= originExp + plus_exp; exp++) {
+                        try {
+                            Thread.sleep(150);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        if (exp >= 100) {
+                            if (templevel + 1 >= 10) {
+                                expb.setString("MAX");
+                                model.setPlayerlevel(10);
+                            } else {
+                                model.setPlayerlevel(templevel + 1);
+                                model.setExp(exp - 100);
+                                expb.setValue(model.getExp());
+                                expb.setString(exp - 100 + " / 100");
+                            }
+                        } else {
+                            model.setExp(exp);
+                            expb.setValue(model.getExp());
+                            expb.setString(exp + " / 100");
+                        }
                     }
                 }
+
             }
         });
         agent.shutdown();
