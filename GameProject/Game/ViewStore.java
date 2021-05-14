@@ -229,23 +229,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
         } else if (e.getSource() == myItemCb) {
             myItemCb_controller();
         } else if (e.getSource() == soldBtn) {
-            if (isNumber(soldNumTextField.getText())) {
-                int have = Integer.parseInt(itemNumLabel.getText());
-                int price = getItemCbObjectPrice();
-                int sell = Integer.parseInt(soldNumTextField.getText());
-                if (0 < sell && sell <= have) {
-                    controller.sold(have, sell, price);
-                    setSoldItemNum(have - sell);
-                    itemNumLabel.setText(String.valueOf(have - sell));
-                    soldNumTextField.setText("");
-                }
-                if (sell > have) {
-                    showDialog("想騙484?");
-                    soldNumTextField.setText("");
-                }
-            } else {
-                showDialog("是不會輸入數字逆?");
-            }
+            soldBtn_controller();
         } else if (e.getSource() == farmBtn_3) {
             if (showConfirmDialong("是否購買強化石?", "購買確認")) {
                 controller.minusCoin(10000);
@@ -296,32 +280,6 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
         instance = null;
     }
 
-    public int getItemCbObjectPrice() {
-        int index = myItemCb.getSelectedIndex();
-        int price = 0;
-        switch (index) {
-            case 0:
-                price = 100;
-                break;
-            case 1:
-                price = 200;
-                break;
-            case 2:
-                price = 200;
-                break;
-            case 3:
-                price = 200;
-                break;
-            case 4:
-                price = 200;
-                break;
-            case 5:
-                price = 1000;
-                break;
-        }
-        return price;
-    }
-
     public void setSoldItemNum(int num) {
         String item = (String) myItemCb.getSelectedItem();
         switch (item) {
@@ -365,7 +323,27 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
                 break;
         }
         itemNumLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        soldPriceLabel.setText("$" + String.valueOf(getItemCbObjectPrice()));
+        soldPriceLabel.setText("$" + String.valueOf(controller.getItemCbObjectPrice(myItemCb)));
+    }
+
+    private void soldBtn_controller() {
+        if (isNumber(soldNumTextField.getText())) {
+            int have = Integer.parseInt(itemNumLabel.getText());
+            int price = controller.getItemCbObjectPrice(myItemCb);
+            int sell = Integer.parseInt(soldNumTextField.getText());
+            if (0 < sell && sell <= have) {
+                controller.sold(have, sell, price);
+                setSoldItemNum(have - sell);
+                itemNumLabel.setText(String.valueOf(have - sell));
+                soldNumTextField.setText("");
+            }
+            if (sell > have) {
+                showDialog("想騙484?");
+                soldNumTextField.setText("");
+            }
+        } else {
+            showDialog("是不會輸入數字逆?");
+        }
     }
 
     private boolean isNumber(String Userinput) {

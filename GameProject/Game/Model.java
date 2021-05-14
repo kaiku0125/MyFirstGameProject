@@ -11,13 +11,12 @@ public class Model implements ModelInterface {
     ArrayList<String> gdCbItemList = new ArrayList<String>();
     Dataset dataset;
     Callback callback;
-    ClockTask stoneTask, dailyTask, gd1_Task, gd2_Task, gd3_Task, gd4_Task;
-    ClockTask gd5_Task, gd6_Task;
+    ClockTask stoneTask, dailyTask;
+    ClockTask gd1_Task, gd2_Task, gd3_Task, gd4_Task, gd5_Task, gd6_Task;
     GardenItemEntity gardenItemEntity;
     String password = null;
     public static int coin;
     public int stone, extremeStone, protectStone, failureTimes;
-    boolean ismain = false;
     int banana, apple, orange, melon, dregs;
     int swordLevel, bowLevel, currentLevel;
     boolean isfarm1_sold, isfarm2_sold;
@@ -30,7 +29,6 @@ public class Model implements ModelInterface {
 
     @Override
     public void on() {
-        ismain = true;
         initData();
         coincounter();
         startallTimer();
@@ -189,13 +187,12 @@ public class Model implements ModelInterface {
         stoneTask.setMinute(dataset.getClockindex(0));
         stoneTask.setSecond(dataset.getClockindex(1));
         stoneTask.getTimer().scheduleAtFixedRate(stoneTask, 0, 1000);
-
     }
 
     @Override
     public void restartStoneTimer() {
         stoneTask = new StoneClock(this);
-        stoneTask.setMinute(1);
+        stoneTask.setMinute(2);
         stoneTask.setSecond(1);
         stoneTask.getTimer().scheduleAtFixedRate(stoneTask, 0, 1000);
     }
@@ -250,7 +247,6 @@ public class Model implements ModelInterface {
         gd2_Task.setMinute(dataset.getClockindex(6));
         gd2_Task.setSecond(dataset.getClockindex(7));
         gd2_Task.getTimer().scheduleAtFixedRate(gd2_Task, 0, 1000);
-
     }
 
     @Override
@@ -260,7 +256,6 @@ public class Model implements ModelInterface {
         gd2_Task.setMinute(1);
         gd2_Task.setSecond(1);
         gd2_Task.getTimer().scheduleAtFixedRate(gd2_Task, 0, 1000);
-
     }
 
     @Override
@@ -274,7 +269,6 @@ public class Model implements ModelInterface {
         gd3_Task.setMinute(dataset.getClockindex(8));
         gd3_Task.setSecond(dataset.getClockindex(9));
         gd3_Task.getTimer().scheduleAtFixedRate(gd3_Task, 0, 1000);
-
     }
 
     @Override
@@ -284,7 +278,6 @@ public class Model implements ModelInterface {
         gd3_Task.setMinute(1);
         gd3_Task.setSecond(1);
         gd3_Task.getTimer().scheduleAtFixedRate(gd3_Task, 0, 1000);
-
     }
 
     @Override
@@ -298,7 +291,6 @@ public class Model implements ModelInterface {
         gd4_Task.setMinute(dataset.getClockindex(10));
         gd4_Task.setSecond(dataset.getClockindex(11));
         gd4_Task.getTimer().scheduleAtFixedRate(gd4_Task, 0, 1000);
-
     }
 
     @Override
@@ -358,7 +350,6 @@ public class Model implements ModelInterface {
             gd6_Task.setSecond(1);
             gd6_Task.getTimer().scheduleAtFixedRate(gd6_Task, 0, 1000);
         }
-
     }
 
     @Override

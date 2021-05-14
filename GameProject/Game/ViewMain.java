@@ -81,7 +81,8 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.getContentPane().setBackground(Color.BLACK);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         menuBar = new JMenuBar();
         menu = new JMenu("Menu");

@@ -92,4 +92,5 @@ public interface ControllerMainInterface {
 
     void sold(int have, int sell, int price);
 
+    int getItemCbObjectPrice(JComboBox<String> myItemCb);
 }

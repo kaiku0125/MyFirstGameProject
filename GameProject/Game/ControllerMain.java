@@ -8,6 +8,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JProgressBar;
 import GameProject.Game.Rate.BounsItem;
 import GameProject.Game.Rate.Result;
@@ -99,7 +100,6 @@ public class ControllerMain implements ControllerMainInterface {
                         }
                     }
                 }
-
             }
         });
         agent.shutdown();
@@ -633,7 +633,6 @@ public class ControllerMain implements ControllerMainInterface {
     public void openStore() {
         getViewStoreInstance();
         this.viewStore = ViewStore.instance;
-
     }
 
     @Override
@@ -662,6 +661,34 @@ public class ControllerMain implements ControllerMainInterface {
         int temppluscoin = sell * price;
         model.setCoin(model.getCoin() + temppluscoin);
         viewStore.showDialog("獲得" + temppluscoin + "金幣");
+    }
+
+    @Override
+    public int getItemCbObjectPrice(JComboBox<String> myItemCb) {
+        int index = myItemCb.getSelectedIndex();
+        int price = 0;
+        switch (index) {
+
+            case 0: // Dregs
+                price = 100;
+                break;
+            case 1: // Banana
+                price = 200;
+                break;
+            case 2: // Apple
+                price = 200;
+                break;
+            case 3: // Orange
+                price = 200;
+                break;
+            case 4: // Melon
+                price = 200;
+                break;
+            case 5: // ??
+                price = 1000;
+                break;
+        }
+        return price;
     }
 
     public String getformateTime() {
