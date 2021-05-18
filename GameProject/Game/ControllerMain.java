@@ -670,7 +670,7 @@ public class ControllerMain implements ControllerMainInterface {
         switch (index) {
 
             case 0: // Dregs
-                price = 100;
+                price = 400;
                 break;
             case 1: // Banana
                 price = 200;

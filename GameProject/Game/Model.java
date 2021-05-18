@@ -123,7 +123,7 @@ public class Model implements ModelInterface {
     @Override
     public void coincounter() {
         Timer cointimer = new Timer();
-        cointimer.schedule(new CoinTask(this), 0, 333);
+        cointimer.schedule(new CoinTask(this), 0, 150);
     }
 
     @Override

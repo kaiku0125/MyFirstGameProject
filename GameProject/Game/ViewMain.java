@@ -837,7 +837,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     public void updateClockGdBtn_1() {
         if (!model.isfinish_Gd1()) {
             gdBtn_1.setText(model.getMinute_gd1() + ":" + model.getSecond_gd1());
-            enableGdBtn_1(false);
+            enableGdBtn(false, gdBtn_1);
         } else {
             if (model.getGdCbList(0).equals("N")) {
                 gdCb_1.setEnabled(true);
@@ -846,7 +846,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
             } else {
                 gdBtn_1.setText("收割");
             }
-            enableGdBtn_1(true);
+            enableGdBtn(true, gdBtn_1);
         }
     }
 
@@ -854,7 +854,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     public void updateClockGdBtn_2() {
         if (!model.isfinish_Gd2()) {
             gdBtn_2.setText(model.getMinute_gd2() + ":" + model.getSecond_gd2());
-            enableGdBtn_2(false);
+            enableGdBtn(false, gdBtn_2);
         } else {
             if (model.getGdCbList(1).equals("N")) {
                 gdCb_2.setEnabled(true);
@@ -863,7 +863,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
             } else {
                 gdBtn_2.setText("收割");
             }
-            enableGdBtn_2(true);
+            enableGdBtn(true, gdBtn_2);
         }
     }
 
@@ -871,7 +871,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     public void updateClockGdBtn_3() {
         if (!model.isfinish_Gd3()) {
             gdBtn_3.setText(model.getMinute_gd3() + ":" + model.getSecond_gd3());
-            enableGdBtn_3(false);
+            enableGdBtn(false, gdBtn_3);
         } else {
             if (model.getGdCbList(2).equals("N")) {
                 gdCb_3.setEnabled(true);
@@ -880,7 +880,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
             } else {
                 gdBtn_3.setText("收割");
             }
-            enableGdBtn_3(true);
+            enableGdBtn(true, gdBtn_3);
         }
     }
 
@@ -888,7 +888,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     public void updateClockGdBtn_4() {
         if (!model.isfinish_Gd4()) {
             gdBtn_4.setText(model.getMinute_gd4() + ":" + model.getSecond_gd4());
-            enableGdBtn_4(false);
+            enableGdBtn(false, gdBtn_4);
         } else {
             if (model.getGdCbList(3).equals("N")) {
                 gdCb_4.setEnabled(true);
@@ -897,7 +897,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
             } else {
                 gdBtn_4.setText("收割");
             }
-            enableGdBtn_4(true);
+            enableGdBtn(true, gdBtn_4);
         }
     }
 
@@ -984,7 +984,6 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         }
     }
 
-    // Alchemy
     @Override
     public void alchemyProgressEnd() {
         if (controller.isAlchemyRunning() == false) {
@@ -1044,22 +1043,6 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         dailyBtn.setEnabled(b);
     }
 
-    public void enableGdBtn_1(boolean b) {
-        gdBtn_1.setEnabled(b);
-    }
-
-    public void enableGdBtn_2(boolean b) {
-        gdBtn_2.setEnabled(b);
-    }
-
-    public void enableGdBtn_3(boolean b) {
-        gdBtn_3.setEnabled(b);
-    }
-
-    public void enableGdBtn_4(boolean b) {
-        gdBtn_4.setEnabled(b);
-    }
-
     public void enableGdBtn_5(boolean b) {
         gdBtn_5.setEnabled(b);
     }
@@ -1070,30 +1053,6 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
     public void enableGdBtn(boolean b, JButton btn) {
         btn.setEnabled(b);
-    }
-
-    public void enableGdCb_1(boolean b) {
-        gdCb_1.setEnabled(b);
-    }
-
-    public void enableGdCb_2(boolean b) {
-        gdCb_2.setEnabled(b);
-    }
-
-    public void enableGdCb_3(boolean b) {
-        gdCb_3.setEnabled(b);
-    }
-
-    public void enableGdCb_4(boolean b) {
-        gdCb_4.setEnabled(b);
-    }
-
-    public void enableGdCb_5(boolean b) {
-        gdCb_5.setEnabled(b);
-    }
-
-    public void enableGdCb_6(boolean b) {
-        gdCb_6.setEnabled(b);
     }
 
     public void enableGdCb(boolean b, GardenItemComboBox gdCb) {
@@ -1146,19 +1105,6 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
             return (int) element4.getSelectedItem();
         }
         return 0;
-    }
-
-    public void showDialog(String msg) {
-        JOptionPane.showMessageDialog(null, msg);
-    }
-
-    public boolean showConfirmDialong(String msg, String title) {
-        int result = JOptionPane.showConfirmDialog(null, msg, title, JOptionPane.OK_CANCEL_OPTION);
-
-        if (result == JOptionPane.OK_OPTION) {
-            return true;
-        }
-        return false;
     }
 
     public boolean rightSet() {
@@ -1294,4 +1240,55 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         expBar.setString(expbarString);
     }
 
+    public void showDialog(String msg) {
+        JOptionPane.showMessageDialog(null, msg);
+    }
+
+    public boolean showConfirmDialong(String msg, String title) {
+        int result = JOptionPane.showConfirmDialog(null, msg, title, JOptionPane.OK_CANCEL_OPTION);
+
+        if (result == JOptionPane.OK_OPTION) {
+            return true;
+        }
+        return false;
+    }
+
+    // public void enableGdBtn_1(boolean b) {
+    // gdBtn_1.setEnabled(b);
+    // }
+
+    // public void enableGdBtn_2(boolean b) {
+    // gdBtn_2.setEnabled(b);
+    // }
+
+    // public void enableGdBtn_3(boolean b) {
+    // gdBtn_3.setEnabled(b);
+    // }
+
+    // public void enableGdBtn_4(boolean b) {
+    // gdBtn_4.setEnabled(b);
+    // }
+    // public void enableGdCb_1(boolean b) {
+    // gdCb_1.setEnabled(b);
+    // }
+
+    // public void enableGdCb_2(boolean b) {
+    // gdCb_2.setEnabled(b);
+    // }
+
+    // public void enableGdCb_3(boolean b) {
+    // gdCb_3.setEnabled(b);
+    // }
+
+    // public void enableGdCb_4(boolean b) {
+    // gdCb_4.setEnabled(b);
+    // }
+
+    // public void enableGdCb_5(boolean b) {
+    // gdCb_5.setEnabled(b);
+    // }
+
+    // public void enableGdCb_6(boolean b) {
+    // gdCb_6.setEnabled(b);
+    // }
 }
