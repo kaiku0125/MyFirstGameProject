@@ -11,6 +11,8 @@ import GameProject.libs.Weapon;
 public interface ControllerMainInterface {
     void login();
 
+    void destroyLoginFrame();
+
     void stop();
 
     // Exp

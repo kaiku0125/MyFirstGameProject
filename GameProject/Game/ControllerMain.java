@@ -34,7 +34,7 @@ public class ControllerMain implements ControllerMainInterface {
     boolean success, protect, notFailure;
     GardenItem bananaItem, appleItem, orangeItem, melonItem;
     public static final boolean SOLD = true;
-    Random random;
+    protected Random random;
     int rInt;
     private static final Color DARK_GREEN = new Color(0, 153, 0);
 
@@ -49,11 +49,18 @@ public class ControllerMain implements ControllerMainInterface {
     }
 
     @Override
+    public void destroyLoginFrame() {
+        viewlogin.enableLoginFrame(false);
+        viewlogin.dispose();
+    }
+
+    @Override
     public void login() {
         viewlogin.enableLoginFrame(false);
         viewMain.createMainView();
         viewMain.createControls();
         model.on();
+
         setGardenItem();
         setAllGdCb();
         setPlayerInformation();
