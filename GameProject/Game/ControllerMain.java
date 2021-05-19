@@ -40,27 +40,26 @@ public class ControllerMain implements ControllerMainInterface {
 
     public ControllerMain(ModelInterface model) {
         this.model = model;
-        ViewLogin viewlogin = new ViewLogin(this, model);
-        ViewMain viewMain = new ViewMain(this, model);
-        this.viewlogin = viewlogin;
-        this.viewMain = viewMain;
-        viewlogin.createLoginView();
+        // ViewLogin viewlogin = new ViewLogin(this, model);
+        // ViewMain viewMain = new ViewMain(this, model);
+        // this.viewlogin = viewlogin;
+        // this.viewMain = viewMain;
+        // viewlogin.createLoginView();
         random = new Random();
     }
 
     @Override
-    public void destroyLoginFrame() {
-        viewlogin.enableLoginFrame(false);
-        viewlogin.dispose();
+    public void initLogin() {
+        viewlogin = new ViewLogin(this, model);
+        viewlogin.createLoginView();
     }
 
     @Override
     public void login() {
-        viewlogin.enableLoginFrame(false);
+        viewMain = new ViewMain(this, model);
         viewMain.createMainView();
         viewMain.createControls();
         model.on();
-
         setGardenItem();
         setAllGdCb();
         setPlayerInformation();

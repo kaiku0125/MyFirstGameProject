@@ -3,7 +3,6 @@ package GameProject.Game;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JProgressBar;
-
 import GameProject.libs.GardenItem;
 import GameProject.libs.GardenItemComboBox;
 import GameProject.libs.Weapon;
@@ -11,7 +10,7 @@ import GameProject.libs.Weapon;
 public interface ControllerMainInterface {
     void login();
 
-    void destroyLoginFrame();
+    void initLogin();
 
     void stop();
 

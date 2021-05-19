@@ -91,10 +91,17 @@ public class ViewLogin extends JFrame implements KeyListener, ActionListener {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             logger.info("User press enter");
             model.checkID();
-            if (IDtextField.getText().equals(model.getpassword())) {
-                controller.login();
+            if ((IDtextField.getText().equals("Master"))) {
+                ControllerMainInterface master = new MasterController(model);
+                enableLoginFrame(false);
+                master.login();
             } else {
-                JOptionPane.showMessageDialog(null, "Uncorrected UserID", "Login error", 0);
+                if (IDtextField.getText().equals(model.getpassword())) {
+                    enableLoginFrame(false);
+                    controller.login();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Uncorrected UserID", "Login error", 0);
+                }
             }
         }
     }

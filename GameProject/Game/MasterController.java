@@ -28,4 +28,15 @@ public class MasterController extends ControllerMain {
         e = model.getMelon();
         model.setMelon(e + melon);
     }
+
+    public void login() {
+        viewMain = new ViewMain(this, model);
+        viewMain.createMainView();
+        viewMain.createControls();
+        model.on();
+        setGardenItem();
+        setAllGdCb();
+        setPlayerInformation();
+        viewMain.showDialog("登入為Master@@");
+    }
 }
