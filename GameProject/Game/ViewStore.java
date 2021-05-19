@@ -212,6 +212,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             farmBtn_3.addActionListener(this);
             myItemCb.addActionListener(this);
             soldBtn.addActionListener(this);
+            hintBtn.addActionListener(this);
         }
     }
 
@@ -235,6 +236,8 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
                 controller.minusCoin(10000);
                 model.setStone(model.getStone() + 1);
             }
+        } else if (e.getSource() == hintBtn) {
+            hintController();
         }
     }
 
@@ -366,6 +369,20 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             return true;
         }
         return false;
+    }
+
+    private void hintController() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("1.煉金手冊: \n");
+        sb.append("    (1).1111 : 強化石\n");
+        sb.append("    (2).2222 : 凝縮強化石\n");
+        sb.append("    (3).4444 : 強化石*5\n");
+        sb.append("    (4).3333 : 保護石\n");
+        sb.append("    (5).3132 : 失敗疊層*15\n");
+        sb.append("    (6).1211 : 失敗疊層*5\n");
+        sb.append("2.煉金殘渣、高級煉金石可直接賣商店，換取金幣" + "\n");
+        sb.append("3.武器最高20階，利用保護石與失敗疊層，增加強化機率");
+        showDialog(sb.toString());
     }
 
 }

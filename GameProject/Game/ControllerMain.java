@@ -425,7 +425,8 @@ public class ControllerMain implements ControllerMainInterface {
         String msg = form.format(date);
         result = Rate.getResult(Rate.ALCHEMY, 0, 0);
         sb = new StringBuilder();
-        sb.append(String.valueOf(viewMain.getBananaCombo()));
+        // sb.append(String.valueOf(viewMain.getBananaCombo()));
+        sb.append(viewMain.getBananaCombo());
         sb.append(String.valueOf(viewMain.getAppleCombo()));
         sb.append(String.valueOf(viewMain.getOrangeCombo()));
         sb.append(String.valueOf(viewMain.getMelonCombo()));
