@@ -25,6 +25,8 @@ public interface Callback {
 
     void updateDregs();
 
+    void updateRareDregs();
+
     void updateClockGdBtn_1();
 
     void updateClockGdBtn_2();

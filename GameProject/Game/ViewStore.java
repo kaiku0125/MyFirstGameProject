@@ -140,7 +140,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             soldNumDes.setOpaque(true);
             soldNumDes.setBackground(Color.white);
 
-            String[] solditem = new String[] { "煉金殘渣", "Banana", "Apple", "Orange", "Melon" };
+            String[] solditem = new String[] { "煉金殘渣", "高級煉金石", "Banana", "Apple", "Orange", "Melon" };
             myItemCb = new JComboBox<String>(solditem);
             myItemCb.setBounds(10, 175, 100, 20);
             myItemCb.setSelectedItem(null);

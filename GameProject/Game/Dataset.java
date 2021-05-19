@@ -170,11 +170,13 @@ public class Dataset {
             allElement.put("element3", Integer.parseInt(s[2]));
             allElement.put("element4", Integer.parseInt(s[3]));
             allElement.put("dregs", Integer.parseInt(s[4]));
+            allElement.put("rare", Integer.parseInt(s[5]));
             model.setBanana(allElement.get("element1"));
             model.setApple(allElement.get("element2"));
             model.setOrange(allElement.get("element3"));
             model.setMelon(allElement.get("element4"));
             model.setDregs(allElement.get("dregs"));
+            model.setRareDregs(allElement.get("rare"));
             reader.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -189,8 +191,9 @@ public class Dataset {
             allElement.put("element3", model.getOrange());
             allElement.put("element4", model.getMelon());
             allElement.put("dregs", model.getDredgs());
+            allElement.put("rare", model.getRareDregs());
             fw.write(allElement.get("element1") + "," + allElement.get("element2") + "," + allElement.get("element3")
-                    + "," + allElement.get("element4") + "," + allElement.get("dregs"));
+                    + "," + allElement.get("element4") + "," + allElement.get("dregs") + "," + allElement.get("rare"));
             fw.close();
         } catch (Exception e) {
             e.printStackTrace();

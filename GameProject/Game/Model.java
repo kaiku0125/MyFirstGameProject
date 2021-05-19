@@ -17,7 +17,7 @@ public class Model implements ModelInterface {
     String password = null;
     public static int coin;
     public int stone, extremeStone, protectStone, failureTimes;
-    int banana, apple, orange, melon, dregs;
+    int banana, apple, orange, melon, dregs, rareDregs;
     int swordLevel, bowLevel, currentLevel;
     boolean isfarm1_sold, isfarm2_sold;
     int playerLevel = 0, exp;
@@ -585,6 +585,11 @@ public class Model implements ModelInterface {
     }
 
     @Override
+    public void rareDregsListener() {
+        callback.updateRareDregs();
+    }
+
+    @Override
     public void gdBtn_1Listener() {
         callback.updateClockGdBtn_1();
     }
@@ -672,6 +677,17 @@ public class Model implements ModelInterface {
     public void setDregs(int num) {
         this.dregs = num;
         dregsListener();
+    }
+
+    @Override
+    public int getRareDregs() {
+        return rareDregs;
+    }
+
+    @Override
+    public void setRareDregs(int num) {
+        this.rareDregs = num;
+        rareDregsListener();
     }
 
     // Weapon

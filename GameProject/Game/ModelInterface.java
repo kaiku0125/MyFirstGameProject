@@ -195,6 +195,8 @@ public interface ModelInterface {
 
     void dregsListener();
 
+    void rareDregsListener();
+
     void gdBtn_1Listener();
 
     void gdBtn_2Listener();
@@ -227,6 +229,10 @@ public interface ModelInterface {
     int getDredgs();
 
     void setDregs(int num);
+
+    int getRareDregs();
+
+    void setRareDregs(int num);
 
     // Weapon
     int getSwordLevel();

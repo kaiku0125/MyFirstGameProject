@@ -27,7 +27,7 @@ public interface ControllerMainInterface {
 
     void minusProtectStone(int stone);
 
-    // Element
+    // checker
     boolean checker(int inputNum, String name);
 
     // Daily

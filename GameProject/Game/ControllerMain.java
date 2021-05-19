@@ -429,7 +429,7 @@ public class ControllerMain implements ControllerMainInterface {
         sb.append(String.valueOf(viewMain.getAppleCombo()));
         sb.append(String.valueOf(viewMain.getOrangeCombo()));
         sb.append(String.valueOf(viewMain.getMelonCombo()));
-        System.out.println("強化序號:" + sb);
+        System.out.println("煉金序號:" + sb);
         switch (sb.toString()) {
             case "1111":
                 plusStone(1);
@@ -474,6 +474,10 @@ public class ControllerMain implements ControllerMainInterface {
         }
         rInt = random.nextInt(5) + 1;
         model.setDregs(model.getDredgs() + rInt);
+        if (rInt == 2) {
+            model.setRareDregs(model.getRareDregs() + 1);
+        }
+
     }
 
     // ................................Garden part ...............................//
@@ -544,7 +548,7 @@ public class ControllerMain implements ControllerMainInterface {
     @Override
     public void harvest(GardenItem gardenItem) {
         String name = gardenItem.getName();
-        rInt = random.nextInt(2) + 1; // 調整收割數量
+        rInt = random.nextInt(3) + 1; // 調整收割數量
         System.out.println("機率為 : " + rInt);
         switch (name) {
             case "Banana":
@@ -606,7 +610,6 @@ public class ControllerMain implements ControllerMainInterface {
 
         if (btn.getText() == "收割") {
             harvest((GardenItem) gdCb.getSelectedItem());
-            // setHarvestMap(gdCb, );
             plusHarvest();
             model.setGdCbLiset(index, "N");
             gdCb.setSelectedItem(null);
@@ -615,7 +618,6 @@ public class ControllerMain implements ControllerMainInterface {
             btn.setText("start");
         }
         if (gdCb.getSelectedItem() != null) {
-            // plusHarvest();
             viewMain.enableGdBtn(false, btn);
             viewMain.enableGdCb(false, gdCb);
             model.setGdCbLiset(index, ((GardenItem) gdCb.getSelectedItem()).getCodeName());
@@ -651,12 +653,10 @@ public class ControllerMain implements ControllerMainInterface {
         btn.setEnabled(false);
         if (btn.getName() == "buy1") {
             model.setFarm1Sold(SOLD);
-            // viewMain.enableGdCb_5(true);
             viewMain.enableGdBtn_5(true);
             model.restartTimer_Gd5();
         } else if (btn.getName() == "buy2") {
             model.setFarm2Sold(SOLD);
-            // viewMain.enableGdCb_6(true);
             viewMain.enableGdBtn_6(true);
             model.restartTimer_Gd6();
         }
@@ -678,20 +678,20 @@ public class ControllerMain implements ControllerMainInterface {
             case 0: // Dregs
                 price = 400;
                 break;
-            case 1: // Banana
-                price = 200;
-                break;
-            case 2: // Apple
-                price = 200;
-                break;
-            case 3: // Orange
-                price = 200;
-                break;
-            case 4: // Melon
-                price = 200;
-                break;
-            case 5: // ??
+            case 1: // Rare
                 price = 1000;
+                break;
+            case 2: // Banana
+                price = 200;
+                break;
+            case 3: // Apple
+                price = 200;
+                break;
+            case 4: // Orange
+                price = 200;
+                break;
+            case 5: // Melon
+                price = 200;
                 break;
         }
         return price;

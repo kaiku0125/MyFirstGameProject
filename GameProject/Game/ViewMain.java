@@ -46,8 +46,8 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     JLabel stoneLabel, stoneNumLabel, extremeLabel, extremeNumLabel;
     JLabel protectLabel, protectNumLabel, failureTimesLabel;
     JLabel alchemyImgLabel, enhanceImgLabel, weaponLevelLabel;
-    JLabel bananaLabel, appleLabel, orangeLabel, melonLabel, dregsLabel;
-    JLabel bananaNum, appleNum, orangeNum, melonNum, dregsNum;
+    JLabel bananaLabel, appleLabel, orangeLabel, melonLabel, dregsLabel, rareDregsLabel;
+    JLabel bananaNum, appleNum, orangeNum, melonNum, dregsNum, rareDregsNum;
     JLabel gardenTitleLabel, gardenImgLabel, storeImgLabel;
     JCheckBox failcheck, protectcheck;
     JComboBox<Integer> element1, element2, element3, element4;
@@ -81,7 +81,6 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.getContentPane().setBackground(Color.BLACK);
-        // mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         menuBar = new JMenuBar();
@@ -421,6 +420,18 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         dregsNum.setOpaque(true);
         dregsNum.setBounds(80, 10, 20, 20);
 
+        rareDregsLabel = new JLabel("高級煉金石", SwingConstants.CENTER);
+        rareDregsLabel.setBackground(Color.BLACK);
+        rareDregsLabel.setForeground(Color.RED);
+        rareDregsLabel.setOpaque(true);
+        rareDregsLabel.setBounds(120, 10, 70, 20);
+
+        rareDregsNum = new JLabel("0", SwingConstants.LEFT);
+        rareDregsNum.setBackground(Color.BLACK);
+        rareDregsNum.setForeground(Color.RED);
+        rareDregsNum.setOpaque(true);
+        rareDregsNum.setBounds(190, 10, 20, 20);
+
         // ...................................right.............................//
         coinImgLabel = new JLabel();
         coinImgLabel.setIcon(new ImageIcon("GameProject//res//pics//Coin.png"));
@@ -543,7 +554,6 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         leftPanel.add(stoneClockLabel);
         leftPanel.add(enhanceBtn);
         leftPanel.add(protectcheck);
-        // leftPanel.add(descriptionLabel);
 
         playerPanel.add(IDLabel);
         playerPanel.add(levelLabel);
@@ -574,6 +584,8 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
         downPanel.add(dregsLabel);
         downPanel.add(dregsNum);
+        downPanel.add(rareDregsLabel);
+        downPanel.add(rareDregsNum);
 
         CoinDailyPanel.add(coinImgLabel);
         CoinDailyPanel.add(coinLabel);
@@ -1020,6 +1032,11 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     @Override
     public void updateDregs() {
         dregsNum.setText(String.valueOf(model.getDredgs()));
+    }
+
+    @Override
+    public void updateRareDregs() {
+        rareDregsNum.setText(String.valueOf(model.getRareDregs()));
     }
 
     // ............................Enable UI..........................//
