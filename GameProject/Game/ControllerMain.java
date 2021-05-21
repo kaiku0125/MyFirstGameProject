@@ -7,9 +7,7 @@ import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JProgressBar;
+import javax.swing.*;
 import GameProject.Game.Rate.BounsItem;
 import GameProject.Game.Rate.Result;
 import GameProject.libs.GardenItem;
@@ -40,11 +38,6 @@ public class ControllerMain implements ControllerMainInterface {
 
     public ControllerMain(ModelInterface model) {
         this.model = model;
-        // ViewLogin viewlogin = new ViewLogin(this, model);
-        // ViewMain viewMain = new ViewMain(this, model);
-        // this.viewlogin = viewlogin;
-        // this.viewMain = viewMain;
-        // viewlogin.createLoginView();
         random = new Random();
     }
 
@@ -380,6 +373,7 @@ public class ControllerMain implements ControllerMainInterface {
         viewMain.enableAlchemyBtn(false);
         viewMain.visibleAlchemybar(true);
         viewMain.enableEnhanceBtn(false);
+        viewStore.enabelSoldBtn(false);
     }
 
     @Override
@@ -388,6 +382,7 @@ public class ControllerMain implements ControllerMainInterface {
         viewMain.visibleAlchemybar(false);
         viewMain.enableEnhanceBtn(true);
         viewMain.alchemyEndCheck();
+        viewStore.enabelSoldBtn(true);
     }
 
     public void alchemyThread(JProgressBar jProgressBar) {
@@ -420,16 +415,17 @@ public class ControllerMain implements ControllerMainInterface {
 
     @Override
     public void getAlchemyResult() {
-        SimpleDateFormat form = new SimpleDateFormat("HH:mm:ss");
-        Date date = new Date(System.currentTimeMillis());
-        String msg = form.format(date);
+        int b = viewMain.getBananaCombo();
+        int a = viewMain.getAppleCombo();
+        int o = viewMain.getOrangeCombo();
+        int m = viewMain.getMelonCombo();
+        String msg = getformateTime();
         result = Rate.getResult(Rate.ALCHEMY, 0, 0);
         sb = new StringBuilder();
-        // sb.append(String.valueOf(viewMain.getBananaCombo()));
-        sb.append(viewMain.getBananaCombo());
-        sb.append(viewMain.getAppleCombo());
-        sb.append(viewMain.getOrangeCombo());
-        sb.append(viewMain.getMelonCombo());
+        sb.append(b);
+        sb.append(a);
+        sb.append(o);
+        sb.append(m);
         System.out.println("煉金序號:" + sb);
         switch (sb.toString()) {
             case "1111":
@@ -474,11 +470,17 @@ public class ControllerMain implements ControllerMainInterface {
                 break;
         }
         rInt = random.nextInt(5) + 1;
-        model.setDregs(model.getDredgs() + rInt);
-        if (rInt == 2) {
-            model.setRareDregs(model.getRareDregs() + 1);
+        if (b + a + o + m >= 4) {
+            model.setDregs(model.getDredgs() + rInt);
+            if (rInt == 2) {
+                model.setRareDregs(model.getRareDregs() + 1);
+            }
         }
-
+        if (viewStore != null) {
+            if (viewStore.getmyItemCb()) {
+                resetSoldNum();
+            }
+        }
     }
 
     // ................................Garden part ...............................//
@@ -696,6 +698,39 @@ public class ControllerMain implements ControllerMainInterface {
                 break;
         }
         return price;
+    }
+
+    @Override
+    public void myItemCb_controller(int index, JLabel label, JComboBox<String> cb) {
+        switch (index) {
+            case 0:
+                label.setText(String.valueOf(model.getDredgs()));
+                break;
+            case 1:
+                label.setText(String.valueOf(model.getRareDregs()));
+                break;
+            case 2:
+                label.setText(String.valueOf(model.getBanana()));
+                break;
+            case 3:
+                label.setText(String.valueOf(model.getApple()));
+                break;
+            case 4:
+                label.setText(String.valueOf(model.getOrange()));
+                break;
+            case 5:
+                label.setText(String.valueOf(model.getMelon()));
+                break;
+
+        }
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        String text = "$" + String.valueOf(getItemCbObjectPrice(cb));
+        viewStore.setSoldPriceLabelText(text);
+    }
+
+    @Override
+    public void resetSoldNum() {
+        viewStore.resetCbSelectIndex();
     }
 
     public String getformateTime() {

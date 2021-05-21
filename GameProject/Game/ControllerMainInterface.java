@@ -1,5 +1,6 @@
 package GameProject.Game;
 
+import javax.swing.*;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JProgressBar;
@@ -94,4 +95,8 @@ public interface ControllerMainInterface {
     void sold(int have, int sell, int price);
 
     int getItemCbObjectPrice(JComboBox<String> myItemCb);
+
+    void myItemCb_controller(int index, JLabel label, JComboBox<String> cb);
+
+    void resetSoldNum();
 }

@@ -27,6 +27,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
     JButton soldBtn;
     JLayeredPane pane;
     public static volatile ViewStore instance = null;
+    static final Color VERY_LIGHT_YELLOW = new Color(255, 255, 204);
 
     public ViewStore(ControllerMainInterface controller, ModelInterface model) {
         this.controller = controller;
@@ -123,12 +124,12 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             farmTitle_4.setOpaque(true);
             farmTitle_4.setBackground(Color.gray);
 
-            farmImg_4 = new JLabel();
+            farmImg_4 = new JLabel(new ImageIcon("GameProject//res//pics//protect.jpg"));
             farmImg_4.setBounds(280, 30, 80, 80);
             farmImg_4.setOpaque(true);
             farmImg_4.setBackground(Color.white);
 
-            farmBtn_4 = new JButton("5,000");
+            farmBtn_4 = new JButton("$5,000");
             farmBtn_4.setBounds(280, 115, 80, 20);
             farmBtn_4.setFont(new Font("Arial", Font.PLAIN, 11));
             farmBtn_4.setName("buy4");
@@ -137,12 +138,14 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             myItemDes.setBounds(10, 145, 100, 20);
             myItemDes.setOpaque(true);
             myItemDes.setBackground(Color.white);
+
             itemNumDes = new JLabel("擁有數量", SwingConstants.CENTER);
-            itemNumDes.setBounds(115, 145, 50, 20);
+            itemNumDes.setBounds(115, 145, 60, 20);
             itemNumDes.setOpaque(true);
             itemNumDes.setBackground(Color.white);
+
             soldNumDes = new JLabel("販賣數量", SwingConstants.CENTER);
-            soldNumDes.setBounds(170, 145, 50, 20);
+            soldNumDes.setBounds(180, 145, 60, 20);
             soldNumDes.setOpaque(true);
             soldNumDes.setBackground(Color.white);
 
@@ -152,25 +155,25 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             myItemCb.setSelectedItem(null);
 
             itemNumLabel = new JLabel();
-            itemNumLabel.setBounds(115, 175, 50, 20);
+            itemNumLabel.setBounds(115, 175, 60, 20);
             itemNumLabel.setOpaque(true);
             itemNumLabel.setBackground(Color.white);
             itemNumLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 13));
 
             soldNumTextField = new JTextField();
             soldNumTextField.setHorizontalAlignment(JTextField.CENTER);
-            soldNumTextField.setBounds(170, 174, 50, 21);
+            soldNumTextField.setBounds(180, 174, 60, 21);
             soldNumTextField.setOpaque(true);
             soldNumTextField.setBackground(Color.white);
             soldNumTextField.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 13));
 
             soldBtn = new JButton("販賣");
-            soldBtn.setBounds(225, 173, 60, 22);
+            soldBtn.setBounds(245, 173, 60, 22);
 
             soldPriceLabel = new JLabel("$0", SwingConstants.CENTER);
             soldPriceLabel.setBounds(10, 200, 100, 20);
             soldPriceLabel.setOpaque(true);
-            soldPriceLabel.setBackground(new Color(255, 255, 204));
+            soldPriceLabel.setBackground(VERY_LIGHT_YELLOW);
             soldPriceLabel.setForeground(Color.BLACK);
 
             titlePanel.add(backBtn);
@@ -232,17 +235,17 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
         if (e.getSource() == backBtn) {
             controller.closeStore();
         } else if (e.getSource() == farmBtn_1) {
-            if (showConfirmDialog("是否購買強化石?", "購買確認")) {
+            if (showConfirmDialog("是否購買田地?", "購買確認")) {
                 controller.minusCoin(50000);
                 controller.buyControl(farmBtn_1);
             }
         } else if (e.getSource() == farmBtn_2) {
-            if (showConfirmDialog("是否購買強化石?", "購買確認")) {
+            if (showConfirmDialog("是否購買田地?", "購買確認")) {
                 controller.minusCoin(100000);
                 controller.buyControl(farmBtn_2);
             }
         } else if (e.getSource() == myItemCb) {
-            myItemCb_controller();
+            controller.myItemCb_controller(myItemCb.getSelectedIndex(), itemNumLabel, myItemCb);
         } else if (e.getSource() == soldBtn) {
             soldBtn_controller();
         } else if (e.getSource() == farmBtn_3) {
@@ -251,7 +254,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
                 model.setStone(model.getStone() + 1);
             }
         } else if (e.getSource() == farmBtn_4) {
-            if (showConfirmDialog("是否購買強化石?", "購買確認")) {
+            if (showConfirmDialog("是否購買保護石?", "購買確認")) {
                 controller.minusCoin(5000);
                 model.setProtectStone(model.getProtectStone() + 1);
             }
@@ -299,6 +302,10 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
         }
     }
 
+    public void enabelSoldBtn(boolean b) {
+        soldBtn.setEnabled(b);
+    }
+
     public void enableBtn(JButton btn, boolean b) {
         btn.setEnabled(b);
     }
@@ -314,6 +321,9 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             case "煉金殘渣":
                 model.setDregs(num);
                 break;
+            case "高級練金石":
+                model.setRareDregs(num);
+                break;
             case "Banana":
                 model.setBanana(num);
                 break;
@@ -326,32 +336,26 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             case "Melon":
                 model.setMelon(num);
                 break;
+
             default:
                 break;
         }
     }
 
-    private void myItemCb_controller() {
-        int i = myItemCb.getSelectedIndex();
-        switch (i) {
-            case 0:
-                itemNumLabel.setText(String.valueOf(model.getDredgs()));
-                break;
-            case 1:
-                itemNumLabel.setText(String.valueOf(model.getBanana()));
-                break;
-            case 2:
-                itemNumLabel.setText(String.valueOf(model.getApple()));
-                break;
-            case 3:
-                itemNumLabel.setText(String.valueOf(model.getOrange()));
-                break;
-            case 4:
-                itemNumLabel.setText(String.valueOf(model.getMelon()));
-                break;
+    public void resetCbSelectIndex() {
+        int index = myItemCb.getSelectedIndex();
+        myItemCb.setSelectedIndex(index);
+    }
+
+    public boolean getmyItemCb() {
+        if (myItemCb.getSelectedItem() != null) {
+            return true;
         }
-        itemNumLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        soldPriceLabel.setText("$" + String.valueOf(controller.getItemCbObjectPrice(myItemCb)));
+        return false;
+    }
+
+    public void setSoldPriceLabelText(String text) {
+        soldPriceLabel.setText(text);
     }
 
     private void soldBtn_controller() {

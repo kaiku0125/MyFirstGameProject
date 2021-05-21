@@ -1096,6 +1096,13 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         element4.setSelectedItem(null);
     }
 
+    public int getElementComboItem(JComboBox<Integer> elements) {
+        if (elements.getSelectedItem() != null) {
+            return (int) elements.getSelectedItem();
+        }
+        return 0;
+    }
+
     public int getBananaCombo() {
         if (element1.getSelectedItem() != null) {
             return (int) element1.getSelectedItem();
@@ -1269,43 +1276,4 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         }
         return false;
     }
-
-    // public void enableGdBtn_1(boolean b) {
-    // gdBtn_1.setEnabled(b);
-    // }
-
-    // public void enableGdBtn_2(boolean b) {
-    // gdBtn_2.setEnabled(b);
-    // }
-
-    // public void enableGdBtn_3(boolean b) {
-    // gdBtn_3.setEnabled(b);
-    // }
-
-    // public void enableGdBtn_4(boolean b) {
-    // gdBtn_4.setEnabled(b);
-    // }
-    // public void enableGdCb_1(boolean b) {
-    // gdCb_1.setEnabled(b);
-    // }
-
-    // public void enableGdCb_2(boolean b) {
-    // gdCb_2.setEnabled(b);
-    // }
-
-    // public void enableGdCb_3(boolean b) {
-    // gdCb_3.setEnabled(b);
-    // }
-
-    // public void enableGdCb_4(boolean b) {
-    // gdCb_4.setEnabled(b);
-    // }
-
-    // public void enableGdCb_5(boolean b) {
-    // gdCb_5.setEnabled(b);
-    // }
-
-    // public void enableGdCb_6(boolean b) {
-    // gdCb_6.setEnabled(b);
-    // }
 }
