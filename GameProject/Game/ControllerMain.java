@@ -34,7 +34,6 @@ public class ControllerMain implements ControllerMainInterface {
     public static final boolean SOLD = true;
     protected Random random;
     int rInt;
-    private static final Color DARK_GREEN = new Color(0, 153, 0);
 
     public ControllerMain(ModelInterface model) {
         this.model = model;
@@ -303,7 +302,7 @@ public class ControllerMain implements ControllerMainInterface {
         switch (result) {
             case SUCCESS:
                 jProgressBar.setString("強化成功");
-                viewMain.setdescription(msg + ", enhance Success!", DARK_GREEN);
+                viewMain.setdescription(msg + ", enhance Success!", MyColor.DARK_GREEN);
                 model.setCurrentLevel(model.getCurrentLevel() + 1);
                 expController(viewMain.getExpBar(), 7);
                 break;

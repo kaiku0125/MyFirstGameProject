@@ -34,8 +34,6 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     private Logger logger = Logger.getLogger(ViewMain.class.getName());
     static int WIDTH = 700;
     static int HEIGHT = 520;
-    static final Color DARK_BROWN = new Color(51, 0, 0);
-    static final Color VERY_LIGHT_YELLOW = new Color(255, 255, 204);
     ControllerMainInterface controller;
     ModelInterface model;
     JFrame mainFrame;
@@ -98,9 +96,9 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         playerPanel = new JPanel();
         playerPanel.setLayout(null);
         playerPanel.setOpaque(true);
-        playerPanel.setBackground(DARK_BROWN);
+        playerPanel.setBackground(MyColor.DARK_BROWN);
         playerPanel.setBounds(0, 350, 200, 120);
-        playerPanel.setBorder(BorderFactory.createLineBorder(DARK_BROWN, 2));
+        playerPanel.setBorder(BorderFactory.createLineBorder(MyColor.DARK_BROWN, 2));
 
         middlePanel = new JPanel();
         middlePanel.setLayout(null);
@@ -246,39 +244,39 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         IDLabel = new JLabel("ID : " + model.getpassword(), SwingConstants.LEFT);
         IDLabel.setBounds(5, 5, 110, 25);
         IDLabel.setOpaque(true);
-        IDLabel.setBackground(DARK_BROWN);
-        IDLabel.setForeground(VERY_LIGHT_YELLOW);
+        IDLabel.setBackground(MyColor.DARK_BROWN);
+        IDLabel.setForeground(MyColor.VERY_LIGHT_YELLOW);
         IDLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 13));
-        IDLabel.setBorder(BorderFactory.createLineBorder(VERY_LIGHT_YELLOW, 1));
+        IDLabel.setBorder(BorderFactory.createLineBorder(MyColor.VERY_LIGHT_YELLOW, 1));
 
         levelLabel = new JLabel("等級", SwingConstants.CENTER);
         levelLabel.setBounds(115, 5, 45, 25);
         levelLabel.setOpaque(true);
-        levelLabel.setBackground(DARK_BROWN);
-        levelLabel.setForeground(VERY_LIGHT_YELLOW);
-        levelLabel.setBorder(BorderFactory.createLineBorder(VERY_LIGHT_YELLOW, 1));
+        levelLabel.setBackground(MyColor.DARK_BROWN);
+        levelLabel.setForeground(MyColor.VERY_LIGHT_YELLOW);
+        levelLabel.setBorder(BorderFactory.createLineBorder(MyColor.VERY_LIGHT_YELLOW, 1));
 
         levelNum = new JLabel("", SwingConstants.CENTER);
         levelNum.setBounds(160, 5, 35, 25);
         levelNum.setOpaque(true);
-        levelNum.setBackground(DARK_BROWN);
-        levelNum.setForeground(VERY_LIGHT_YELLOW);
-        levelNum.setBorder(BorderFactory.createLineBorder(VERY_LIGHT_YELLOW, 1));
+        levelNum.setBackground(MyColor.DARK_BROWN);
+        levelNum.setForeground(MyColor.VERY_LIGHT_YELLOW);
+        levelNum.setBorder(BorderFactory.createLineBorder(MyColor.VERY_LIGHT_YELLOW, 1));
 
         explabel = new JLabel("exp.", SwingConstants.CENTER);
         explabel.setBounds(5, 32, 30, 20);
         explabel.setOpaque(true);
-        explabel.setBackground(DARK_BROWN);
-        explabel.setForeground(VERY_LIGHT_YELLOW);
-        explabel.setBorder(BorderFactory.createLineBorder(VERY_LIGHT_YELLOW, 1));
+        explabel.setBackground(MyColor.DARK_BROWN);
+        explabel.setForeground(MyColor.VERY_LIGHT_YELLOW);
+        explabel.setBorder(BorderFactory.createLineBorder(MyColor.VERY_LIGHT_YELLOW, 1));
 
         ProgressBarUI ui = new MetalProgressBarUI() {
             protected Color getSelectionBackground() {
-                return new Color(51, 51, 51);
+                return MyColor.LIGHT_BLACK;
             };
 
             protected Color getSelectionForeground() {
-                return new Color(51, 51, 51);
+                return MyColor.LIGHT_BLACK;
             };
         };
 
@@ -288,31 +286,31 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         expBar.setString("");
         expBar.setVisible(true);
         expBar.setForeground(Color.yellow);
-        expBar.setBackground(new Color(220, 220, 220));
+        expBar.setBackground(MyColor.GRAY_WIGHT);
         expBar.setValue(0);
         expBar.setUI(ui);
-        expBar.setBorder(BorderFactory.createLineBorder(VERY_LIGHT_YELLOW, 1));
+        expBar.setBorder(BorderFactory.createLineBorder(MyColor.VERY_LIGHT_YELLOW, 1));
 
         plusRateLabel = new JLabel("當前強化成功機率:", SwingConstants.CENTER);
         plusRateLabel.setBounds(5, 55, 125, 20);
         plusRateLabel.setOpaque(true);
-        plusRateLabel.setBackground(DARK_BROWN);
-        plusRateLabel.setForeground(VERY_LIGHT_YELLOW);
-        plusRateLabel.setBorder(BorderFactory.createLineBorder(VERY_LIGHT_YELLOW, 1));
+        plusRateLabel.setBackground(MyColor.DARK_BROWN);
+        plusRateLabel.setForeground(MyColor.VERY_LIGHT_YELLOW);
+        plusRateLabel.setBorder(BorderFactory.createLineBorder(MyColor.VERY_LIGHT_YELLOW, 1));
 
         plusRateNum = new JLabel("", SwingConstants.CENTER);
         plusRateNum.setBounds(130, 55, 65, 20);
         plusRateNum.setOpaque(true);
-        plusRateNum.setBackground(DARK_BROWN);
-        plusRateNum.setForeground(VERY_LIGHT_YELLOW);
-        plusRateNum.setBorder(BorderFactory.createLineBorder(VERY_LIGHT_YELLOW, 1));
+        plusRateNum.setBackground(MyColor.DARK_BROWN);
+        plusRateNum.setForeground(MyColor.VERY_LIGHT_YELLOW);
+        plusRateNum.setBorder(BorderFactory.createLineBorder(MyColor.VERY_LIGHT_YELLOW, 1));
 
         descriptionLabel = new JLabel("...");
         descriptionLabel.setHorizontalAlignment(JLabel.LEFT);
-        descriptionLabel.setBackground(new Color(204, 204, 204));
+        descriptionLabel.setBackground(MyColor.LIGHT_GRAY);
         descriptionLabel.setOpaque(true);
         descriptionLabel.setBounds(5, 80, 190, 28);
-        descriptionLabel.setBorder(BorderFactory.createLineBorder(VERY_LIGHT_YELLOW, 1));
+        descriptionLabel.setBorder(BorderFactory.createLineBorder(MyColor.VERY_LIGHT_YELLOW, 1));
 
         // ..............................middle...........................//
         alchemyBtn = new JButton("煉金");
@@ -353,60 +351,60 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
 
         bananaLabel = new JLabel("Banana", SwingConstants.CENTER);
         bananaLabel.setBackground(Color.black);
-        bananaLabel.setForeground(new Color(255, 204, 0));
+        bananaLabel.setForeground(MyColor.BANANA_YELLOW);
         bananaLabel.setOpaque(true);
         bananaLabel.setPreferredSize(new Dimension(60, 20));
-        bananaLabel.setBorder(BorderFactory.createLineBorder(new Color(255, 204, 0), 1));
+        bananaLabel.setBorder(BorderFactory.createLineBorder(MyColor.BANANA_YELLOW, 1));
 
         appleLabel = new JLabel("Apple", SwingConstants.CENTER);
         appleLabel.setBackground(Color.BLACK);
-        appleLabel.setForeground(new Color(255, 51, 51));
+        appleLabel.setForeground(MyColor.APPLE_RED);
         appleLabel.setOpaque(true);
         appleLabel.setPreferredSize(new Dimension(60, 20));
-        appleLabel.setBorder(BorderFactory.createLineBorder(new Color(255, 51, 51), 1));
+        appleLabel.setBorder(BorderFactory.createLineBorder(MyColor.APPLE_RED, 1));
 
         orangeLabel = new JLabel("Orange", SwingConstants.CENTER);
         orangeLabel.setBackground(Color.black);
-        orangeLabel.setForeground(new Color(255, 153, 0));
+        orangeLabel.setForeground(MyColor.ORANGE_ORANGE);
         orangeLabel.setOpaque(true);
         orangeLabel.setPreferredSize(new Dimension(60, 20));
-        orangeLabel.setBorder(BorderFactory.createLineBorder(new Color(255, 153, 0), 1));
+        orangeLabel.setBorder(BorderFactory.createLineBorder(MyColor.ORANGE_ORANGE, 1));
 
         melonLabel = new JLabel("Melon", SwingConstants.CENTER);
         melonLabel.setBackground(Color.black);
-        melonLabel.setForeground(new Color(0, 255, 51));
+        melonLabel.setForeground(MyColor.MELON_GREEN);
         melonLabel.setOpaque(true);
         melonLabel.setPreferredSize(new Dimension(60, 20));
-        melonLabel.setBorder(BorderFactory.createLineBorder(new Color(0, 255, 51), 1));
+        melonLabel.setBorder(BorderFactory.createLineBorder(MyColor.MELON_GREEN, 1));
 
         bananaNum = new JLabel("0", SwingConstants.CENTER);
         bananaNum.setBackground(Color.black);
-        bananaNum.setForeground(new Color(255, 204, 0));
+        bananaNum.setForeground(MyColor.BANANA_YELLOW);
         bananaNum.setOpaque(true);
         bananaNum.setPreferredSize(new Dimension(60, 20));
-        bananaNum.setBorder(BorderFactory.createLineBorder(new Color(255, 204, 0), 1));
+        bananaNum.setBorder(BorderFactory.createLineBorder(MyColor.BANANA_YELLOW, 1));
         // bananaNum.setBounds(5, 10, 50, 20);
 
         appleNum = new JLabel("0", SwingConstants.CENTER);
         appleNum.setBackground(Color.black);
-        appleNum.setForeground(new Color(255, 51, 51));
+        appleNum.setForeground(MyColor.APPLE_RED);
         appleNum.setOpaque(true);
         appleNum.setPreferredSize(new Dimension(60, 20));
-        appleNum.setBorder(BorderFactory.createLineBorder(new Color(255, 51, 51), 1));
+        appleNum.setBorder(BorderFactory.createLineBorder(MyColor.APPLE_RED, 1));
 
         orangeNum = new JLabel("0", SwingConstants.CENTER);
         orangeNum.setBackground(Color.black);
-        orangeNum.setForeground(new Color(255, 153, 0));
+        orangeNum.setForeground(MyColor.ORANGE_ORANGE);
         orangeNum.setOpaque(true);
         orangeNum.setPreferredSize(new Dimension(60, 20));
-        orangeNum.setBorder(BorderFactory.createLineBorder(new Color(255, 153, 0), 1));
+        orangeNum.setBorder(BorderFactory.createLineBorder(MyColor.ORANGE_ORANGE, 1));
 
         melonNum = new JLabel("0", SwingConstants.CENTER);
         melonNum.setBackground(Color.black);
-        melonNum.setForeground(new Color(0, 255, 51));
+        melonNum.setForeground(MyColor.MELON_GREEN);
         melonNum.setOpaque(true);
         melonNum.setPreferredSize(new Dimension(60, 20));
-        melonNum.setBorder(BorderFactory.createLineBorder(new Color(0, 255, 51), 1));
+        melonNum.setBorder(BorderFactory.createLineBorder(MyColor.MELON_GREEN, 1));
 
         dregsLabel = new JLabel("煉金殘渣", SwingConstants.CENTER);
         dregsLabel.setBackground(Color.BLACK);
@@ -438,7 +436,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         coinImgLabel.setBounds(0, 0, 20, 20);
 
         coinLabel = new JLabel("0", SwingConstants.CENTER);
-        coinLabel.setBackground(new Color(255, 204, 51));
+        coinLabel.setBackground(MyColor.GOLD);
         coinLabel.setFont(new Font("Serif", Font.BOLD, 13));
         coinLabel.setOpaque(true);
         coinLabel.setBounds(20, 0, 70, 20);
@@ -453,7 +451,7 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
         gardenTitleLabel = new JLabel("花園", SwingConstants.CENTER);
         gardenTitleLabel.setBounds(0, 20, 184, 30);
         gardenTitleLabel.setOpaque(true);
-        gardenTitleLabel.setBackground(new Color(0, 204, 0));
+        gardenTitleLabel.setBackground(MyColor.VERY_DARK_GREEN);
         gardenTitleLabel.setBorder(BorderFactory.createLineBorder(Color.green, 1));
 
         gdCb_1 = new GardenItemComboBox(model);

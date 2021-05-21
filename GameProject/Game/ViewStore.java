@@ -27,7 +27,6 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
     JButton soldBtn;
     JLayeredPane pane;
     public static volatile ViewStore instance = null;
-    static final Color VERY_LIGHT_YELLOW = new Color(255, 255, 204);
 
     public ViewStore(ControllerMainInterface controller, ModelInterface model) {
         this.controller = controller;
@@ -76,7 +75,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             farmTitle_1 = new JLabel("田地+1", SwingConstants.CENTER);
             farmTitle_1.setBounds(10, 10, 80, 20);
             farmTitle_1.setOpaque(true);
-            farmTitle_1.setBackground(Color.gray);
+            farmTitle_1.setBackground(MyColor.SKYBLUE);
 
             farmImg_1 = new JLabel(new ImageIcon("GameProject//res//pics//farm.jpg"));
             farmImg_1.setBounds(10, 30, 80, 80);
@@ -92,7 +91,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             farmTitle_2 = new JLabel("田地+1", SwingConstants.CENTER);
             farmTitle_2.setBounds(100, 10, 80, 20);
             farmTitle_2.setOpaque(true);
-            farmTitle_2.setBackground(Color.gray);
+            farmTitle_2.setBackground(MyColor.SKYBLUE);
 
             farmImg_2 = new JLabel(new ImageIcon("GameProject//res//pics//farm.jpg"));
             farmImg_2.setBounds(100, 30, 80, 80);
@@ -107,7 +106,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             farmTitle_3 = new JLabel("強化石+1", SwingConstants.CENTER);
             farmTitle_3.setBounds(190, 10, 80, 20);
             farmTitle_3.setOpaque(true);
-            farmTitle_3.setBackground(Color.gray);
+            farmTitle_3.setBackground(MyColor.SKYBLUE);
 
             farmImg_3 = new JLabel(new ImageIcon("GameProject//res//pics//stone.jpg"));
             farmImg_3.setBounds(190, 30, 80, 80);
@@ -122,7 +121,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             farmTitle_4 = new JLabel("保護石+1", SwingConstants.CENTER);
             farmTitle_4.setBounds(280, 10, 80, 20);
             farmTitle_4.setOpaque(true);
-            farmTitle_4.setBackground(Color.gray);
+            farmTitle_4.setBackground(MyColor.SKYBLUE);
 
             farmImg_4 = new JLabel(new ImageIcon("GameProject//res//pics//protect.jpg"));
             farmImg_4.setBounds(280, 30, 80, 80);
@@ -138,16 +137,19 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             myItemDes.setBounds(10, 145, 100, 20);
             myItemDes.setOpaque(true);
             myItemDes.setBackground(Color.white);
+            myItemDes.setBorder(BorderFactory.createLineBorder(MyColor.SKYBLUE, 1));
 
             itemNumDes = new JLabel("擁有數量", SwingConstants.CENTER);
             itemNumDes.setBounds(115, 145, 60, 20);
             itemNumDes.setOpaque(true);
             itemNumDes.setBackground(Color.white);
+            itemNumDes.setBorder(BorderFactory.createLineBorder(MyColor.SKYBLUE, 1));
 
             soldNumDes = new JLabel("販賣數量", SwingConstants.CENTER);
             soldNumDes.setBounds(180, 145, 60, 20);
             soldNumDes.setOpaque(true);
             soldNumDes.setBackground(Color.white);
+            soldNumDes.setBorder(BorderFactory.createLineBorder(MyColor.SKYBLUE, 1));
 
             String[] solditem = new String[] { "煉金殘渣", "高級煉金石", "Banana", "Apple", "Orange", "Melon" };
             myItemCb = new JComboBox<String>(solditem);
@@ -173,7 +175,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             soldPriceLabel = new JLabel("$0", SwingConstants.CENTER);
             soldPriceLabel.setBounds(10, 200, 100, 20);
             soldPriceLabel.setOpaque(true);
-            soldPriceLabel.setBackground(VERY_LIGHT_YELLOW);
+            soldPriceLabel.setBackground(MyColor.VERY_LIGHT_YELLOW);
             soldPriceLabel.setForeground(Color.BLACK);
 
             titlePanel.add(backBtn);
