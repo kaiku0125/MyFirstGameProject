@@ -11,13 +11,14 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
     ControllerMainInterface controller;
     ModelInterface model;
     JFrame storeFrame;
-    JPanel mainPanel, titlePanel, buyPanel, soldPanel;
+    JPanel mainPanel, titlePanel;
     JLabel storeTitle, backImgLabel;
     // buyPanel
     JLabel farmImg_1, farmTitle_1;
     JLabel farmImg_2, farmTitle_2;
     JLabel farmImg_3, farmTitle_3;
-    JButton backBtn, hintBtn, farmBtn_1, farmBtn_2, farmBtn_3;
+    JLabel farmImg_4, farmTitle_4;
+    JButton backBtn, hintBtn, farmBtn_1, farmBtn_2, farmBtn_3, farmBtn_4;
     // soldPanel
     JLabel myItemDes, itemNumDes, soldNumDes;
     JComboBox<String> myItemCb;
@@ -38,7 +39,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
     public void createStoreView() {
         if (instance == null) {
             storeFrame = new JFrame("商店");
-            storeFrame.setSize(310, 300);
+            storeFrame.setSize(390, 300);
             storeFrame.setResizable(false);
             storeFrame.setLocationRelativeTo(null);
             storeFrame.setLocation(new Point(ViewMain.WIDTH + 600, ViewMain.HEIGHT - 200));
@@ -46,40 +47,30 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             storeFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
             mainPanel = new JPanel();
-            mainPanel.setBounds(0, 20, 310, 300);
+            mainPanel.setBounds(0, 20, 390, 300);
             mainPanel.setLayout(null);
 
             backImgLabel = new JLabel(new ImageIcon("GameProject//res//pics//store.jpg"));
-            backImgLabel.setBounds(0, 0, 310, 300);
+            backImgLabel.setBounds(0, -10, 390, 300);
 
             titlePanel = new JPanel();
             titlePanel.setLayout(null);
-            titlePanel.setBounds(0, 0, 350, 20);
+            titlePanel.setBounds(0, 0, 390, 20);
             titlePanel.setOpaque(true);
             titlePanel.setBackground(Color.BLUE);
-
-            // buyPanel = new JPanel();
-            // buyPanel.setLayout(null);
-            // buyPanel.setBounds(0, 20, 310, 200);
-
-            // soldPanel = new JPanel();
-            // soldPanel.setLayout(null);
-            // soldPanel.setBounds(0, 220, 400, 100);
-            // soldPanel.setOpaque(true);
-            // soldPanel.setBackground(Color.red);
 
             backBtn = new JButton("關閉");
             backBtn.setBounds(0, 0, 60, 20);
 
             storeTitle = new JLabel("凱酷的店舖", SwingConstants.CENTER);
-            storeTitle.setBounds(60, 0, 174, 20);
+            storeTitle.setBounds(60, 0, 254, 20);
             storeTitle.setOpaque(true);
             storeTitle.setBackground(Color.black);
             storeTitle.setForeground(Color.WHITE);
             storeTitle.setFont(new Font("Serif", Font.BOLD, 12));
 
             hintBtn = new JButton("提示");
-            hintBtn.setBounds(234, 0, 60, 20);
+            hintBtn.setBounds(314, 0, 60, 20);
 
             farmTitle_1 = new JLabel("田地+1", SwingConstants.CENTER);
             farmTitle_1.setBounds(10, 10, 80, 20);
@@ -122,10 +113,25 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             farmImg_3.setOpaque(true);
             farmImg_3.setBackground(Color.white);
 
-            farmBtn_3 = new JButton("$10,000");
+            farmBtn_3 = new JButton("$1,500");
             farmBtn_3.setBounds(190, 115, 80, 20);
             farmBtn_3.setFont(new Font("Arial", Font.PLAIN, 11));
             farmBtn_3.setName("buy3");
+
+            farmTitle_4 = new JLabel("保護石+1", SwingConstants.CENTER);
+            farmTitle_4.setBounds(280, 10, 80, 20);
+            farmTitle_4.setOpaque(true);
+            farmTitle_4.setBackground(Color.gray);
+
+            farmImg_4 = new JLabel();
+            farmImg_4.setBounds(280, 30, 80, 80);
+            farmImg_4.setOpaque(true);
+            farmImg_4.setBackground(Color.white);
+
+            farmBtn_4 = new JButton("5,000");
+            farmBtn_4.setBounds(280, 115, 80, 20);
+            farmBtn_4.setFont(new Font("Arial", Font.PLAIN, 11));
+            farmBtn_4.setName("buy4");
 
             myItemDes = new JLabel("選擇販賣項目", SwingConstants.CENTER);
             myItemDes.setBounds(10, 145, 100, 20);
@@ -183,6 +189,9 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             pane.add(farmImg_3);
             pane.add(farmTitle_3);
             pane.add(farmBtn_3);
+            pane.add(farmImg_4);
+            pane.add(farmTitle_4);
+            pane.add(farmBtn_4);
 
             pane.add(myItemDes);
             pane.add(itemNumDes);
@@ -210,6 +219,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             farmBtn_1.addActionListener(this);
             farmBtn_2.addActionListener(this);
             farmBtn_3.addActionListener(this);
+            farmBtn_4.addActionListener(this);
             myItemCb.addActionListener(this);
             soldBtn.addActionListener(this);
             hintBtn.addActionListener(this);
@@ -222,19 +232,28 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
         if (e.getSource() == backBtn) {
             controller.closeStore();
         } else if (e.getSource() == farmBtn_1) {
-            controller.minusCoin(50000);
-            controller.buyControl(farmBtn_1);
+            if (showConfirmDialog("是否購買強化石?", "購買確認")) {
+                controller.minusCoin(50000);
+                controller.buyControl(farmBtn_1);
+            }
         } else if (e.getSource() == farmBtn_2) {
-            controller.minusCoin(100000);
-            controller.buyControl(farmBtn_2);
+            if (showConfirmDialog("是否購買強化石?", "購買確認")) {
+                controller.minusCoin(100000);
+                controller.buyControl(farmBtn_2);
+            }
         } else if (e.getSource() == myItemCb) {
             myItemCb_controller();
         } else if (e.getSource() == soldBtn) {
             soldBtn_controller();
         } else if (e.getSource() == farmBtn_3) {
-            if (showConfirmDialong("是否購買強化石?", "購買確認")) {
-                controller.minusCoin(10000);
+            if (showConfirmDialog("是否購買強化石?", "購買確認")) {
+                controller.minusCoin(1500);
                 model.setStone(model.getStone() + 1);
+            }
+        } else if (e.getSource() == farmBtn_4) {
+            if (showConfirmDialog("是否購買強化石?", "購買確認")) {
+                controller.minusCoin(5000);
+                model.setProtectStone(model.getProtectStone() + 1);
             }
         } else if (e.getSource() == hintBtn) {
             hintController();
@@ -248,10 +267,16 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
     @Override
     public void updateCoin() {
         if (instance != null) {
-            if (model.getCoin() >= 10000) {
+            if (model.getCoin() >= 1500) {
                 enableBtn(farmBtn_3, true);
             } else {
                 enableBtn(farmBtn_3, false);
+            }
+
+            if (model.getCoin() >= 5000) {
+                enableBtn(farmBtn_4, true);
+            } else {
+                enableBtn(farmBtn_4, false);
             }
 
             if (model.getCoin() >= 50000 && model.getFarm1Sold() == false) {
@@ -362,7 +387,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
         JOptionPane.showMessageDialog(null, msg);
     }
 
-    public boolean showConfirmDialong(String msg, String title) {
+    public boolean showConfirmDialog(String msg, String title) {
         int result = JOptionPane.showConfirmDialog(null, msg, title, JOptionPane.OK_CANCEL_OPTION);
 
         if (result == JOptionPane.OK_OPTION) {

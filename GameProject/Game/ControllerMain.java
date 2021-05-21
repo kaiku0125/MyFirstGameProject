@@ -427,9 +427,9 @@ public class ControllerMain implements ControllerMainInterface {
         sb = new StringBuilder();
         // sb.append(String.valueOf(viewMain.getBananaCombo()));
         sb.append(viewMain.getBananaCombo());
-        sb.append(String.valueOf(viewMain.getAppleCombo()));
-        sb.append(String.valueOf(viewMain.getOrangeCombo()));
-        sb.append(String.valueOf(viewMain.getMelonCombo()));
+        sb.append(viewMain.getAppleCombo());
+        sb.append(viewMain.getOrangeCombo());
+        sb.append(viewMain.getMelonCombo());
         System.out.println("煉金序號:" + sb);
         switch (sb.toString()) {
             case "1111":
