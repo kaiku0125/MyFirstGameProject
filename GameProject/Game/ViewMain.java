@@ -1038,6 +1038,10 @@ public class ViewMain implements ActionListener, CoinObserver, ClockObserver, Ca
     }
 
     // ............................Enable UI..........................//
+    public void enableWeaponCb(boolean b) {
+        weaponCombo.setEnabled(b);
+    }
+
     public void enableEnhanceBtn(boolean b) {
         enhanceBtn.setEnabled(b);
     }

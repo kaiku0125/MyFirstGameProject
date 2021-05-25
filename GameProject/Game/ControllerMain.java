@@ -261,6 +261,7 @@ public class ControllerMain implements ControllerMainInterface {
         viewMain.enableAlchemyBtn(false);
         viewMain.enableFailureCheck(false);
         viewMain.enableProtectCheck(false);
+        viewMain.enableWeaponCb(false);
     }
 
     @Override
@@ -276,6 +277,7 @@ public class ControllerMain implements ControllerMainInterface {
         viewMain.enableProtectCheck(true);
         viewMain.setFailureCkeck(false);
         viewMain.setProtectCheck(false);
+        viewMain.enableWeaponCb(true);
     }
 
     @Override
