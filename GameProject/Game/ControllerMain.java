@@ -374,7 +374,9 @@ public class ControllerMain implements ControllerMainInterface {
         viewMain.enableAlchemyBtn(false);
         viewMain.visibleAlchemybar(true);
         viewMain.enableEnhanceBtn(false);
-        viewStore.enabelSoldBtn(false);
+        if (viewStore != null) {
+            viewStore.enabelSoldBtn(false);
+        }
     }
 
     @Override
@@ -383,7 +385,9 @@ public class ControllerMain implements ControllerMainInterface {
         viewMain.visibleAlchemybar(false);
         viewMain.enableEnhanceBtn(true);
         viewMain.alchemyEndCheck();
-        viewStore.enabelSoldBtn(true);
+        if (viewStore != null) {
+            viewStore.enabelSoldBtn(true);
+        }
     }
 
     public void alchemyThread(JProgressBar jProgressBar) {
