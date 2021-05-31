@@ -1,6 +1,7 @@
 package GameProject.Game;
 
 import java.io.*;
+import java.net.URLDecoder;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -17,9 +18,17 @@ public class Dataset {
     FileWriter fw = null;
     int tempcoin, count, tempStone, tempFailure;
     String UserID, temp;
+    String path1 = Dataset.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+    public static String decodedpath;
+    // 使用IDE將路徑replace為: decodedpath + "data/Coin.data"
 
     public Dataset(ModelInterface model) {
         this.model = model;
+        try {
+            decodedpath = URLDecoder.decode(path1, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     public void readcoin() {
