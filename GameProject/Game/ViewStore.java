@@ -323,7 +323,7 @@ public class ViewStore extends JFrame implements ActionListener, CoinObserver {
             case "煉金殘渣":
                 model.setDregs(num);
                 break;
-            case "高級練金石":
+            case "高級煉金石":
                 model.setRareDregs(num);
                 break;
             case "Banana":
